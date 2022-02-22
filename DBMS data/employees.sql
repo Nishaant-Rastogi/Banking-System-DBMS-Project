@@ -1,6 +1,6 @@
 drop table Employees;
 CREATE TABLE Employees(
-Employee_ID bigint NOT NULL PRIMARY KEY,
+Employee_ID VARCHAR(100) NOT NULL PRIMARY KEY,
 Name VARCHAR(100) NOT NULL,
 Salary int NOT NULL,
 Designation VARCHAR(100) NOT NULL,
@@ -130,7 +130,7 @@ VALUES
 INSERT INTO Employees(Employee_ID, Name, Salary, Designation, Joining_Date)
 VALUES
 (
-1005000025, 'Irfan Pathan', 55000, 'Account Manager', STR_TO_DATE("03-29-2020", "%m-%d-%Y")
+'1005000025', 'Irfan Pathan', 55000, 'Account Manager', STR_TO_DATE("03-29-2020", "%m-%d-%Y")
 );
 
 

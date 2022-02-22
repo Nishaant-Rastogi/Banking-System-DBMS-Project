@@ -1,6 +1,6 @@
 drop table Customers;
 CREATE TABLE Customers(
-Customer_ID bigint NOT NULL PRIMARY KEY,
+Customer_ID VARCHAR(100) NOT NULL PRIMARY KEY,
 Name VARCHAR(100) NOT NULL,
 Age int NOT NULL,
 Address VARCHAR(200) NOT NULL,
