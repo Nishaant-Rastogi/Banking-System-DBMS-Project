@@ -110,7 +110,7 @@ VALUES
 INSERT INTO Employees(Employee_ID, Name, Salary, Designation, Joining_Date)
 VALUES
 (
-1004000021, 'Anvesh Kumar', 50000, 'Account Manager', STR_TO_DATE("11-20-2020", "%m-%d-%Y")
+'1004000021', 'Anvesh Kumar', 50000, 'Account Manager', STR_TO_DATE("11-20-2020", "%m-%d-%Y")
 );
 INSERT INTO Employees(Employee_ID, Name, Salary, Designation, Joining_Date)
 VALUES
