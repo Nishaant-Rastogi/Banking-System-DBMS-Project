@@ -31,4 +31,4 @@ VALUES
 (STR_TO_DATE("05-20-2012", "%m-%d-%Y") ,'10050300050001', 160000, 0, 8),
 (STR_TO_DATE("02-17-2022", "%m-%d-%Y") ,'10050300070001', 120000, 6, 1),
 (STR_TO_DATE("07-05-2018", "%m-%d-%Y") ,'10050300080001', 10000, 5, 1 );
-UPDATE loans set EndDate = DATE_ADD(StartDate, INTERVAL Term YEAR)
+UPDATE loans set EndDate = STR_TO_DATE(DATE_ADD(StartDate, INTERVAL Term YEAR), "%Y-%m-%d");

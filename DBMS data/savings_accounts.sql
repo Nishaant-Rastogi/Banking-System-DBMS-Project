@@ -8,4 +8,4 @@ FOREIGN KEY (AccountNo) REFERENCES Accounts(AccountNo)
 );
 
 INSERT INTO Savings_Accounts(AccountNo, Balance) SELECT AccountNo, Balance from Accounts where AccountNo like '______00____';
-UPDATE Savings_Account set TransactionLimit = IF(Balance <= 10000, Balance, 10000); 
+UPDATE Savings_Accounts set TransactionLimit = IF(Balance <= 10000, Balance, 10000); 

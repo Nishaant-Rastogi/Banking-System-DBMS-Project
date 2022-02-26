@@ -10,7 +10,7 @@ ContactNo bigint NOT NULL,
 PAN varchar(30) NOT NULL,
 Password VARCHAR(100) NOT NULL
 );
-INSERT INTO Customers(Customer_ID, Name, Age, Address, ContactNo, Password)
+INSERT INTO Customers(Customer_ID, Name, Age, HouseNo, Locality, City, ContactNo, PAN, Password)
 VALUES
 ('1001040001', 'Vasant Kumar', 27, '54', 'Defense Colony', 'Delhi', '9999900001', 'A501C0101', 'aabbcc'),
 ('1001040002', 'Shobha Dutta', 24, '1756', 'Chatrapur', 'Delhi', '8999900001', 'A456C0102', 'bbccaa'),
@@ -36,4 +36,33 @@ VALUES
 ('1005040002', 'Arpita Kumari', 27, '762', 'Lajpat Nagar', 'Delhi', '7562957771', 'J814C0502', 'kklljj'),
 ('1005040003', 'Rakesh Puri', 33, '762', 'Kirti Nagar', 'Delhi', '9998002481', 'R019C0503', 'llkkjj'),
 ('1005040004', 'Ranjit Singh', 26, '433', 'Chanakyapuri', 'Delhi', '6785521137', 'Q505C0504', 'lljjkk'),
-('1005040005', 'Mohammad Aazan', 44, 'E-52', 'Gandhi Nagar', 'Delhi', '8959369005', 'P021C0505', 'aabbccc');
+('1005040005', 'Mohammad Aazan', 44, 'E-52', 'Gandhi Nagar', 'Delhi', '8959369005', 'P021C0505', 'aabbccc'),
+('1001E40001', 'Ravish Chatterjee', 51, '67', 'Parparganj', 'Delhi', '3434500101', 'A501E0101', 'zzyyxx'),
+('1002E40002', 'Shaan Grover', 48, '3801', 'Punjabi Bagh', 'Delhi', '3434500202', 'A456E0102', 'zzxxyy'),
+('1003E40003', 'Ravinder Singh', 57, '729', 'Lotus Towers Block C', 'Gurgaon', '3434500303', 'A645E0103','yyxxzz'),
+('1004E40004', 'Amish Chaudhary', 44, '97', 'Greater Kailash Sector E', 'Delhi', '3434500404', 'Q576E0104','yyzzxx'),
+('1005E40005', 'Vivek Bansal', 32, '42', 'Sector E Vasant Kunj', 'Delhi', '3434500505', 'A789E0105','xxzzyy'),
+('1001E40006', 'Rampal Yadav', 56, '164', 'Defense Colony', 'Delhi', '3434500102', 'K981E0201', 'xxyyzz'),
+('1001E40007', 'Ashish Jain', 35, '1228', 'Malviya Nagar', 'Delhi', '3434500103', 'A182E0202','uuvvww'),
+('1001E40008', 'Vinay Dubey', 29, '677', 'Gulmohar Park', 'Delhi', '3434500104', 'A912E0203', 'uuwwvv'),
+('1001E40009', 'Yash Chauhan', 26, '1212', 'Gulmohar Park', 'Delhi', '3434500105', 'A681E0204', 'vvwwuu'),
+('1002E40010', 'Ankur Kanauj', 40, '2337', 'Malviya Nagar', 'Delhi', '3434500201', 'A182E0202','vvuuww'),
+('1002E40011', 'Shankar Rastogi', 24, '5167', 'Gulmohar Park', 'Delhi', '3434500203', 'A912E0203', 'wwvvuu'),
+('1002E40012', 'Mohammad Farhan', 28, '1002', 'Gulmohar Park', 'Delhi', '3434500204', 'A681E0204', 'wwvuvu'),
+('1002E40013', 'Taheer Khan', 24, '324', 'Preet Vihar', 'Delhi', '3434500205', 'K820E0205', 'wwuuvv'),
+('1003E40014', 'Johnny', 53, '5008', 'Punjabi Bagh', 'Delhi', '3434500301', 'L911E0302', 'ffaaee'),
+('1003E40015', 'Mitanshi Setia', 34, 'F-4', 'Janakpuri', 'Delhi', '3434500302', 'G718E0303', 'bbhhii'),
+('1003E40016', 'Abdul Sheikh', 31, '1072', 'Paschim Vihar', 'Delhi', '3434500304', 'H516E0304', 'cciihh'),
+('1003E40017', 'Jesus', 60, '712', 'Harkesh Nagar', 'Delhi', '3434500305', 'Y520E0305', 'aahhgg'),
+('1004E40018', 'Ankit Garg', 41, '808', 'Harkesh Nagar', 'Delhi', '3434500401', 'M703E0401', 'iicchh'),
+('1004E40019', 'Shalini Vashisht', 38, 'B-56', 'Dwarka Sub City', 'Delhi', '3434500402', 'N810E0402', 'hhddii'),
+('1004E40020', 'Lalit Gupta', 50, '138', 'Kirti Nagar', 'Delhi', '3434500403', 'I517E0403','aaiigg'),
+('1004E40021', 'Anvesh Kumar', 33, '457' ,'Paschim Vihar', 'Delhi', '3434500405', 'K112E0404', 'bbkkll'),
+('1005E40001', 'Sachin Ranade', 48, '859', 'Civil Lines', 'Delhi', '3434500501', 'C915E0501', 'aajjll'),
+('1005E40002', 'Harsimar Kaur', 30, '940', 'Lajpat Nagar', 'Delhi', '3434500502', 'J814E0502', 'kkbbjj'),
+('1005E40003', 'Vishnu Kumar', 36, '655', 'Kirti Nagar', 'Delhi', '3434500503', 'R019E0503', 'llkkcc'),
+('1005E40004', 'Irfan Pathan', 43, '471', 'Chanakyapuri', 'Delhi', '3434500504', 'Q505E0504', 'lljddk');
+
+
+
+
