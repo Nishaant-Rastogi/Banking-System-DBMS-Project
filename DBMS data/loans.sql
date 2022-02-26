@@ -1,14 +1,14 @@
 drop table Loans;-- 
 CREATE TABLE Loans(
 StartDate DATE NOT NULL,
-Reference_ID VARCHAR(100) NOT NULL PRIMARY KEY,
+Loan_ID VARCHAR(100) NOT NULL PRIMARY KEY,
 Amount DOUBLE NOT NULL,
 InterestRate DOUBLE,
 Term int NOT NULL,
 EndDate DATE
 );
 
-INSERT INTO Loans(StartDate, Reference_ID, Amount, InterestRate, Term)
+INSERT INTO Loans(StartDate, Loan_ID, Amount, InterestRate, Term)
 VALUES
 (STR_TO_DATE("01-05-2022", "%m-%d-%Y") ,'10010300080001', 55000, 6, 2),
 (STR_TO_DATE("01-18-2022", "%m-%d-%Y") ,'10010300040001', 1600000, 0, 20),
