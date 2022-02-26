@@ -1,11 +1,13 @@
-drop table Loans;
+drop table Loans;-- 
 CREATE TABLE Loans(
 StartDate DATE NOT NULL,
 Reference_ID VARCHAR(100) NOT NULL PRIMARY KEY,
 Amount DOUBLE NOT NULL,
 InterestRate DOUBLE,
-Term int NOT NULL
+Term int NOT NULL,
+EndDate DATE
 );
+
 INSERT INTO Loans(StartDate, Reference_ID, Amount, InterestRate, Term)
 VALUES
 (STR_TO_DATE("01-05-2022", "%m-%d-%Y") ,'10010300080001', 55000, 6, 2),
@@ -29,4 +31,4 @@ VALUES
 (STR_TO_DATE("05-20-2012", "%m-%d-%Y") ,'10050300050001', 160000, 0, 8),
 (STR_TO_DATE("02-17-2022", "%m-%d-%Y") ,'10050300070001', 120000, 6, 1),
 (STR_TO_DATE("07-05-2018", "%m-%d-%Y") ,'10050300080001', 10000, 5, 1 );
-
+UPDATE loans set EndDate = DATE_ADD(StartDate, INTERVAL Term YEAR)
