@@ -1,7 +1,16 @@
 import React from 'react';
 import Link from 'next/link';
+import { useRouter } from 'next/router';
 
 export default function Adminbar() {
+  // const router = useRouter();
+  // const isActive = (r) => {
+  //   if(r==router.pathname){
+  //     return "active";
+  //   }else{
+  //     return "";
+  //   }
+  // }
   return (
     <div>
         <nav class="navbar navbar-expand-lg navbar-light bg-light">
