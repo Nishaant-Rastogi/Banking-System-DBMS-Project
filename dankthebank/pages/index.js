@@ -1,6 +1,5 @@
 import Link from 'next/link';
 import { useState } from 'react';
-import styled from 'styled-components';
 
 const Login = () =>{
   const [loginasuser, setloginasuser] = useState(true);
@@ -8,14 +7,15 @@ const Login = () =>{
   const handler2 = () => setloginasuser(false);
   return(
     <div className='LOGIN'>
+      <img className="LOGINIMG" src = "bankimage.jpg"/>
       <div className='LOGINCONTAINER'>
         <div className='LOGINS'>
         <div className='USER'>
-          <button onClick={handler1} type="button" class="btn btn-info" active >Login As User</button>
+          <button onClick={handler1} type="button" class="btn COLOR" active= "true" >Login As User</button>
         </div>
 
         <div className='ADMIN'>
-        <button onClick={handler2} type="button" class="btn btn-info" >Login As Admin</button>
+        <button onClick={handler2} type="button" class="btn COLOR" >Login As Admin</button>
         </div>
         </div>
           <div className='FORMCONTAINER'>
@@ -31,7 +31,7 @@ const Login = () =>{
             <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password" />
           </div>
           <Link href="/admin">
-            <button type="submit" class="btn btn-primary LOGINB">Login as admin</button>
+            <button type="submit" class="btn COLOR LOGINB">Login as Admin</button>
           </Link> 
           </form> }
           { loginasuser ? 
@@ -46,7 +46,7 @@ const Login = () =>{
             <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password" />
           </div>
           <Link href="/user">
-            <button type="submit" class="btn btn-primary LOGINB">Login as User</button>
+            <button type="submit" class="btn COLOR LOGINB">Login as User</button>
           </Link> 
           </form> : null}
         </div>

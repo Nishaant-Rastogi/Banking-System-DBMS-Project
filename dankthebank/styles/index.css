@@ -1,17 +1,33 @@
 .LOGIN{
     background-color: white;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
     height: 100vh;
     width: 100vw;
 }
 
+.LOGIN .LOGINIMG{
+    z-index: 0;
+    height: 120vh;
+    width: 100vw;
+    position: absolute;
+    top: -10vh;
+}
+
+
 .LOGIN .LOGINS{
     display: flex;
-    justify-content: space-between;
+    justify-content: space-around;
     align-items: center;
+}
+
+.LOGIN .LOGINCONTAINER{
+    z-index: 100;
+    width: 25vw;
+    height: 50vh;
+    background-color: #131a27;
+    position: absolute;
+    left: 70vw;
+    top: 20vh;
+    color: white;
 }
 
 .LOGIN .USER{
@@ -24,12 +40,6 @@
     margin-right: 20px;
 }
 
-.LOGIN .LOGINCONTAINER{
-    background-color: #17a3b869;
-    position: relative;
-    left: 30vw;
-    top: -5vh;
-}
 
 .LOGIN .FORMCONTAINER{
     margin-left: 50px;
@@ -40,5 +50,9 @@
 
 .LOGIN .FORMCONTAINER .LOGINB :hover{
     background-color:white;
-    font-color: #17A2B8;
+}
+
+.LOGIN .LOGINCONTAINER .COLOR{
+    background-color: #232f4a;
+    color: white;
 }

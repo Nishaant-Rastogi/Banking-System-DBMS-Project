@@ -12,8 +12,8 @@ export default function Adminbar() {
   //   }
   // }
   return (
-    <div>
-        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div >
+        <nav class="navbar navbar-expand-lg navbar-dark ADMINBAR COLOR1">
           <a class="navbar-brand" href="#">Navbar</a>
           <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -30,7 +30,7 @@ export default function Adminbar() {
                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                   Dropdown
                 </a>
-                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                <div class="dropdown-menu COLOR2" aria-labelledby="navbarDropdown">
                   <a class="dropdown-item" href="#">Action</a>
                   <a class="dropdown-item" href="#">Another action</a>
                   <div class="dropdown-divider"></div>
@@ -41,15 +41,23 @@ export default function Adminbar() {
                   <a class="nav-link disabled" href="#">Disabled</a>
                 </li>
               </ul>
-              <form class="form-inline my-2 my-lg-0">
-                <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" />
-                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-              </form>
+              <div>
+                <div className='nav-item dropdown ADMINDROPDOWN'>
+                  <img className="PROFILEIMAGE" src = "bankimage.jpg"/>
+                  <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    User
+                  </a>
+                <div class="dropdown-menu COLOR2" aria-labelledby="navbarDropdown">
+                  <a class="dropdown-item" href="#">Profile</a>
+                  <div class="dropdown-divider"></div>
+                    <Link href = '/'>
+                      <a class="dropdown-item">Logout</a>
+                    </Link>
+                  </div>
+                </div>
+              </div>
           </div>
           <div>
-            <Link href = '/'>
-              <a>Logout</a>
-            </Link>
           </div>
         </nav>
     </div>

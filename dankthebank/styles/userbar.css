@@ -1,0 +1,40 @@
+.COLOR1{
+    background-color: #131a27;
+    
+}
+
+.COLOR2{
+    background-color: #232f4a;
+}
+
+.USERBAR{
+    border-bottom: 1px solid black;
+    margin-bottom: 10px;
+}
+.USERBAR .PROFILEIMAGE {
+    float: left;
+    width: 50px;
+    height: 50px;
+    border: 1px solid #ccc;
+    border-radius: 30px;
+}
+
+.USERBAR .USERDROPDOWN{
+    display: flex;
+    position: relative;
+    /* justify-content: right; */
+    right: 0px;
+    margin-right: 10px;
+}
+
+.USERBAR #navbarDropdown{
+    color: white;
+}
+
+.USERBAR .dropdown-item{
+    color: white;
+}
+
+.USERBAR  .dropdown-item:hover{
+    background-color: #131a27;
+}
