@@ -8,6 +8,7 @@
 }
 
 .USERBAR{
+    width: 100%;
     border-bottom: 1px solid black;
     margin-bottom: 10px;
 }
@@ -37,4 +38,38 @@
 
 .USERBAR  .dropdown-item:hover{
     background-color: #131a27;
+}
+
+.PROFILE{
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top:0;
+    left: 0;
+}
+.PROFILE .BLUR{
+    width: 100%;
+    height: 100%;
+    background-color: grey;
+    opacity: 0.6;
+}
+
+.PROFILE .PROFILECONTAINER{
+    background-color: white;
+    position: absolute;
+    top:0;
+    left:25%;
+    display: flex;
+    flex-direction: row;
+    border-radius: 40px;;
+}
+.PROFILE .PROFILEIMAGE{
+    position: relative;
+    width: 5vh;
+    height: 5vh;
+    margin: 20px;
+}
+
+.PROFILE .DUMMYFORM{
+    margin: 20px;
 }
