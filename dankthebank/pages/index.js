@@ -7,7 +7,7 @@ const Login = () =>{
   const handler2 = () => setloginasuser(false);
   return(
     <div className='LOGIN'>
-      <img className="LOGINIMG" src = "bankimage.jpg"/>
+      <img className="LOGINIMG" src = "bankimage.png"/>
       <div className='LOGINCONTAINER'>
         <div className='LOGINS'>
         <div className='USER'>

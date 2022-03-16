@@ -5,7 +5,6 @@ const User = () =>{
     return(
       <div>
         <UHome/>
-        User
       </div>
       )
   }

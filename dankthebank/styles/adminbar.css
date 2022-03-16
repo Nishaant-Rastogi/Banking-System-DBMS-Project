@@ -10,6 +10,7 @@
 .ADMINBAR{
     border-bottom: 1px solid black;
     margin-bottom: 10px;
+    z-index: 10;
 }
 .ADMINBAR .PROFILEIMAGE {
     float: left;
@@ -37,4 +38,39 @@
 
 .ADMINBAR  .dropdown-item:hover{
     background-color: #131a27;
+}
+
+.APROFILE{
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top:0;
+    left: 0;
+    z-index: 100;
+}
+.APROFILE .BLUR{
+    width: 100%;
+    height: 100%;
+    background-color: grey;
+    opacity: 0.6;
+}
+
+.APROFILE .PROFILECONTAINER{
+    background-color: white;
+    position: absolute;
+    top:0;
+    left:25%;
+    display: flex;
+    flex-direction: row;
+    border-radius: 40px;;
+}
+.APROFILE .PROFILEIMAGE{
+    position: relative;
+    width: 5vh;
+    height: 5vh;
+    margin: 20px;
+}
+
+.APROFILE .DUMMYFORM{
+    margin: 20px;
 }

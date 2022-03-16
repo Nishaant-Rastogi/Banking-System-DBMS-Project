@@ -11,6 +11,7 @@
     width: 100%;
     border-bottom: 1px solid black;
     margin-bottom: 10px;
+    z-index: 10;
 }
 .USERBAR .PROFILEIMAGE {
     float: left;
@@ -40,21 +41,22 @@
     background-color: #131a27;
 }
 
-.PROFILE{
+.UPROFILE{
     width: 100%;
     height: 100%;
     position: absolute;
     top:0;
     left: 0;
+    z-index: 100;
 }
-.PROFILE .BLUR{
+.UPROFILE .BLUR{
     width: 100%;
     height: 100%;
     background-color: grey;
     opacity: 0.6;
 }
 
-.PROFILE .PROFILECONTAINER{
+.UPROFILE .PROFILECONTAINER{
     background-color: white;
     position: absolute;
     top:0;
@@ -63,13 +65,13 @@
     flex-direction: row;
     border-radius: 40px;;
 }
-.PROFILE .PROFILEIMAGE{
+.UPROFILE .PROFILEIMAGE{
     position: relative;
     width: 5vh;
     height: 5vh;
     margin: 20px;
 }
 
-.PROFILE .DUMMYFORM{
+.UPROFILE .DUMMYFORM{
     margin: 20px;
 }
