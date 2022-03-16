@@ -5,10 +5,6 @@ function UHome() {
   return (
     <div className='UHOME'>
         <Userbar/>
-        {/* <form className="form-inline my-2 my-lg-0">
-                <input className="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" />
-                <button className="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-        </form> */}
         <div className="UHCONTAINER1">
           <div className='UHFLEX1'>
             <div className='ROW ROW1'>
@@ -20,18 +16,18 @@ function UHome() {
                 <img className='IMG ACIMG' src="account.png"/>
                 </div>
                 <div className='DATA'> 
-                  <div className = 'HEADING'> LOAN</div>
-                  <div className = 'SUBHEADING'>View ALl Your Loan Details</div>
+                  <div className = 'HEADING'> ACCOUNTS</div>
+                  <div className = 'SUBHEADING'>View All Your Account Details</div>
                   <div className = 'LINK'><a href="#">View</a></div>
                 </div>
               </div>
               <div className='COL'>
                 <div className='IMGCONTAINER'>
-                <img className='IMG ACIMG' src="account.png"/>
+                <img className='IMG ACIMG' src="loan.png"/>
                 </div>
                 <div className='DATA'> 
-                  <div className = 'HEADING'> LOAN</div>
-                  <div className = 'SUBHEADING'>View ALl Your Loan Details</div>
+                  <div className = 'HEADING'> LOANS</div>
+                  <div className = 'SUBHEADING'>View All Your Loan Details</div>
                   <div className = 'LINK'><a href="#">View</a></div>
                 </div>
               </div>
@@ -39,21 +35,21 @@ function UHome() {
             <div className='ROW ROW3 '>
             <div className='COL'>
                 <div className='IMGCONTAINER'>
-                <img className='IMG ACIMG' src="account.png"/>
+                <img className='IMG ACIMG' src="vault.png"/>
                 </div>
                 <div className='DATA'> 
-                  <div className = 'HEADING'> LOAN</div>
-                  <div className = 'SUBHEADING'>View ALl Your Loan Details</div>
+                  <div className = 'HEADING'> TRANSACTIONS</div>
+                  <div className = 'SUBHEADING'>View Transaction History</div>
                   <div className = 'LINK'><a href="#">View</a></div>
                 </div>
               </div>
               <div className='COL'>
                 <div className='IMGCONTAINER'>
-                <img className='IMG ACIMG' src="account.png"/>
+                <img className='IMG ACIMG' src="questions.png"/>
                 </div>
                 <div className='DATA'> 
-                  <div className = 'HEADING'> LOAN</div>
-                  <div className = 'SUBHEADING'>View ALl Your Loan Details</div>
+                  <div className = 'HEADING'> REQUESTS</div>
+                  <div className = 'SUBHEADING'>View All Your Requests</div>
                   <div className = 'LINK'><a href="#">View</a></div>
                 </div>
               </div>
