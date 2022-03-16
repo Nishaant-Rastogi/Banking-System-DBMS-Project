@@ -1,11 +1,19 @@
 import React from 'react';
 import Userbar from './Userbar';
+import AdCarousel from './AdCarousel';
 
 function UHome() {
+  const [index, setIndex] = React.useState(0);
+
+  const handleSelect = (selectedIndex, e) => {
+    setIndex(selectedIndex);
+  };
   return (
     <div className='UHOME'>
         <Userbar/>
+        <AdCarousel/>
         <div className="UHCONTAINER1">
+          {/*...............................................................................................................*/}
           <div className='UHFLEX1'>
             <div className='ROW ROW1'>
               Services For You

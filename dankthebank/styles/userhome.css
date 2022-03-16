@@ -1,12 +1,34 @@
 .UHOME{
-    background-color: blue;
+    background-color: #E67817;
+    height: 100vh;
+    width: 100vw;
+}
+
+.CAROUSEL{
+    height: 78vh;
+}
+
+.CAROUSEL .carousel-control-prev-icon{
+    position: relative;
+    top: -10vh;
+}
+.CAROUSEL .carousel-control-next-icon{
+    position: relative;
+    top: -10vh;
+}
+
+.CAROUSELIMG{
+    width: 80vh;
+    height: 80vh;
+    position: relative;
+    top: -10vh;
 }
 
 .UHCONTAINER1{
     display: flex;
     flex-direction: row;
     position: relative;
-    top:-2vh;
+    top:-25vh;
     z-index: 1;
 }
 
