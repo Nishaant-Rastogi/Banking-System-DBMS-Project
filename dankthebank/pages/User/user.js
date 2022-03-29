@@ -1,4 +1,4 @@
-import UHome from "../components/UHome";
+import UHome from "../../components/UHome";
 
 
 const User = () =>{

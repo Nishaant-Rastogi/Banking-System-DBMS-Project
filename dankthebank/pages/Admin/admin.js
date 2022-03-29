@@ -1,4 +1,4 @@
-import AHome from "../components/AHome";
+import AHome from "../../components/AHome";
 
 const Admin = () =>{
     return(

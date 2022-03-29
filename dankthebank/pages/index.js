@@ -30,7 +30,7 @@ const Login = () =>{
             <label for="exampleInputPassword1">Password</label>
             <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password" />
           </div>
-          <Link href="/admin">
+          <Link href="./Admin/admin">
             <button type="submit" class="btn COLOR LOGINB">Login as Admin</button>
           </Link> 
           </form> }
@@ -45,7 +45,7 @@ const Login = () =>{
             <label htmlFor="exampleInputPassword1">Password</label>
             <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password" />
           </div>
-          <Link href="/user">
+          <Link href="./User/user">
             <button type="submit" class="btn COLOR LOGINB">Login as User</button>
           </Link> 
           </form> : null}
