@@ -1,8 +1,14 @@
-import React from 'react'
-
+import React from 'react';
+import Userbar from '../../components/Userbar';
+import DropDown from '../../components/dropDown';
+import Table from '../../components/Table';
 function savings() {
   return (
-    <div>savings</div>
+    <div>
+      <Userbar />
+      <DropDown />
+      <Table />
+    </div>
   )
 }
 
