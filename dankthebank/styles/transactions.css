@@ -1,0 +1,21 @@
+.DROPDOWNCONTAINER{
+    flex: 1;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    flex-direction: row;
+}
+
+.DROPDOWNCONTAINER .COL{
+    margin: 10px;
+}
+
+.DROPDOWNCONTAINER .COL1{
+    flex: 8;
+    padding-right: 10px;
+    border-right: 2px solid black;
+}
+
+.DROPDOWNCONTAINER .COL2{
+    flex: 2;
+}

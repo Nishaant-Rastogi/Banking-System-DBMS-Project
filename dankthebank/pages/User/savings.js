@@ -7,7 +7,6 @@ function savings() {
     <div>
       <Userbar />
       <DropDown />
-      <Table />
     </div>
   )
 }

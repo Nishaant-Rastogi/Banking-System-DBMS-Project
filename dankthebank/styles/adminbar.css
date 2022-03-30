@@ -36,8 +36,13 @@
     color: white;
 }
 
+.ADMINBAR .DROPDOWN{
+    background-color: #232f4a;
+}
+
 .ADMINBAR  .dropdown-item:hover{
     background-color: #131a27;
+    color: white;
 }
 
 .APROFILE{

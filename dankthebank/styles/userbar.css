@@ -37,8 +37,13 @@
     color: white;
 }
 
+.USERBAR .DROPDOWN{
+    background-color: #232f4a;
+}
+
 .USERBAR  .dropdown-item:hover{
     background-color: #131a27;
+    color: white;
 }
 
 .UPROFILE{
@@ -75,3 +80,5 @@
 .UPROFILE .DUMMYFORM{
     margin: 20px;
 }
+
+
