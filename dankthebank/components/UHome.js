@@ -2,12 +2,18 @@ import React from 'react';
 import Userbar from './Userbar';
 import AdCarousel from './AdCarousel';
 import Link from 'next/link';
+import UNew from './UNew';
+import NewLoan from './NewLoan';
 
 function UHome() {
-  const [index, setIndex] = React.useState(0);
+  const [account, setAccount] = React.useState(false);
+  const [loan, setLoan] = React.useState(false);
 
-  const handleSelect = (selectedIndex, e) => {
-    setIndex(selectedIndex);
+  const handleNewAccount = () => {
+    setAccount(true);
+  };
+  const handleNewLoan = () => {
+    setLoan(true);
   };
   return (
     <div className='UHOME'>
@@ -65,9 +71,11 @@ function UHome() {
               <div className='DATA'>
                 <div className='HEADING'> LOANS</div>
                 <div className='SUBHEADING'>View All Your Loan Details</div>
-                <div className='LINK'><Link href="/User/loan">
-                  <a>View</a>
-                </Link> </div>
+                <div className='LINK'>
+                  <Link href="/User/loan">
+                    <a>View</a>
+                  </Link>
+                </div>
               </div>
             </div>
           </div>
@@ -75,16 +83,18 @@ function UHome() {
         </div>
         <div className='UHFLEX2'>
           <div className='ROW'>
-            <div className='COL'>
+            <div className='COL' onClick={handleNewAccount}>
               <div className='IMGCONTAINER'>
                 <img className='IMG ACIMG' src="account.png" />
               </div>
               <div className='DATA'>
-                <div className='HEADING'>New Account</div>
-                <div className='SUBHEADING'>Create New Account</div>
+                <div className='LINK'>
+                  <div className='HEADING'>New Account</div>
+                  <div className='SUBHEADING'>Create New Account</div>
+                </div>
               </div>
             </div>
-            <div className='COL'>
+            <div className='COL' onClick={handleNewLoan}>
               <div className='IMGCONTAINER'>
                 <img className='IMG ACIMG' src="questions.png" />
               </div>
@@ -93,6 +103,8 @@ function UHome() {
                 <div className='SUBHEADING'>Apply For New Loan</div>
               </div>
             </div>
+            {account ? <UNew setAccount={setAccount} /> : null}
+            {loan ? <NewLoan setLoan={setLoan} /> : null}
           </div>
         </div>
         <div className='UHFLEX3'>
@@ -107,9 +119,10 @@ function UHome() {
               </div>
             </div>
           </div>
+
         </div>
       </div>
-    </div>
+    </div >
   )
 }
 

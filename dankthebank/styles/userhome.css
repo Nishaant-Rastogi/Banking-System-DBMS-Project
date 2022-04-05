@@ -85,17 +85,6 @@
     flex: 6;
 }
 
-.UHCONTAINER1 .UHFLEX1 .ROW .SUBHEADING{
-    display: inline;
-    margin-top: 0.4vh;
-    margin-bottom: 0.8vh;
-    font-size: small;
-    color: grey;
-    opacity: 0.9;
-}
-
-
-
 .UHCONTAINER1 .UHFLEX2{
     flex: 3;
     align-items: center;
@@ -107,6 +96,14 @@
     color: white;
     display: flex;
     flex-direction: column;
+}
+.ROW .SUBHEADING{
+    display: inline;
+    margin-top: 0.4vh;
+    margin-bottom: 0.8vh;
+    font-size: small;
+    color: grey;
+    opacity: 0.9;
 }
 .UHCONTAINER1 .UHFLEX3{
     flex: 2;
