@@ -25,58 +25,52 @@ function UHome() {
         {/*...............................................................................................................*/}
         <div className='UHFLEX1'>
           <div className='ROW ROW2'>
-            <div className='COL'>
-              <div className='IMGCONTAINER'>
-                <img className='IMG ACIMG' src="/account.png" />
-              </div>
-              <div className='DATA'>
-                <div className='HEADING'>SAVINGS ACCOUNT</div>
-                <div className='SUBHEADING'>View All Your Account Details</div>
-                <div className='LINK'><Link href="/User/savings">
-                  <a>View</a>
-                </Link> </div>
-              </div>
-            </div>
-            <div className='COL'>
-              <div className='IMGCONTAINER'>
-                <img className='IMG ACIMG' src="/questions.png" />
-              </div>
-              <div className='DATA'>
-                <div className='HEADING'>CURRENT ACCOUNT</div>
-                <div className='SUBHEADING'>View All Your Account Details</div>
-                <div className='LINK'><Link href="/User/current">
-                  <a>View</a>
-                </Link> </div>
-              </div>
-            </div>
-          </div>
-          <div className='ROW ROW3 '>
-            <div className='COL'>
-              <div className='IMGCONTAINER'>
-                <img className='IMG ACIMG' src="/transaction.png" />
-              </div>
-              <div className='DATA'>
-                <div className='HEADING'> TRANSACTIONS</div>
-                <div className='SUBHEADING'>View Transaction History</div>
-                <div className='LINK'><Link href="/User/transactions">
-                  <a>View</a>
-                </Link> </div>
-              </div>
-            </div>
-            <div className='COL'>
-              <div className='IMGCONTAINER'>
-                <img className='IMG ACIMG' src="/loan.png" />
-              </div>
-              <div className='DATA'>
-                <div className='HEADING'> LOANS</div>
-                <div className='SUBHEADING'>View All Your Loan Details</div>
-                <div className='LINK'>
-                  <Link href="/User/loan">
-                    <a>View</a>
-                  </Link>
+            <Link href="/User/savings">
+              <div className='COL'>
+                <div className='IMGCONTAINER'>
+                  <img className='IMG ACIMG' src="/save.png" />
+                </div>
+                <div className='DATA'>
+                  <div className='HEADING'>SAVINGS ACCOUNT</div>
+                  <div className='SUBHEADING'>View All Your Account Details</div>
                 </div>
               </div>
-            </div>
+            </Link>
+            <Link href="/User/current">
+              <div className='COL'>
+                <div className='IMGCONTAINER'>
+                  <img className='IMG ACIMG' src="/business.png" />
+                </div>
+                <div className='DATA'>
+                  <div className='HEADING'>CURRENT ACCOUNT</div>
+                  <div className='SUBHEADING'>View All Your Account Details</div>
+                </div>
+              </div>
+            </Link>
+          </div>
+          <div className='ROW ROW3 '>
+            <Link href="/User/transactions">
+              <div className='COL'>
+                <div className='IMGCONTAINER'>
+                  <img className='IMG ACIMG' src="/transaction.png" />
+                </div>
+                <div className='DATA'>
+                  <div className='HEADING'> TRANSACTIONS</div>
+                  <div className='SUBHEADING'>View Transaction History</div>
+                </div>
+              </div>
+            </Link>
+            <Link href="/User/loan">
+              <div className='COL'>
+                <div className='IMGCONTAINER'>
+                  <img className='IMG ACIMG' src="/loan.png" />
+                </div>
+                <div className='DATA'>
+                  <div className='HEADING'> LOANS</div>
+                  <div className='SUBHEADING'>View All Your Loan Details</div>
+                </div>
+              </div>
+            </Link>
           </div>
 
         </div>
@@ -105,7 +99,7 @@ function UHome() {
           </div>
         </div>
         <div className='UHFLEX3'>
-        <div className='ROW ROW1'>
+          <div className='ROW ROW1'>
             Loan Payment
           </div>
           <div className='ROW ROW2'>

@@ -13,50 +13,29 @@ function NewLoan(props) {
             <div className='LOANCONTAINER'>
                 <div className='FORM'>
                     <form>
-                        <div class="form-row">
-                            <div class="form-group col-md-6">
-                            <label for="inputEmail4">Email</label>
-                            <input type="email" class="form-control" id="inputEmail4" placeholder="Email" />
+                        <div className="form-row">
+                            <div className="form-group col-md-6">
+                                <label htmlhtml="account">Account No</label>
+                                <input type="text" className="form-control" placeholder="Enter Account No" />
                             </div>
-                            <div class="form-group col-md-6">
-                            <label for="inputPassword4">Password</label>
-                            <input type="password" class="form-control" id="inputPassword4" placeholder="Password" />
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label for="inputAddress">Address</label>
-                            <input type="text" class="form-control" id="inputAddress" placeholder="1234 Main St" />
-                        </div>
-                        <div class="form-group">
-                            <label for="inputAddress2">Address 2</label>
-                            <input type="text" class="form-control" id="inputAddress2" placeholder="Apartment, studio, or floor" />
-                        </div>
-                        <div class="form-row">
-                            <div class="form-group col-md-6">
-                            <label for="inputCity">City</label>
-                            <input type="text" class="form-control" id="inputCity" />
-                            </div>
-                            <div class="form-group col-md-4">
-                            <label for="inputState">State</label>
-                            <select id="inputState" class="form-control">
-                                <option selected>Choose...</option>
-                                <option>...</option>
-                            </select>
-                            </div>
-                            <div class="form-group col-md-2">
-                            <label for="inputZip">Zip</label>
-                            <input type="text" class="form-control" id="inputZip" />
+                            <div className="form-group">
+                                <label htmlhtml="amount">Amount</label>
+                                <input type="text" className="form-control" placeholder="Amount" />
                             </div>
                         </div>
-                        <div class="form-group">
-                            <div class="form-check">
-                            <input class="form-check-input" type="checkbox" id="gridCheck" />
-                            <label class="form-check-label" for="gridCheck">
-                                Check me out
-                            </label>
-                            </div>
+                        <div className="form-group">
+                            <label htmlhtml="roi">Rate of Interest</label>
+                            <input type="text" className="form-control" placeholder="Rate of Interest" />
                         </div>
-                        <button type="submit" class="btn btn-primary">Create Account</button>
+                        <div className="form-group">
+                            <label htmlhtml="term">Term</label>
+                            <input type="text" className="form-control" placeholder="Term" />
+                        </div>
+                        <div className="form-group">
+                            <label htmlhtml="start">Start Date</label>
+                            <input type="text" className="form-control" placeholder="Start Date" />
+                        </div>
+                        <button type="submit" className="btn btn-primary">Create Account</button>
                     </form>
                 </div>
                 <img className="CLOSEIMAGE" onClick={handler} src="/close.png" />
@@ -75,23 +54,23 @@ export default NewLoan;
                 <div className="DUMMYFORM">
                     <form>
                         <div className="form-group">
-                            <label htmlFor="account">Account No</label>
+                            <label htmlhtml="account">Account No</label>
                             <input type="text" className="form-control" placeholder="Enter Account No" />
                         </div>
                         <div className="form-group">
-                            <label htmlFor="amount">Amount</label>
+                            <label htmlhtml="amount">Amount</label>
                             <input type="text" className="form-control" placeholder="Amount" />
                         </div>
                         <div className="form-group">
-                            <label htmlFor="roi">Rate of Interest</label>
+                            <label htmlhtml="roi">Rate of Interest</label>
                             <input type="text" className="form-control" placeholder="Rate of Interest" />
                         </div>
                         <div className="form-group">
-                            <label htmlFor="term">Term</label>
+                            <label htmlhtml="term">Term</label>
                             <input type="text" className="form-control" placeholder="Term" />
                         </div>
                         <div className="form-group">
-                            <label htmlFor="start">Start Date</label>
+                            <label htmlhtml="start">Start Date</label>
                             <input type="text" className="form-control" placeholder="Start Date" />
                         </div>
                         <button type="submit" className="btn COLOR LOGINB">Take New Loan</button>

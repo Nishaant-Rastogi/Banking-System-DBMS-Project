@@ -13,50 +13,29 @@ function UNew(props) {
             <div className='ACCONTAINER'>
                 <div className='FORM'>
                     <form>
-                        <div class="form-row">
-                            <div class="form-group col-md-6">
-                            <label for="inputEmail4">Email</label>
-                            <input type="email" class="form-control" id="inputEmail4" placeholder="Email" />
+                        <div className="form-row">
+                            <div className="form-group col-md-6">
+                                <label html="Name">Name</label>
+                                <input type="text" className="form-control" id="name" placeholder="Enter Name" />
                             </div>
-                            <div class="form-group col-md-6">
-                            <label for="inputPassword4">Password</label>
-                            <input type="password" class="form-control" id="inputPassword4" placeholder="Password" />
+                            <div className="form-group col-md-6">
+                                <label html="Age">Age</label>
+                                <input type="text" className="form-control" id="age" placeholder="Enter Age" />
                             </div>
-                        </div>
-                        <div class="form-group">
-                            <label for="inputAddress">Address</label>
-                            <input type="text" class="form-control" id="inputAddress" placeholder="1234 Main St" />
-                        </div>
-                        <div class="form-group">
-                            <label for="inputAddress2">Address 2</label>
-                            <input type="text" class="form-control" id="inputAddress2" placeholder="Apartment, studio, or floor" />
-                        </div>
-                        <div class="form-row">
-                            <div class="form-group col-md-6">
-                            <label for="inputCity">City</label>
-                            <input type="text" class="form-control" id="inputCity" />
-                            </div>
-                            <div class="form-group col-md-4">
-                            <label for="inputState">State</label>
-                            <select id="inputState" class="form-control">
-                                <option selected>Choose...</option>
-                                <option>...</option>
-                            </select>
-                            </div>
-                            <div class="form-group col-md-2">
-                            <label for="inputZip">Zip</label>
-                            <input type="text" class="form-control" id="inputZip" />
+                            <div className="form-group col-md-6">
+                                <label html="Customer_ID">Customer ID</label>
+                                <input type="text" className="form-control" id="customer_id" placeholder="Enter Customer ID" />
                             </div>
                         </div>
-                        <div class="form-group">
-                            <div class="form-check">
-                            <input class="form-check-input" type="checkbox" id="gridCheck" />
-                            <label class="form-check-label" for="gridCheck">
-                                Check me out
-                            </label>
-                            </div>
+                        <div className="form-group">
+                            <label html="PAN">PAN</label>
+                            <input type="text" className="form-control" id="PAN" placeholder="Enter PAN" />
                         </div>
-                        <button type="submit" class="btn btn-primary">Create Account</button>
+                        <div className="form-group">
+                            <label html="Phone">Phone No</label>
+                            <input type="text" className="form-control" id="Phone" placeholder="Enter Phone No" />
+                        </div>
+                        <button type="submit" className="btn btn-primary">Create Account</button>
                     </form>
                 </div>
                 <img className="CLOSEIMAGE" onClick={handler} src="/close.png" />
