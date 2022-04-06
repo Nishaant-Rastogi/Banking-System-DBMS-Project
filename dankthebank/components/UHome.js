@@ -76,7 +76,7 @@ function UHome() {
         </div>
         <div className='UHFLEX2'>
           <div className='ROW'>
-            <div className='COL' onClick={handleNewAccount}>
+            <div className='COL COL1' onClick={handleNewAccount}>
               <div className='IMGCONTAINER'>
                 <img className='IMG ACIMG' src="/add-user.png" />
               </div>
@@ -87,7 +87,7 @@ function UHome() {
                 </div>
               </div>
             </div>
-            <div className='COL' onClick={handleNewLoan}>
+            <div className='COL COL2' onClick={handleNewLoan}>
               <div className='IMGCONTAINER'>
                 <img className='IMG ACIMG' src="/save-money.png" />
               </div>

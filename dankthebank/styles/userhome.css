@@ -84,7 +84,7 @@
 }
 .UHCONTAINER1 .UHFLEX1 .ROW .DATA{
     position: relative;
-    top: 0vh;
+    top: 2vh;
     flex: 6;
 }
 
@@ -105,14 +105,18 @@
 .UHCONTAINER1 .UHFLEX2 .ROW{
     display: flex;
     flex-direction: column;
-    justify-content: space-around;
+    justify-content: space-between;
     margin-left: 1vw;
 }
 
 .UHCONTAINER1 .UHFLEX2 .ROW .COL{
     display: flex;
     flex-direction: row;
-    justify-content: center;
+    justify-content: space-between;
+}
+
+.UHCONTAINER1 .UHFLEX2 .ROW .COL1{
+    margin-bottom: 2vh;
 }
 
 .UHCONTAINER1 .UHFLEX2 .COL:hover{
@@ -129,7 +133,7 @@
 }
 .UHCONTAINER1 .UHFLEX2 .ROW .DATA{
     position: relative;
-    top: 0vh;
+    top: 2vh;
 }
 /*--------------------------------*/
 .ROW .SUBHEADING{

@@ -1,0 +1,28 @@
+.CUSTOMCARD{
+    text-decoration: none;
+}
+.CUSTOMCARD .COL{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.CUSTOMCARD .DATA{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+.CUSTOMCARD .DATA .VALUE{
+    font-size: larger;
+    font-weight: bold;
+}
+
+.CUSTOMCARD .TOGGLE{
+    text-decoration: none;
+}
+.CUSTOMCARD .TOGGLE .BUTTON{
+    text-decoration: none;
+    color: black
+}

@@ -12,11 +12,13 @@
 }
 
 .DROPDOWNCONTAINER .COL1{
-    flex: 8;
-    padding-right: 10px;
-    border-right: 2px solid black;
+    flex: 2;
+    margin-left: 5vw;
 }
 
 .DROPDOWNCONTAINER .COL2{
-    flex: 2;
+    flex: 8;
+    margin-right: 5vw;
+    border-left: 2px solid black;
+    padding-left: 10px;
 }
