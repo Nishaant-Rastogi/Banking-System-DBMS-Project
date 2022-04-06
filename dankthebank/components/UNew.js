@@ -8,31 +8,58 @@ function UNew(props) {
         handler;
     }, []);
     return (
-        <div className='UPROFILE'>
+        <div className='UNEW'>
             <div className='BLUR' onClick={handler} ></div>
-            <div className='PROFILECONTAINER'>
-                <div className="DUMMYFORM">
+            <div className='ACCONTAINER'>
+                <div className='FORM'>
                     <form>
-                        <div className="form-group">
-                            <label htmlFor="name">Name</label>
-                            <input type="text" className="form-control" placeholder="Enter Name" />
+                        <div class="form-row">
+                            <div class="form-group col-md-6">
+                            <label for="inputEmail4">Email</label>
+                            <input type="email" class="form-control" id="inputEmail4" placeholder="Email" />
+                            </div>
+                            <div class="form-group col-md-6">
+                            <label for="inputPassword4">Password</label>
+                            <input type="password" class="form-control" id="inputPassword4" placeholder="Password" />
+                            </div>
                         </div>
-                        <div className="form-group">
-                            <label htmlFor="age">Age</label>
-                            <input type="text" className="form-control" placeholder="Enter Age" />
+                        <div class="form-group">
+                            <label for="inputAddress">Address</label>
+                            <input type="text" class="form-control" id="inputAddress" placeholder="1234 Main St" />
                         </div>
-                        <div className="form-group">
-                            <label htmlFor="pan">PAN</label>
-                            <input type="text" className="form-control" placeholder="Enter PAN" />
+                        <div class="form-group">
+                            <label for="inputAddress2">Address 2</label>
+                            <input type="text" class="form-control" id="inputAddress2" placeholder="Apartment, studio, or floor" />
                         </div>
-                        <div className="form-group">
-                            <label htmlFor="Phone No">Phone No</label>
-                            <input type="text" className="form-control" placeholder="Enter Phone No." />
+                        <div class="form-row">
+                            <div class="form-group col-md-6">
+                            <label for="inputCity">City</label>
+                            <input type="text" class="form-control" id="inputCity" />
+                            </div>
+                            <div class="form-group col-md-4">
+                            <label for="inputState">State</label>
+                            <select id="inputState" class="form-control">
+                                <option selected>Choose...</option>
+                                <option>...</option>
+                            </select>
+                            </div>
+                            <div class="form-group col-md-2">
+                            <label for="inputZip">Zip</label>
+                            <input type="text" class="form-control" id="inputZip" />
+                            </div>
                         </div>
-                        <button type="submit" className="btn COLOR LOGINB">Create New Account</button>
+                        <div class="form-group">
+                            <div class="form-check">
+                            <input class="form-check-input" type="checkbox" id="gridCheck" />
+                            <label class="form-check-label" for="gridCheck">
+                                Check me out
+                            </label>
+                            </div>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Create Account</button>
                     </form>
                 </div>
-                <img className="PROFILEIMAGE" onClick={handler} src="close.png" />
+                <img className="CLOSEIMAGE" onClick={handler} src="/close.png" />
             </div>
         </div>
 

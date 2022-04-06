@@ -17,18 +17,17 @@ function UHome() {
   };
   return (
     <div className='UHOME'>
+      {account ? <UNew setAccount={setAccount} /> : null}
+      {loan ? <NewLoan setLoan={setLoan} /> : null}
       <Userbar />
       <AdCarousel />
       <div className="UHCONTAINER1">
         {/*...............................................................................................................*/}
         <div className='UHFLEX1'>
-          <div className='ROW ROW1'>
-            Services For You
-          </div>
           <div className='ROW ROW2'>
             <div className='COL'>
               <div className='IMGCONTAINER'>
-                <img className='IMG ACIMG' src="account.png" />
+                <img className='IMG ACIMG' src="/account.png" />
               </div>
               <div className='DATA'>
                 <div className='HEADING'>SAVINGS ACCOUNT</div>
@@ -40,7 +39,7 @@ function UHome() {
             </div>
             <div className='COL'>
               <div className='IMGCONTAINER'>
-                <img className='IMG ACIMG' src="questions.png" />
+                <img className='IMG ACIMG' src="/questions.png" />
               </div>
               <div className='DATA'>
                 <div className='HEADING'>CURRENT ACCOUNT</div>
@@ -54,7 +53,7 @@ function UHome() {
           <div className='ROW ROW3 '>
             <div className='COL'>
               <div className='IMGCONTAINER'>
-                <img className='IMG ACIMG' src="vault.png" />
+                <img className='IMG ACIMG' src="/transaction.png" />
               </div>
               <div className='DATA'>
                 <div className='HEADING'> TRANSACTIONS</div>
@@ -66,7 +65,7 @@ function UHome() {
             </div>
             <div className='COL'>
               <div className='IMGCONTAINER'>
-                <img className='IMG ACIMG' src="loan.png" />
+                <img className='IMG ACIMG' src="/loan.png" />
               </div>
               <div className='DATA'>
                 <div className='HEADING'> LOANS</div>
@@ -85,7 +84,7 @@ function UHome() {
           <div className='ROW'>
             <div className='COL' onClick={handleNewAccount}>
               <div className='IMGCONTAINER'>
-                <img className='IMG ACIMG' src="account.png" />
+                <img className='IMG ACIMG' src="/add-user.png" />
               </div>
               <div className='DATA'>
                 <div className='LINK'>
@@ -96,26 +95,23 @@ function UHome() {
             </div>
             <div className='COL' onClick={handleNewLoan}>
               <div className='IMGCONTAINER'>
-                <img className='IMG ACIMG' src="questions.png" />
+                <img className='IMG ACIMG' src="/save-money.png" />
               </div>
               <div className='DATA'>
                 <div className='HEADING'>New Loan</div>
                 <div className='SUBHEADING'>Apply For New Loan</div>
               </div>
             </div>
-            {account ? <UNew setAccount={setAccount} /> : null}
-            {loan ? <NewLoan setLoan={setLoan} /> : null}
           </div>
         </div>
         <div className='UHFLEX3'>
+        <div className='ROW ROW1'>
+            Loan Payment
+          </div>
           <div className='ROW ROW2'>
             <div className='COL'>
               <div className='IMGCONTAINER'>
-                <img className='IMG ACIMG' src="account.png" />
-              </div>
-              <div className='DATA'>
-                <div className='HEADING'>Loan Payment</div>
-                <div className='SUBHEADING'>Pay Your Dues</div>
+                <img className='IMG ACIMG' src="/insurance.png" />
               </div>
             </div>
           </div>

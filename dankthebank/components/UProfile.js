@@ -35,7 +35,7 @@ function UProfile(props) {
             </div>
           </div>
         </div>
-        <img className="PROFILEIMAGE" onClick={handler} src="../public/close.png" />
+        <img className="PROFILEIMAGE" onClick={handler} src="/close.png" />
       </div>
     </div>
 

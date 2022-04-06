@@ -16,7 +16,7 @@ function Userbar() {
           <ul className="navbar-nav mr-auto"></ul>
           <div>
             <div className='nav-item dropdown USERDROPDOWN'>
-              <img className="PROFILEIMAGE" src="bankimage.png" />
+              <img className="PROFILEIMAGE" src="/user.png" />
               <a className="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 User
               </a>
