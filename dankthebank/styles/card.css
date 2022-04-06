@@ -3,26 +3,74 @@
 }
 .CUSTOMCARD .COL{
     display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    cursor: pointer;
+}
+
+.CUSTOMCARD .COL .BUTTON{
+    text-decoration: none;
+    color: black;
+    display: flex;
     flex-direction: row;
     justify-content: space-between;
+}
+
+#SUCCESS{
+    color: green
+}
+
+#FAILURE{
+    color: red;
 }
 
 .CUSTOMCARD .DATA{
     display: flex;
     flex-direction: row;
-    justify-content: center;
     align-items: center;
+}
+
+.CUSTOMCARD .ACCOUNT{
+    
+    flex: 3;
+    justify-content: flex-start;
+}
+
+
+
+.CUSTOMCARD .BALANCE{
+    flex: 5;
+    justify-content: center;
+}
+
+.CUSTOMCARD .STATUS{
+    flex: 3;
+    justify-content: flex-end;
+}
+
+.CUSTOMCARD .FROM{
+    flex: 3;
+    justify-content: flex-start;
+}
+
+
+.CUSTOMCARD .TO{
+    flex: 5;
+    justify-content: center;
+}
+
+.CUSTOMCARD .DATE{
+    flex: 3;
+    justify-content: flex-end;
+}
+
+.CUSTOMCARD .CBODY{
+    display: flex;
+    flex-direction: row;
 }
 
 .CUSTOMCARD .DATA .VALUE{
     font-size: larger;
     font-weight: bold;
-}
-
-.CUSTOMCARD .TOGGLE{
-    text-decoration: none;
-}
-.CUSTOMCARD .TOGGLE .BUTTON{
-    text-decoration: none;
-    color: black
+    margin-left: 10px;
 }
