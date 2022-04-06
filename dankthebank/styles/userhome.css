@@ -5,23 +5,30 @@
 }
 
 .CAROUSEL{
+    position: relative;
+    left: 5vw;
     height: 78vh;
+    display: block;
+    align-items: center;
+    width: 90vw;
 }
 
 .CAROUSEL .carousel-control-prev-icon{
     position: relative;
     top: -10vh;
+    right: 10vh;
 }
 .CAROUSEL .carousel-control-next-icon{
     position: relative;
     top: -10vh;
+    left: 10vh;
 }
 
 .CAROUSELIMG{
-    width: 80vh;
+    width: 40vw;
     height: 80vh;
     position: relative;
-    top: -10vh;
+    border: 1px solid #e3f7e3;
 }
 
 .UHCONTAINER1{

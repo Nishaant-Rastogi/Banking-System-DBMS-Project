@@ -13,21 +13,21 @@ function AdCarousel() {
   <Carousel.Item>
     <img
       className="d-block w-100 CAROUSELIMG"
-      src="vault.png"
+      src="/ad1.png"
       alt="First slide"
     />
   </Carousel.Item>
   <Carousel.Item>
     <img
       className="d-block w-100 CAROUSELIMG"
-      src="account.png"
+      src="/ad1.png"
       alt="Second slide"
     />
   </Carousel.Item>
   <Carousel.Item>
     <img
       className="d-block w-100 CAROUSELIMG" 
-      src="bankimage.png"
+      src="/ad1.png"
       alt="Third slide"
     />
     </Carousel.Item>
