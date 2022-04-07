@@ -1,11 +1,11 @@
 import React from 'react';
 import Userbar from '../../components/Userbar';
-import DropDown from '../../components/DropD';
+import TransactionsT from '../../components/TransactionsT';
 function transactions() {
   return (
     <div>
       <Userbar />
-      <DropDown />
+      <TransactionsT />
     </div>
   )
 }

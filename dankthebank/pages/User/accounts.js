@@ -1,12 +1,11 @@
 import React from 'react';
 import Userbar from '../../components/Userbar';
-import DropDown from '../../components/DropD';
-import Table from '../../components/Table';
+import SAccountsT from '../../components/SAccountsT';
 function accounts() {
     return (
         <div>
             <Userbar />
-            <DropDown />
+            <SAccountsT />
         </div>
     )
 }

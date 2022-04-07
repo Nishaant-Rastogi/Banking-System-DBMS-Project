@@ -76,6 +76,7 @@
     flex-direction: row;
     justify-content: center;
     flex: 1;
+    cursor: pointer;
 }
 
 .UHCONTAINER1 .UHFLEX1 .COL:hover{
@@ -218,12 +219,14 @@
 
 .UNEW .ACCONTAINER{
     position: relative;
-    top : 5vh;
-    left: 75%;
+    top : 15vh;
+    left: 50%;
     background-color: white;
     display: flex;
     flex-direction: row;
-    border-radius: 40px;;
+    border-radius: 40px;
+    border: 1px solid #888888;
+    box-shadow: 2px 5px 10px #888888;
 }
 
 .UNEW .CLOSEIMAGE{
@@ -259,12 +262,14 @@
 
 .NEWLOAN .LOANCONTAINER{
     position: relative;
-    top : 5vh;
-    left: 75%;
+    top : 12vh;
+    left: 90%;
     background-color: white;
     display: flex;
     flex-direction: row;
-    border-radius: 40px;;
+    border-radius: 40px;
+    border: 1px solid #888888;
+    box-shadow: 2px 5px 10px #888888;
 }
 
 .NEWLOAN .CLOSEIMAGE{

@@ -1,11 +1,11 @@
 import React from 'react';
 import Userbar from '../../components/Userbar';
-import DropDown from '../../components/DropD';
+import SAccountsT from '../../components/SAccountsT';
 function savings() {
   return (
     <div>
       <Userbar />
-      <DropDown />
+      <SAccountsT/>
     </div>
   )
 }

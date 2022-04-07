@@ -39,6 +39,7 @@
 
 .USERBAR .DROPDOWN{
     background-color: #232f4a;
+    cursor: pointer;
 }
 
 .USERBAR  .dropdown-item:hover{

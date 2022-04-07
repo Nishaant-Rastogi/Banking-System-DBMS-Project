@@ -1,5 +1,9 @@
 .CUSTOMCARD{
     text-decoration: none;
+    box-shadow: 1px 2px 4px #000000;
+}
+.CUSTOMCARD:hover{
+    box-shadow:  0 0 0 0;
 }
 .CUSTOMCARD .COL{
     display: flex;
@@ -31,12 +35,9 @@
 }
 
 .CUSTOMCARD .ACCOUNT{
-    
     flex: 3;
     justify-content: flex-start;
 }
-
-
 
 .CUSTOMCARD .BALANCE{
     flex: 5;
@@ -47,6 +48,7 @@
     flex: 3;
     justify-content: flex-end;
 }
+
 
 .CUSTOMCARD .FROM{
     flex: 3;

@@ -3,7 +3,7 @@ import React from "react";
 function CustomCard() {
   return (
         <div className="CUSTOMCARD" id="accordion">
-            <div className="card">
+            <div className="card CARD">
                 <div className="card-header COL" id="headingOne">
                 <button className="btn btn-link BUTTON" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
                     <div className="DATA ACCOUNT">

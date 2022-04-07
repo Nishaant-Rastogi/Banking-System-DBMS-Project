@@ -1,15 +1,15 @@
 import * as React from 'react';
 import CustomCard from './Card';
 
-export default function MultipleSelect() {
-
-
+export default function TransactionsT() {
     return (
         <div className = "DROPDOWNCONTAINER">
             <div className="COL COL1">
                 <div className="ROW ROW2">
                     <div>
-                        This is a flexbox;
+                        <div className='IMGCONTAINER'>
+                            <img className='IMG ACIMG' src="/insurance.png" />
+                        </div>
                     </div>
                 </div> 
             </div>

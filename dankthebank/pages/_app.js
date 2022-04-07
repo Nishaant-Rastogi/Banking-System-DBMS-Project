@@ -6,6 +6,8 @@ import '../styles/userhome.css';
 import '../styles/userhome.css';
 import '../styles/transactions.css';
 import '../styles/card.css';
+import '../styles/savings.css';
+import '../styles/loans.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 function MyApp({ Component, pageProps }) {

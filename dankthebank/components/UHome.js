@@ -109,11 +109,10 @@ function UHome() {
               </div>
             </div>
           </div>
-
         </div>
       </div>
     </div >
   )
 }
 
-export default UHome
+export default UHome;
