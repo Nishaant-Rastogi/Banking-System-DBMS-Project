@@ -1,4 +1,6 @@
-
+.body{
+    background-color:#e3f7e3;;
+}
 .SAVINGACCOUNT{
     flex: 1;
     display: flex;

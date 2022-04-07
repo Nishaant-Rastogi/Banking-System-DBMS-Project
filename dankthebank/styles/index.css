@@ -1,13 +1,14 @@
 .LOGIN{
-    background-color: white;
+    background-color: #e3f7f6;
     height: 100vh;
     width: 100vw;
 }
 
 .LOGIN .LOGINIMG{
     z-index: 0;
+    float: left;
     height: 120vh;
-    width: 100vw;
+    width: 80vw;
     position: absolute;
     top: -10vh;
 }

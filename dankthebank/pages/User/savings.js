@@ -5,7 +5,7 @@ function savings() {
   return (
     <div>
       <Userbar />
-      <SAccountsT/>
+      <SAccountsT />
     </div>
   )
 }

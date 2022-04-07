@@ -82,7 +82,7 @@ function UHome() {
               </div>
               <div className='DATA'>
                 <div className='LINK'>
-                  <div className='HEADING'>New Account</div>
+                  <div className='HEADING'>NEW ACCOUNT</div>
                   <div className='SUBHEADING'>Create New Account</div>
                 </div>
               </div>
@@ -92,7 +92,7 @@ function UHome() {
                 <img className='IMG ACIMG' src="/save-money.png" />
               </div>
               <div className='DATA'>
-                <div className='HEADING'>New Loan</div>
+                <div className='HEADING'>NEW LOAN</div>
                 <div className='SUBHEADING'>Apply For New Loan</div>
               </div>
             </div>

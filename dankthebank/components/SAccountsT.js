@@ -1,14 +1,14 @@
 import * as React from 'react';
-import CustomCard from './Card';
+import CardA from './CardA';
 import UNew from './UNew';
 
 export default function SAccountsT() {
     const [account, setAccount] = React.useState(false);
     const handleNewAccount = () => {
         setAccount(true);
-      };
+    };
     return (
-        <div className = "SAVINGACCOUNT">
+        <div className="SAVINGACCOUNT">
             {account ? <UNew setAccount={setAccount} /> : null}
             <div className="COL COL1">
                 <div className="ROW ROW2">
@@ -20,14 +20,14 @@ export default function SAccountsT() {
                             <img className='FLEXIMG' src="/save.png" />
                         </div>
                     </div>
-                </div> 
+                </div>
             </div>
             <div className="COL COL2">
                 <div className='ROW ROW1'>
-                    <CustomCard />
+                    <CardA />
                 </div>
             </div>
         </div>
-        
+
     );
 }
