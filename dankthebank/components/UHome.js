@@ -4,10 +4,12 @@ import AdCarousel from './AdCarousel';
 import Link from 'next/link';
 import UNew from './UNew';
 import NewLoan from './NewLoan';
+import LoanPayment from './LoanPayment';
 
 function UHome() {
   const [account, setAccount] = React.useState(false);
   const [loan, setLoan] = React.useState(false);
+  const [loanPayment, setLoanPayment] = React.useState(false);
 
   const handleNewAccount = () => {
     setAccount(true);
@@ -15,10 +17,14 @@ function UHome() {
   const handleNewLoan = () => {
     setLoan(true);
   };
+  const handleNewLoanPayment = () => {
+    setLoanPayment(true);
+  };
   return (
     <div className='UHOME'>
       {account ? <UNew setAccount={setAccount} /> : null}
       {loan ? <NewLoan setLoan={setLoan} /> : null}
+      {loanPayment ? <LoanPayment setLoanPayment={setLoanPayment} /> : null}
       <Userbar />
       <AdCarousel />
       <div className="UHCONTAINER1">
@@ -98,7 +104,7 @@ function UHome() {
             </div>
           </div>
         </div>
-        <div className='UHFLEX3'>
+        <div className='UHFLEX3' onClick={handleNewLoanPayment}>
           <div className='ROW ROW1'>
             Loan Payment
           </div>

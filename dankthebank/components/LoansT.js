@@ -1,5 +1,5 @@
 import * as React from 'react';
-import CardT from './CardT';
+import CardL from './CardL';
 import NewLoan from './NewLoan';
 
 export default function LoansT() {
@@ -24,7 +24,7 @@ export default function LoansT() {
             </div>
             <div className="COL COL2">
                 <div className='ROW ROW1'>
-                    <CardT />
+                    <CardL />
                 </div>
             </div>
         </div>
