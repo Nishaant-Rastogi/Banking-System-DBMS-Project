@@ -14,26 +14,14 @@ function LoanPayment(props) {
                 <div className='FORM'>
                     <form>
                         <div className="form-row">
-                            <div className="form-group col-md-6">
-                                <label htmlhtml="account">Account No</label>
-                                <input type="text" className="form-control" placeholder="Enter Account No" />
-                            </div>
-                            <div className="form-group">
-                                <label htmlhtml="amount">Amount</label>
-                                <input type="text" className="form-control" placeholder="Amount" />
-                            </div>
+                            <label htmlhtml="account">Account No</label>
+                            <input type="text" className="form-control" placeholder="Enter Account No" />
                         </div>
                         <div className="form-group">
-                            <label htmlhtml="roi">Rate of Interest</label>
-                            <input type="text" className="form-control" placeholder="Rate of Interest" />
-                        </div>
-                        <div className="form-group">
-                            <label htmlhtml="term">Term</label>
-                            <input type="text" className="form-control" placeholder="Term" />
-                        </div>
-                        <div className="form-group">
-                            <label htmlhtml="start">Start Date</label>
-                            <input type="text" className="form-control" placeholder="Start Date" />
+                            <label htmlhtml="Loan ID">Loan ID</label>
+                            <select className="dropdown" id="loanId" name="loanId">
+                                <option value="defualt">Choose Loan ID</option>
+                            </select>
                         </div>
                         <button type="submit" className="btn btn-primary">Pay</button>
                     </form>

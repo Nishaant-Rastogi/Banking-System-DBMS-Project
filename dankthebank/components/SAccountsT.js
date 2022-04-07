@@ -17,7 +17,7 @@ export default function SAccountsT() {
                             <h5>Create New Account</h5>
                         </div>
                         <div className='IMGCONTAINER' onClick={handleNewAccount}>
-                            <img className='FLEXIMG' src="/save.png" />
+                            <img className='FLEXIMG' src="/add-user.png" />
                         </div>
                     </div>
                 </div>
