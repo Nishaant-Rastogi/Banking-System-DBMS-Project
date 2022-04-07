@@ -25,7 +25,7 @@ function AHome() {
         {/*...............................................................................................................*/}
         <div className='UHFLEX1'>
           <div className='ROW ROW2'>
-            <Link href="/User/savings">
+            <Link href="/Admin/employees">
               <div className='COL'>
                 <div className='IMGCONTAINER'>
                   <img className='IMG ACIMG' src="/businessman.png" />
@@ -49,7 +49,7 @@ function AHome() {
             </Link>
           </div>
           <div className='ROW ROW3 '>
-            <Link href="/User/transactions">
+            <Link href="/Admin/transactions">
               <div className='COL'>
                 <div className='IMGCONTAINER'>
                   <img className='IMG ACIMG' src="/transaction.png" />
@@ -60,7 +60,7 @@ function AHome() {
                 </div>
               </div>
             </Link>
-            <Link href="/User/current">
+            <Link href="/Admin/loans">
               <div className='COL'>
                 <div className='IMGCONTAINER'>
                   <img className='IMG ACIMG' src="/loan.png" />
