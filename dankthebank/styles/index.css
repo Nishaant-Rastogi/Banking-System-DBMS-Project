@@ -18,26 +18,29 @@
     display: flex;
     justify-content: space-around;
     align-items: center;
+    padding-top: 10px;
 }
 
 .LOGIN .LOGINCONTAINER{
     z-index: 100;
     width: 25vw;
-    height: 50vh;
+    height: 52vh;
     background-color: #131a27;
     position: absolute;
     left: 70vw;
     top: 20vh;
     color: white;
+    border-radius: 10px;
 }
 
 .LOGIN .USER{
-    margin-top:30px;
+    margin-top:20px;
 }
 
 .LOGIN .ADMIN{
-    margin-top:30px;
-    margin-right: 20px;
+    margin-top:20px;
+    padding-left: 10px;
+    padding-right: 10px ;
 }
 
 

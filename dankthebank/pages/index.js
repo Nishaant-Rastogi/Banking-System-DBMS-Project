@@ -11,11 +11,11 @@ const Login = () => {
       <div className='LOGINCONTAINER'>
         <div className='LOGINS'>
           <div className='USER'>
-            <button onClick={handler1} type="button" className="btn COLOR" active="true" >User</button>
+            <button onClick={handler1} type="button" className="btn COLOR" active="true" >USER</button>
           </div>
 
           <div className='ADMIN'>
-            <button onClick={handler2} type="button" className="btn COLOR" >Admin</button>
+            <button onClick={handler2} type="button" className="btn COLOR" >ADMIN</button>
           </div>
         </div>
         <div className='FORMCONTAINER'>
