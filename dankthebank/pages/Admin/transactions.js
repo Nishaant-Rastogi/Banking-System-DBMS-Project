@@ -1,8 +1,10 @@
 import React from 'react'
-
+import AdminBar from '../../components/AdminBar';
 const transactions = () => {
     return (
-        <div>transactions</div>
+        <div>
+            <AdminBar />
+        </div>
     )
 }
 

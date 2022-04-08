@@ -4,11 +4,15 @@ import AdCarousel from './AdCarousel';
 import Link from 'next/link';
 import CNew from './CNew';
 import NewLoan from './NewLoan';
+import ENew from './ENew';
 
 function AHome() {
   const [account, setAccount] = React.useState(false);
   const [loan, setLoan] = React.useState(false);
-
+  const [employee, setEmployee] = React.useState(false);
+  const handleNewEmployee = () => {
+    setEmployee(true);
+  };
   const handleNewAccount = () => {
     setAccount(true);
   };
@@ -19,6 +23,7 @@ function AHome() {
     <div className='UHOME'>
       {account ? <CNew setAccount={setAccount} /> : null}
       {loan ? <NewLoan setLoan={setLoan} /> : null}
+      {employee ? <ENew setEmployee={setEmployee} /> : null}
       <Adminbar />
       <AdCarousel />
       <div className="UHCONTAINER1">
@@ -36,17 +41,15 @@ function AHome() {
                 </div>
               </div>
             </Link>
-            <Link href="/User/loan">
-              <div className='COL'>
-                <div className='IMGCONTAINER'>
-                  <img className='IMG ACIMG' src="/time-management.png" />
-                </div>
-                <div className='DATA'>
-                  <div className='HEADING'>NEW EMPLOYEES</div>
-                  <div className='SUBHEADING'>Add New Branch Employees</div>
-                </div>
+            <div className='COL' onClick={handleNewEmployee}>
+              <div className='IMGCONTAINER'>
+                <img className='IMG ACIMG' src="/time-management.png" />
               </div>
-            </Link>
+              <div className='DATA'>
+                <div className='HEADING'>NEW EMPLOYEES</div>
+                <div className='SUBHEADING'>Add New Branch Employees</div>
+              </div>
+            </div>
           </div>
           <div className='ROW ROW3 '>
             <Link href="/Admin/transactions">

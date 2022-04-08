@@ -35,7 +35,7 @@ function NewLoan(props) {
                             <label htmlhtml="start">Start Date</label>
                             <input type="text" className="form-control" placeholder="Start Date" />
                         </div>
-                        <button type="submit" className="btn btn-primary">Create Account</button>
+                        <button type="submit" className="btn btn-primary">Approve New Loan</button>
                     </form>
                 </div>
                 <img className="CLOSEIMAGE" onClick={handler} src="/close.png" />

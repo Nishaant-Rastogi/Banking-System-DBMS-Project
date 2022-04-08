@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import Table from "./Table";
-function CardA(props) {
 
+function CardE(props) {
     return (
         <div className="CUSTOMCARD" id="accordion">
             <div className="card CARD">
@@ -9,7 +9,7 @@ function CardA(props) {
                     <button className="btn btn-link BUTTON" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
                         <div className="DATA ACCOUNT">
                             <div className="HEAD">
-                                Account No:
+                                Employee ID:
                             </div>
                             <div className="VALUE">
                                 123456789
@@ -17,10 +17,10 @@ function CardA(props) {
                         </div>
                         <div className="DATA BALANCE">
                             <div className="HEAD">
-                                Balance:
+                                Name:
                             </div>
                             <div className="VALUE">
-                                120000<image src="/greenup.png" className="VALUEIMG" />
+                                Mr. ABCDE<image src="/greenup.png" className="VALUEIMG" />
                                 {/*<image src="/reddown.png" className="VALUEIMG"/>*/}
                             </div>
                         </div>
@@ -41,7 +41,30 @@ function CardA(props) {
                 </div>
                 <div id="collapseOne" className="collapse" aria-labelledby="headingOne" data-parent="#accordion">
                     <div className="card-body CBODY">
-                        <Table />
+                        <div className="DATA FROM">
+                            <div className="HEAD">
+                                Designation:
+                            </div>
+                            <div className="VALUE">
+                                Branch Manager
+                            </div>
+                        </div>
+                        <div className="DATA TO">
+                            <div className="HEAD">
+                                Salary:
+                            </div>
+                            <div className="VALUE">
+                                200000
+                            </div>
+                        </div>
+                        <div className="DATA DATE">
+                            <div className="HEAD">
+                                Joining Date:
+                            </div>
+                            <div className="VALUE">
+                                1 April 2017
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -50,7 +73,7 @@ function CardA(props) {
                     <button className="btn btn-link BUTTON" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseOne">
                         <div className="DATA ACCOUNT">
                             <div className="HEAD">
-                                Account No:
+                                Employee ID:
                             </div>
                             <div className="VALUE">
                                 123456789
@@ -58,10 +81,10 @@ function CardA(props) {
                         </div>
                         <div className="DATA BALANCE">
                             <div className="HEAD">
-                                Balance:
+                                Name:
                             </div>
                             <div className="VALUE">
-                                150000<image src="/greenup.png" className="VALUEIMG" />
+                                Mr. XYZA<image src="/greenup.png" className="VALUEIMG" />
                                 {/*<image src="/reddown.png" className="VALUEIMG"/>*/}
                             </div>
                         </div>
@@ -81,7 +104,30 @@ function CardA(props) {
                 </div>
                 <div id="collapseTwo" className="collapse" aria-labelledby="headingTwo" data-parent="#accordion">
                     <div className="card-body CBODY">
-                        <Table />
+                        <div className="DATA FROM">
+                            <div className="HEAD">
+                                Designation:
+                            </div>
+                            <div className="VALUE">
+                                Customer Service Manager
+                            </div>
+                        </div>
+                        <div className="DATA TO">
+                            <div className="HEAD">
+                                Salary:
+                            </div>
+                            <div className="VALUE">
+                                20000
+                            </div>
+                        </div>
+                        <div className="DATA DATE">
+                            <div className="HEAD">
+                                Joining Date:
+                            </div>
+                            <div className="VALUE">
+                                1 April 2020
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -89,4 +135,4 @@ function CardA(props) {
     );
 }
 
-export default CardA;
+export default CardE;
