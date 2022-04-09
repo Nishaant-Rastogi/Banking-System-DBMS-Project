@@ -5,11 +5,13 @@ import Link from 'next/link';
 import CNew from './CNew';
 import NewLoan from './NewLoan';
 import ENew from './ENew';
+import EditCustomer from './EditCustomer';
 
 function AHome() {
   const [account, setAccount] = React.useState(false);
   const [loan, setLoan] = React.useState(false);
   const [employee, setEmployee] = React.useState(false);
+  const [edit, setEdit] = React.useState(false);
   const handleNewEmployee = () => {
     setEmployee(true);
   };
@@ -19,11 +21,15 @@ function AHome() {
   const handleNewLoan = () => {
     setLoan(true);
   };
+  const handleNewEdit = () => {
+    setEdit(true);
+  }
   return (
     <div className='UHOME'>
       {account ? <CNew setAccount={setAccount} /> : null}
       {loan ? <NewLoan setLoan={setLoan} /> : null}
       {employee ? <ENew setEmployee={setEmployee} /> : null}
+      {edit ? <EditCustomer setEdit={setEdit} /> : null}
       <Adminbar />
       <AdCarousel />
       <div className="UHCONTAINER1">
@@ -101,7 +107,7 @@ function AHome() {
             </div>
           </div>
         </div>
-        <div className='UHFLEX3'>
+        <div className='UHFLEX3' onClick={handleNewEdit}>
           <div className='ROW ROW1'>
             EDIT CUSTOMER
           </div>
