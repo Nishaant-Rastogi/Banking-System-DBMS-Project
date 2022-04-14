@@ -1,4 +1,6 @@
-drop table Employees;
+create database IF NOT EXISTS DANKTHEBANK;
+use DANKTHEBANK;
+drop table if exists Employees;
 CREATE TABLE Employees(
 Employee_ID VARCHAR(100) NOT NULL PRIMARY KEY,
 Name VARCHAR(100) NOT NULL,

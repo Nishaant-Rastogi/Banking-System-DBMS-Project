@@ -1,4 +1,6 @@
-drop table Customers;
+create database IF NOT EXISTS DANKTHEBANK;
+use DANKTHEBANK;
+drop table if exists Customers;
 CREATE TABLE Customers(
 Customer_ID VARCHAR(100) NOT NULL PRIMARY KEY,
 Name VARCHAR(100) NOT NULL,

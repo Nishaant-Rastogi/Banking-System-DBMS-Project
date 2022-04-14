@@ -1,4 +1,6 @@
-drop table Works;
+create database IF NOT EXISTS DANKTHEBANK;
+use DANKTHEBANK;
+drop table if exists Works;
 CREATE TABLE Works(
 Branch_ID bigint NOT NULL,
 Employee_ID VARCHAR(100) NOT NULL,

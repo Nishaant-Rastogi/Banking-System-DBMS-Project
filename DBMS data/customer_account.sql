@@ -1,4 +1,6 @@
-drop table Customer_Account;
+create database IF NOT EXISTS DANKTHEBANK;
+use DANKTHEBANK;
+drop table if exists Customer_Account;
 CREATE TABLE Customer_Account(
 Customer_ID VARCHAR(100) NOT NULL,
 AccountNo VARCHAR(100) NOT NULL,

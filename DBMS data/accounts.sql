@@ -1,4 +1,6 @@
-drop table Accounts;
+create database IF NOT EXISTS DANKTHEBANK;
+use DANKTHEBANK;
+drop table if exists Accounts;
 CREATE TABLE Accounts(
 AccountNo VARCHAR(100) NOT NULL PRIMARY KEY,
 OpeningDate DATE NOT NULL,

@@ -1,4 +1,6 @@
-drop table Branch_Account;
+create database IF NOT EXISTS DANKTHEBANK;
+use DANKTHEBANK;
+drop table if exists Branch_Account;
 CREATE TABLE Branch_Account(
 Branch_ID bigint NOT NULL,
 AccountNo VARCHAR(100) NOT NULL,

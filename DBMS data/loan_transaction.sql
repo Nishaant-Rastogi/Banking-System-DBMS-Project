@@ -1,4 +1,6 @@
-drop table Loan_Transaction;
+create database IF NOT EXISTS DANKTHEBANK;
+use DANKTHEBANK;
+drop table if exists Loan_Transaction;
 CREATE TABLE Loan_Transaction(
 Loan_ID VARCHAR(100) NOT NULL,
 Payment_ID VARCHAR(100) NOT NULL,

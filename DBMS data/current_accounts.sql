@@ -1,4 +1,6 @@
-drop table Current_Accounts;
+create database IF NOT EXISTS DANKTHEBANK;
+use DANKTHEBANK;
+drop table if exists Current_Accounts;
 CREATE TABLE Current_Accounts(
 AccountNo VARCHAR(100) NOT NULL PRIMARY KEY,
 Balance DOUBLE,

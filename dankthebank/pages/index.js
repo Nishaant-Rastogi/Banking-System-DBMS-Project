@@ -3,7 +3,9 @@ import { useState } from 'react';
 
 const Login = () => {
   const [loginasuser, setloginasuser] = useState(true);
-  const handler1 = () => setloginasuser(true);
+  const [email,setemail] = useState('');
+  const [password,setpassword] = useState('');
+  const handler1 = () => {setloginasuser(true)};
   const handler2 = () => setloginasuser(false);
   return (
     <div className='LOGIN'>

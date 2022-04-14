@@ -1,15 +1,16 @@
-drop view Branch_Manager_View_1001;
-drop view Branch_Manager_View_1002;
-drop view Branch_Manager_View_1003;
-drop view Branch_Manager_View_1004;
-drop view Branch_Manager_View_1005;
-drop view Customer_Branch_View;
-drop view Manager_Customer_View;
-drop view Manager_Account_View_1001;
-drop view Manager_Account_View_1002;
-drop view Manager_Account_View_1003;
-drop view Manager_Account_View_1004;
-drop view Manager_Account_View_1005;
+use DANKTHEBANK;
+drop view if exists Branch_Manager_View_1001;
+drop view if exists Branch_Manager_View_1002;
+drop view if exists Branch_Manager_View_1003;
+drop view if exists Branch_Manager_View_1004;
+drop view if exists Branch_Manager_View_1005;
+drop view if exists Customer_Branch_View;
+drop view if exists Manager_Customer_View;
+drop view if exists Manager_Account_View_1001;
+drop view if exists Manager_Account_View_1002;
+drop view if exists Manager_Account_View_1003;
+drop view if exists Manager_Account_View_1004;
+drop view if exists Manager_Account_View_1005;
 
 create View Branch_Manager_View_1001 as 
 (select * FROM Employees E where substring(E.Employee_ID,1,4) = '1001');

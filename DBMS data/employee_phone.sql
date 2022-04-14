@@ -1,4 +1,6 @@
-drop table Employee_phone;
+create database IF NOT EXISTS DANKTHEBANK;
+use DANKTHEBANK;
+drop table if exists Employee_phone;
 CREATE TABLE Employee_Phone(
 Employee_ID VARCHAR(100) NOT NULL,
 PhoneNo VARCHAR(10) NOT NULL,
