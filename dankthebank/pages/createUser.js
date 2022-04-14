@@ -1,13 +1,12 @@
 import crypto from 'crypto';
 import { v4 as uuidv4 } from 'uuid';
-import excuteQuery from './db';
+import excuteQuery from '../lib/db';
 import moment from 'moment';
+import { nanoid } from "nanoid";
 
 export async function createUser({ email, password }) {
-    const salt = crypto.randomBytes(16).toString('hex');
-    const hash = crypto
-        .pbkdf2Sync(password, salt, 1000, 64, 'sha512')
-        .toString('hex');
+    const salt = nanoid(16);
+    const hash = password;
     const user = {
         id: uuidv4(),
         createdAt: moment().format( 'YYYY-MM-DD HH:mm:ss'),
@@ -30,11 +29,11 @@ export async function createUser({ email, password }) {
 }
 
 
-export async function findUser({ email }) {
+export async function findUser({ id }) {
     try {
         const result = await excuteQuery({
-            query: 'SELECT * FROM users WHERE email = ?',
-            values: [ email ],
+            query: 'SELECT * FROM Customers WHERE Customer_ID = ?',
+            values: [ id ],
         });
         return result[0];
     } catch (error) {
@@ -43,9 +42,7 @@ export async function findUser({ email }) {
 }
 
 export async function validatePassword(user, inputPassword) {
-    const inputHash = crypto
-        .pbkdf2Sync(inputPassword, user.salt, 1000, 64, 'sha512')
-        .toString('hex');
+    const inputHash = inputPassword;
     const passwordsMatch = user.hash === inputHash;
     return passwordsMatch;
 }
