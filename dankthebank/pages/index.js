@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import { useState } from 'react';
-import { findUser } from './createUser';
+import { findUser } from './api/createUser';
 
 const Login = () => {
   const [loginasuser, setloginasuser] = useState(true);

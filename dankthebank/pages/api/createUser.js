@@ -1,6 +1,6 @@
 import crypto from 'crypto';
 import { v4 as uuidv4 } from 'uuid';
-import excuteQuery from '../lib/db';
+import excuteQuery from '../../lib/db'
 import moment from 'moment';
 import { nanoid } from "nanoid";
 
