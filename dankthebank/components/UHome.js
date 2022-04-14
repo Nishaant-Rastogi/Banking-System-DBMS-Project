@@ -5,6 +5,7 @@ import Link from 'next/link';
 import UNew from './UNew';
 import NewLoan from './NewLoan';
 import LoanPayment from './LoanPayment';
+import axios from 'axios';
 
 function UHome() {
   const [account, setAccount] = React.useState(false);

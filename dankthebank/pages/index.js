@@ -1,14 +1,54 @@
 import Link from 'next/link';
-import { useState } from 'react';
-import { findUser } from './api/createUser';
+import { useRouter } from 'next/router'
+import axios from 'axios';
+import { useEffect, useState } from 'react';
+
 
 const Login = () => {
+  const router = useRouter()
   const [loginasuser, setloginasuser] = useState(true);
-  const [email,setemail] = useState('');
-  const [password,setpassword] = useState('');
-  const handler1 = () => {setloginasuser(true)};
+  const [id, setid] = useState('');
+  const [password, setpassword] = useState('');
+
+  const handler1 = () => { setloginasuser(true) };
   const handler2 = () => setloginasuser(false);
-  const handler3 = () => {findUser({email})};
+
+
+  const handleLoginUser = (e) => {
+    axios.post('http://localhost:5000/authUser', { id, password })
+      .then(function (response) {
+        console.log(response);
+        if (response.data === "Success") {
+          e.preventDefault();
+          router.push('/User/user');
+        } else {
+          alert("Wrong ID or Password");
+        }
+        //Perform action based on response
+      })
+      .catch(function (error) {
+        console.log(error);
+        //Perform action based on error
+      });
+    console.log("GENERATE");
+  }
+  const handleLoginAdmin = (e) => {
+    axios.post('http://localhost:5000/authAdmin', { id, password })
+      .then(function (response) {
+        console.log(response);
+        if (response === "Success") {
+          e.preventDefault();
+          router.push('/Admin/admin');
+        } else {
+          alert("Wrong ID or Password");
+        }
+        //Perform action based on response
+      })
+      .catch(function (error) {
+        console.log(error);
+        //Perform action based on error
+      });
+  }
   return (
     <div className='LOGIN'>
       <img className="LOGINIMG" src="bankimage.png" />
@@ -26,32 +66,28 @@ const Login = () => {
           {loginasuser ? null :
             <form>
               <div className="form-group">
-                <label html="exampleInputEmail1">Employee ID</label>
-                <input onChange={event => setemail(event.target.value)} type="text" className="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email" />
-                <small id="emailHelp" className="form-text text-muted">We will never share your email with anyone else.</small>
+                <label html="exampleInputid1">Employee ID</label>
+                <input onChange={event => setid(event.target.value)} type="text" className="form-control" id="exampleInputid1" aria-describedby="idHelp" placeholder="Enter id" />
+                <small id="idHelp" className="form-text text-muted">We will never share your id with anyone else.</small>
               </div>
               <div className="form-group">
                 <label html="exampleInputPassword1">Password</label>
                 <input onChange={event => setpassword(event.target.value)} type="password" className="form-control" id="exampleInputPassword1" placeholder="Password" />
               </div>
-              <Link href="./Admin/admin">
-                <button onClick={handler3} type="submit" className="btn COLOR LOGINB">Login as Admin</button>
-              </Link>
+              <button onClick={handleLoginAdmin} type="submit" className="btn COLOR LOGINB">Login as Admin</button>
             </form>}
           {loginasuser ?
             <form>
               <div className="form-group">
-                <label htmlhtml="exampleInputEmail1">Email address</label>
-                <input type="email" className="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email" />
-                <small id="emailHelp" className="form-text text-muted">We will never share your email with anyone else.</small>
+                <label htmlhtml="exampleInputid1">Customer ID</label>
+                <input onChange={event => setid(event.target.value)} type="id" className="form-control" id="exampleInputid1" aria-describedby="idHelp" placeholder="Enter id" />
+                <small id="idHelp" className="form-text text-muted">We will never share your id with anyone else.</small>
               </div>
               <div className="form-group">
                 <label htmlhtml="exampleInputPassword1">Password</label>
-                <input type="password" className="form-control" id="exampleInputPassword1" placeholder="Password" />
+                <input onChange={event => setpassword(event.target.value)} type="password" className="form-control" id="exampleInputPassword1" placeholder="Password" />
               </div>
-              <Link href="./User/user">
-                <button type="submit" className="btn COLOR LOGINB">Login as User</button>
-              </Link>
+              <button onClick={handleLoginUser} type="submit" className="btn COLOR LOGINB">Login as User</button>
             </form> : null}
         </div>
       </div>
