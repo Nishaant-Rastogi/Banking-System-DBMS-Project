@@ -9,18 +9,21 @@ const Login = () => {
   const [loginasuser, setloginasuser] = useState(true);
   const [id, setid] = useState('');
   const [password, setpassword] = useState('');
-
+  const [user, setUser] = useState()
   const handler1 = () => { setloginasuser(true) };
   const handler2 = () => setloginasuser(false);
 
 
   const handleLoginUser = (e) => {
     e.preventDefault();
-    axios.post('http://localhost:5000/authUser', { id, password })
+    const user = { id, password };
+    axios.post('http://localhost:5000/authUser',user)
       .then(function (response) {
         console.log(response);
         if (response.data === "Success") {
+          localStorage.setItem('user', JSON.stringify(user));
           router.push('/User/user');
+          console.log(user);
         } else {
           alert("Wrong ID or Password");
         }
@@ -34,11 +37,12 @@ const Login = () => {
   }
   const handleLoginAdmin = (e) => {
     e.preventDefault();
+    const user = { id, password };
     axios.post('http://localhost:5000/authAdmin', { id, password })
       .then(function (response) {
         console.log(response);
         if (response === "Success") {
-          e.preventDefault();
+          localStorage.setItem('admin', JSON.stringify(user));
           router.push('/Admin/admin');
         } else {
           alert("Wrong ID or Password");
