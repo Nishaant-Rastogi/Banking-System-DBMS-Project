@@ -15,11 +15,11 @@ const Login = () => {
 
 
   const handleLoginUser = (e) => {
+    e.preventDefault();
     axios.post('http://localhost:5000/authUser', { id, password })
       .then(function (response) {
         console.log(response);
         if (response.data === "Success") {
-          e.preventDefault();
           router.push('/User/user');
         } else {
           alert("Wrong ID or Password");
@@ -33,6 +33,7 @@ const Login = () => {
     console.log("GENERATE");
   }
   const handleLoginAdmin = (e) => {
+    e.preventDefault();
     axios.post('http://localhost:5000/authAdmin', { id, password })
       .then(function (response) {
         console.log(response);
