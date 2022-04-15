@@ -36,15 +36,25 @@ def authAdmin():
         else:
             return "Failure"
 
-@app.route("/userAccounts", methods=['POST'])
+@app.route("/userAccounts", methods=['GET'])
 def userAccounts():
-    if request.method == 'POST':
+    if request.method == 'GET':
         myCursor.execute("SELECT * FROM accounts WHERE Customer_ID = %s", (request.get_json()['id']))
         print(myCursor.fetchall())
         if(myCursor.rowcount > 0):
             return "Success"
         else:
             return "Failure"
+
+@app.route("/userProfile", methods=['GET'])
+def userProfile():
+    if request.method == 'GET':
+        myCursor.execute("SELECT * FROM customers WHERE Customer_ID = %s", (request.get_json()['id']))
+        print(myCursor.fetchall())
+        if(myCursor.rowcount > 0):
+            return {"Success", myCursor.fetchall()}
+        else:
+            return {"Failure"}
 
 
 
