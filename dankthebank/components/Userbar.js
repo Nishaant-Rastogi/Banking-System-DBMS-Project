@@ -1,10 +1,33 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import UProfile from './UProfile';
+import axios from 'axios';
 
-function Userbar() {
-  const [profile, setProfile] = React.useState(false);
-  const handler1 = () => { setProfile(true) };
+function UserBar() {
+  const [profile, setProfile] = useState(false);
+  const [User, setUser] = useState(null);
+  useEffect(() => {
+    const loggedInUser = localStorage.getItem("user");
+    if (loggedInUser) {
+      const foundUser = JSON.parse(loggedInUser);
+      setUser(foundUser);
+      console.log(foundUser);
+    }
+  }, []);
+  const handler1 = (e) => {
+    e.preventDefault();
+    axios.post('http://localhost:5000/userProfile', User)
+      .then(function (response) {
+        setUser(response);
+        //Perform action based on response
+      })
+      .catch(function (error) {
+        console.log(error);
+        //Perform action based on error
+      });
+    console.log("GENERATE");
+    setProfile(true)
+  };
   return (
     <div>
       <nav className="navbar navbar-expand-lg navbar-dark USERBAR COLOR1">
@@ -35,9 +58,9 @@ function Userbar() {
         </div>
       </nav>
       <div>
-        {profile ? <UProfile setProfile={setProfile} /> : null}
+        {profile ? <UProfile User={User} setProfile={setProfile} /> : null}
       </div>
     </div>
   )
 }
-export default Userbar
+export default UserBar

@@ -9,7 +9,6 @@ const Login = () => {
   const [loginasuser, setloginasuser] = useState(true);
   const [id, setid] = useState('');
   const [password, setpassword] = useState('');
-  const [user, setUser] = useState()
   const handler1 = () => { setloginasuser(true) };
   const handler2 = () => setloginasuser(false);
 
@@ -17,13 +16,12 @@ const Login = () => {
   const handleLoginUser = (e) => {
     e.preventDefault();
     const user = { id, password };
-    axios.post('http://localhost:5000/authUser',user)
+    axios.post('http://localhost:5000/authUser', user)
       .then(function (response) {
         console.log(response);
         if (response.data === "Success") {
           localStorage.setItem('user', JSON.stringify(user));
           router.push('/User/user');
-          console.log(user);
         } else {
           alert("Wrong ID or Password");
         }

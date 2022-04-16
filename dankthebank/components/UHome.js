@@ -1,5 +1,4 @@
 import React from 'react';
-import Userbar from './Userbar';
 import AdCarousel from './AdCarousel';
 import Link from 'next/link';
 import UNew from './UNew';
@@ -26,7 +25,6 @@ function UHome() {
       {account ? <UNew setAccount={setAccount} /> : null}
       {loan ? <NewLoan setLoan={setLoan} /> : null}
       {loanPayment ? <LoanPayment setLoanPayment={setLoanPayment} /> : null}
-      <Userbar />
       <AdCarousel />
       <div className="UHCONTAINER1">
         {/*...............................................................................................................*/}

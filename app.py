@@ -1,5 +1,5 @@
 import mysql.connector
-from flask import Flask, request, session, send_from_directory
+from flask import Flask, request, json, send_from_directory
 from flask_restful import Api, Resource, reqparse
 from werkzeug.utils import secure_filename
 from flask_cors import CORS  # comment this on deployment
@@ -8,7 +8,7 @@ app = Flask(__name__)
 db = mysql.connector.connect(
     host="localhost",
     user="root",
-    passwd="mysql",
+    passwd="NISHAant@1234",
     database="DANKTHEBANK"
 )
 myCursor = db.cursor()
@@ -46,16 +46,15 @@ def userAccounts():
         else:
             return "Failure"
 
-@app.route("/userProfile", methods=['GET'])
+@app.route("/userProfile", methods=['GET', 'POST'])
 def userProfile():
-    if request.method == 'GET':
-        myCursor.execute("SELECT * FROM customers WHERE Customer_ID = %s", (request.get_json()['id']))
-        print(myCursor.fetchall())
-        if(myCursor.rowcount > 0):
-            return {"Success", myCursor.fetchall()}
+    if request.method == 'POST':
+        myCursor.execute("SELECT * FROM customers WHERE Customer_ID = %s AND Password = %s", (request.get_json()['id'], request.get_json()['password']))
+        l = str(myCursor.fetchall())
+        if(myCursor.rowcount == 1):
+            return l
         else:
-            return {"Failure"}
-
+            return "Failure"
 
 
 if __name__ == "__main__":
