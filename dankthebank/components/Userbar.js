@@ -3,29 +3,9 @@ import Link from 'next/link';
 import UProfile from './UProfile';
 import axios from 'axios';
 
-function UserBar() {
+function UserBar({ userData }) {
   const [profile, setProfile] = useState(false);
-  const [User, setUser] = useState(null);
-  useEffect(() => {
-    const loggedInUser = localStorage.getItem("user");
-    if (loggedInUser) {
-      const foundUser = JSON.parse(loggedInUser);
-      setUser(foundUser);
-      console.log(foundUser);
-    }
-  }, []);
   const handler1 = (e) => {
-    e.preventDefault();
-    axios.post('http://localhost:5000/userProfile', User)
-      .then(function (response) {
-        setUser(response);
-        //Perform action based on response
-      })
-      .catch(function (error) {
-        console.log(error);
-        //Perform action based on error
-      });
-    console.log("GENERATE");
     setProfile(true)
   };
   return (
@@ -58,7 +38,7 @@ function UserBar() {
         </div>
       </nav>
       <div>
-        {profile ? <UProfile User={User} setProfile={setProfile} /> : null}
+        {profile ? <UProfile userData={userData} setProfile={setProfile} /> : null}
       </div>
     </div>
   )

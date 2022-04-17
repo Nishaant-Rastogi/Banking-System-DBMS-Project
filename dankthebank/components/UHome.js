@@ -1,16 +1,13 @@
-import React from 'react';
+import React, { useState } from 'react';
 import AdCarousel from './AdCarousel';
 import Link from 'next/link';
 import UNew from './UNew';
 import NewLoan from './NewLoan';
 import LoanPayment from './LoanPayment';
-import axios from 'axios';
-
-function UHome() {
-  const [account, setAccount] = React.useState(false);
-  const [loan, setLoan] = React.useState(false);
-  const [loanPayment, setLoanPayment] = React.useState(false);
-
+function UHome({ userData }) {
+  const [account, setAccount] = useState(false);
+  const [loan, setLoan] = useState(false);
+  const [loanPayment, setLoanPayment] = useState(false);
   const handleNewAccount = () => {
     setAccount(true);
   };
