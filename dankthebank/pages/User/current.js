@@ -1,6 +1,7 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import Userbar from '../../components/Userbar';
 import SAccountsT from '../../components/SAccountsT';
+import axios from 'axios';
 function current() {
   const [User, setUser] = useState(null);
   const [userData, setUserData] = useState(null);
@@ -15,8 +16,7 @@ function current() {
   useEffect(() => {
     axios.post('http://localhost:5000/userCurrent', User)
       .then(function (response) {
-        console.log(response.data);
-        setUserData(response.data);
+        console.log(response);
         //Perform action based on response
       })
       .catch(function (error) {

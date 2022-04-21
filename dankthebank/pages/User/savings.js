@@ -1,6 +1,8 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import Userbar from '../../components/Userbar';
 import SAccountsT from '../../components/SAccountsT';
+import axios from 'axios';
+
 function savings() {
   const [User, setUser] = useState(null);
   const [userData, setUserData] = useState(null);
@@ -13,10 +15,9 @@ function savings() {
     }
   }, []);
   useEffect(() => {
-    axios.post('http://localhost:5000/userSaving', User)
+    axios.post('http://localhost:5000/userSavings', User)
       .then(function (response) {
-        console.log(response.data);
-        setUserData(response.data);
+        console.log(response);
         //Perform action based on response
       })
       .catch(function (error) {

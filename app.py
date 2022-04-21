@@ -1,3 +1,4 @@
+from sre_constants import SUCCESS
 import mysql.connector
 from flask import Flask, request, json, send_from_directory
 from flask_restful import Api, Resource, reqparse
@@ -8,13 +9,18 @@ app = Flask(__name__)
 db = mysql.connector.connect(
     host="localhost",
     user="root",
-    passwd="pass",
+    passwd="NISHAant@1234",
     database="DANKTHEBANK"
 )
 myCursor = db.cursor()
 CORS(app)  # comment this on deployment
 api = Api(app)
-
+global maxAccounts
+maxAccounts = 8
+global maxTransactions
+maxTransactions = 4
+global maxLoans
+maxLoans = 2
 
 @app.route("/authUser", methods=["POST"])
 def authUser():
@@ -36,16 +42,6 @@ def authAdmin():
         else:
             return "Failure"
 
-@app.route("/userAccounts", methods=['GET'])
-def userAccounts():
-    if request.method == 'GET':
-        myCursor.execute("SELECT * FROM accounts WHERE Customer_ID = %s", (request.get_json()['id']))
-        print(myCursor.fetchall())
-        if(myCursor.rowcount > 0):
-            return "Success"
-        else:
-            return "Failure"
-
 @app.route("/userProfile", methods=['GET', 'POST'])
 def userProfile():
     if request.method == 'POST':
@@ -58,6 +54,83 @@ def userProfile():
         print(l)
         if(myCursor.rowcount == 1):
             return l
+        else:
+            return "Failure"
+
+@app.route("/newAccount", methods=['POST'])
+def newAccounts():
+    global maxAccounts
+    if request.method == 'POST':
+        customer_id = request.get_json()['Customer_ID']
+        accountNo = customer_id[:5] + "01"
+        if(request.get_json()['AccountType'] == "Savings"):
+            accountNo += "00"
+        else:
+            accountNo += "01"
+        accountNo += "00"+str(maxAccounts)
+        maxAccounts+=1
+        print(accountNo)
+        myCursor.execute("INSERT INTO Accounts (AccountNo, Customer_ID, Balance, OpeningDate) VALUES (%s, %s, %s, CURDATE())", (accountNo, customer_id, request.get_json()['Balance']))
+        if(myCursor.rowcount == 1):
+            return "Success"
+        else:
+            return "Failure"
+
+@app.route("/userSavings", methods=['POST'])
+def userSavings():
+    if request.method == 'POST':
+        columns = ["AccountNo", "Opening_Date", "LoanStatus", "Balance", "Customer_ID"]
+        myCursor.execute("SELECT * FROM Accounts WHERE Customer_ID = %s", (request.get_json()['id'],))
+        l = []
+        # print(myCursor.fetchall())
+        for x in myCursor.fetchall():
+            if(x[0][6:8] == "00"):
+                l.append(dict(zip(columns, x)))
+        if(myCursor.rowcount > 1):
+            if(l == []):
+                return "No Savings Account"
+            else:
+                return tuple(l,)
+        else:
+            return "Failure"
+
+@app.route("/userCurrent", methods=['POST'])
+def userCurrent():
+    if request.method == 'POST':
+        columns = ["AccountNo", "Opening_Date", "LoanStatus", "Balance", "Customer_ID"]
+        myCursor.execute("SELECT * FROM Accounts WHERE Customer_ID = %s", (request.get_json()['id'],))
+        l = []
+        # print(myCursor.fetchall())
+        for x in myCursor.fetchall():
+            if(x[0][6:8] == "01"):
+                l.append(dict(zip(columns, x)))
+
+        if(myCursor.rowcount > 1):
+            if(l == []):
+                return "No Current Account"
+            else:
+                return tuple(l,)
+        else:
+            return "Failure"
+
+@app.route("/userTransactions", methods=['POST'])
+def userTransactions():
+    if request.method == 'POST':
+        columns = ["Payment_ID", "Amount", "Date", "Status"]
+        
+        if(myCursor.rowcount > 1):
+            return "Success"
+        else:
+            return "Failure"
+
+@app.route("/newLoan", methods=['POST'])
+def newLoan():
+    if request.method == 'POST':
+        loanID = ""
+        slab = ""
+        myCursor.execute("INSERT INTO Accounts (LoanID, StartDate, Amount, InterestRate, Term, EndDate, Slab) VALUES (%s, CURDATE(), %s, %s, %s, DATE_ADD(CURDATE(), INTERVAL %s YEAR), %s)", (loanID,  request.get_json()['amount'], request.get_json()['roi'], request.get_json()['term'], request.get_json()['term'], slab))
+        if(myCursor.rowcount > 1):
+            return "Success"
         else:
             return "Failure"
 
