@@ -5,7 +5,7 @@ CREATE TABLE Employee_Phone(
 Employee_ID VARCHAR(100) NOT NULL,
 PhoneNo VARCHAR(10) NOT NULL,
 PRIMARY KEY(Employee_ID, PhoneNo),
-FOREIGN KEY (Employee_ID) References Employees(Employee_ID)
+FOREIGN KEY (Employee_ID) References Employees(Employee_ID) ON DELETE CASCADE
 );
 
 INSERT INTO Employee_Phone

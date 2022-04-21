@@ -1,4 +1,4 @@
-create database IF NOT EXISTS DANKTHEBANK;
+create database IF NOT EXISTS DANKTHEBANK; -- loan status pe trigger
 use DANKTHEBANK;
 drop table if exists Accounts;
 CREATE TABLE Accounts(
@@ -7,8 +7,27 @@ OpeningDate DATE NOT NULL,
 LoanStatus varchar(100) DEFAULT 'NULL',
 Balance DOUBLE,
 Customer_ID varchar(100) NOT NULL,
-FOREIGN KEY (Customer_ID) REFERENCES Customers(Customer_ID)
+FOREIGN KEY (Customer_ID) REFERENCES Customers(Customer_ID) ON DELETE CASCADE
 );
+
+-- create trigger young1 before insert on Accounts
+-- for each row  
+-- set
+-- New.LoanStatus = ;
+
+DELIMITER $$
+
+CREATE TRIGGER young4 BEFORE UPDATE ON Accounts
+    FOR EACH ROW BEGIN
+    UPDATE Savings_Accounts set Savings_Accounts.Balance = New.Balance where Savings_Accounts.AccountNo = New.AccountNo;
+    UPDATE Savings_Accounts set TransactionLimit = IF(Balance <= 10000, Balance, 10000); 
+    UPDATE Current_Accounts set Current_Accounts.Balance = New.Balance where Current_Accounts.AccountNo = New.AccountNo;
+    UPDATE Current_Accounts set OverdraftLimit = IF(Balance <= 60000, Balance, 100000); 
+    END$$
+
+DELIMITER ;
+
+
 INSERT INTO Accounts(AccountNo, Customer_ID, LoanStatus, Balance, OpeningDate)
 VALUES
 ('100101010001', '1003040001', 'NULL', 100000, STR_TO_DATE("02-23-2017", "%m-%d-%Y")),
@@ -42,7 +61,7 @@ VALUES
 ('100301000007', '1002040005', 'DEFAULTER', 41600, STR_TO_DATE("03-29-2008", "%m-%d-%Y")),
 ('100301010008', '1004040002', 'NULL', 43000, STR_TO_DATE("08-16-2012", "%m-%d-%Y")),
 ('100401000001', '1005040003', 'NULL', 8000, STR_TO_DATE("07-06-2006", "%m-%d-%Y")),
-('100401000002', '1004040003', 'NULL', 6700, STR_TO_DATE("11-03-2008", "%m-%d-%Y")),
+('100401000002', '1004040003', 'PAID', 6700, STR_TO_DATE("11-03-2008", "%m-%d-%Y")),
 ('100401000003', '1002040002', 'NULL', 2306, STR_TO_DATE("04-01-2010", "%m-%d-%Y")),
 ('100401010004', '1004040002', 'NULL', 54000, STR_TO_DATE("08-02-2013", "%m-%d-%Y")),
 ('100401010005', '1001040005', 'DEFAULTER', 99000, STR_TO_DATE("09-11-2011", "%m-%d-%Y")),
@@ -83,3 +102,4 @@ VALUES
 ('1005E1000003', '1005E40023', 'NULL', 51000, STR_TO_DATE("09-22-2013", "%m-%d-%Y")),
 ('1005E1000004', '1005E40024', 'NULL', 440000, STR_TO_DATE("07-24-2018", "%m-%d-%Y")),
 ('1005E1000005', '1005E40025', 'NULL', 680000, STR_TO_DATE("03-29-2020", "%m-%d-%Y"));
+

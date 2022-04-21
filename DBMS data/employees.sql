@@ -7,7 +7,8 @@ Name VARCHAR(100) NOT NULL,
 Salary int NOT NULL,
 Designation VARCHAR(100) NOT NULL,
 Joining_Date DATE NOT NULL,
-PAN VARCHAR(30) NOT NULL
+PAN VARCHAR(30) NOT NULL,
+Password VARCHAR(30) NOT NULL
 );
 
 INSERT INTO Employees(Employee_ID, Name, Salary, Designation, Joining_Date, PAN, Password)
