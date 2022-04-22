@@ -10,6 +10,7 @@ function NewLoan(props) {
     const handleNewLoan = (e) => {
         e.preventDefault();
         const data = {
+            account: e.target.account.value,
             amount: e.target.amount.value,
             roi: e.target.roi.value,
             term: e.target.term.value,
@@ -19,7 +20,7 @@ function NewLoan(props) {
                 console.log(response);
                 if (response.data === "Success") {
                     alert("Loan Created");
-                    props.setAccount(false);
+                    props.setLoan(false);
                 } else {
                     alert("Wrong ID or Password");
                 }

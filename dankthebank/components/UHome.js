@@ -4,7 +4,7 @@ import Link from 'next/link';
 import UNew from './UNew';
 import NewLoan from './NewLoan';
 import LoanPayment from './LoanPayment';
-function UHome({ userData }) {
+function UHome({ User }) {
   const [account, setAccount] = useState(false);
   const [loan, setLoan] = useState(false);
   const [loanPayment, setLoanPayment] = useState(false);

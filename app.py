@@ -126,8 +126,17 @@ def userTransactions():
 @app.route("/newLoan", methods=['POST'])
 def newLoan():
     if request.method == 'POST':
-        loanID = ""
-        slab = ""
+        account = request.get_json()['account'][:5]
+        myCursor.execute("SELECT LoanStatus FROM accounts WHERE AccountNo = %s", (account,))
+        loanStatus = myCursor.fetchAll()[0]
+        myCursor.execute("SELECT * FROM branch_loan_account WHERE AccountNo = %s", (account,))
+        loanNo = 0
+        if myCursor.rowCount >= 1 and loanStatus == "PAID":
+            loanNo = myCursor.rowCount
+        else:
+            return "Failure"
+        loanID = account[:5]+"03"+account[7:9]+account[-2:]+"00"+str(loanNo)
+        slab = (request.get_json()['amount']/request.get_json()['term'])*(1+(request.get_json()['roi']/100))
         myCursor.execute("INSERT INTO Accounts (LoanID, StartDate, Amount, InterestRate, Term, EndDate, Slab) VALUES (%s, CURDATE(), %s, %s, %s, DATE_ADD(CURDATE(), INTERVAL %s YEAR), %s)", (loanID,  request.get_json()['amount'], request.get_json()['roi'], request.get_json()['term'], request.get_json()['term'], slab))
         if(myCursor.rowcount > 1):
             return "Success"

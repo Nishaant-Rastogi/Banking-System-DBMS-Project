@@ -30,7 +30,7 @@ const User = () => {
   return (
     <div>
       <UserBar userData={userData} />
-      {User == null ? null : <UHome userData={userData} />}
+      {User == null ? null : <UHome user={User} />}
     </div>
   )
 }
