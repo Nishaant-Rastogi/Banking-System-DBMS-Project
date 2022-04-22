@@ -13,10 +13,10 @@ const User = () => {
       setUser(foundUser);
       console.log(foundUser);
     }
-    else{
+    else {
       setUser(null);
     }
-  }, []);
+  }, [""]);
   useEffect(() => {
     axios.post('http://localhost:5000/userProfile', User)
       .then(function (response) {
@@ -32,11 +32,11 @@ const User = () => {
   }, [User]);
   return (
     <>
-    {User == null ? null :
-    <div>
-      <UserBar userData={userData} />
-       <UHome user={User} />
-    </div>}
+      {User == null ? null :
+        <div>
+          <UserBar userData={userData} />
+          <UHome user={User} />
+        </div>}
     </>
   )
 }

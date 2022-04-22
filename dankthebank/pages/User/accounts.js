@@ -1,4 +1,4 @@
-import React,{useState,useEffect} from 'react';
+import React, { useState, useEffect } from 'react';
 import Userbar from '../../components/Userbar';
 import SAccountsT from '../../components/SAccountsT';
 import axios from 'axios';
@@ -12,10 +12,10 @@ function accounts() {
             setUser(foundUser);
             console.log(foundUser);
         }
-        else{
+        else {
             setUser(null);
         }
-    }, []);
+    }, [""]);
     useEffect(() => {
         axios.post('http://localhost:5000/userAccounts', User)
             .then(function (response) {
@@ -31,11 +31,11 @@ function accounts() {
     }, [User]);
     return (
         <>
-        {User == null ? null :
-        <div>
-            <Userbar userData={userData} />
-            <SAccountsT />
-        </div> }
+            {User == null ? null :
+                <div>
+                    <Userbar userData={userData} />
+                    <SAccountsT />
+                </div>}
         </>
     )
 }

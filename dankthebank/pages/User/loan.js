@@ -1,4 +1,4 @@
-import React,{useState,useEffect} from 'react';
+import React, { useState, useEffect } from 'react';
 import Userbar from '../../components/Userbar';
 import LoansT from '../../components/LoansT';
 import axios from 'axios';
@@ -12,10 +12,10 @@ function UserLoan() {
       setUser(foundUser);
       console.log(foundUser);
     }
-    else{
+    else {
       setUser(null);
     }
-  }, []);
+  }, [""]);
   useEffect(() => {
     axios.post('http://localhost:5000/userLoans', User)
       .then(function (response) {
@@ -31,11 +31,11 @@ function UserLoan() {
   }, [User]);
   return (
     <>
-    {User == null ? null :
-    <div>
-      <Userbar userData={userData} />
-      <LoansT />
-    </div> }
+      {User == null ? null :
+        <div>
+          <Userbar userData={userData} />
+          <LoansT />
+        </div>}
     </>
   )
 }

@@ -13,10 +13,10 @@ function savings() {
       setUser(foundUser);
       console.log(foundUser);
     }
-    else{
+    else {
       setUser(null);
     }
-  }, []);
+  }, [""]);
   useEffect(() => {
     axios.post('http://localhost:5000/userSavings', User)
       .then(function (response) {
@@ -31,11 +31,11 @@ function savings() {
   }, [User]);
   return (
     <>
-    {User == null ? null :
-    <div>
-      <Userbar userData={userData} />
-      <SAccountsT />
-    </div> }
+      {User == null ? null :
+        <div>
+          <Userbar userData={userData} />
+          <SAccountsT />
+        </div>}
     </>
   )
 }
