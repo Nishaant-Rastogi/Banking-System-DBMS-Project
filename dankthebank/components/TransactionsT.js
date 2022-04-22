@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import CardT from './CardT';
 import PaymentPortal from './PaymentPortal';
 
-export default function TransactionsT() {
+export default function TransactionsT({ data }) {
     const [transact, setTransact] = useState(false);
     const handleNewTransact = () => {
         setTransact(true);
@@ -24,7 +24,7 @@ export default function TransactionsT() {
             </div>
             <div className="COL COL2">
                 <div className='ROW ROW1'>
-                    <CardT />
+                    <CardT data = {data}/>
                 </div>
             </div>
         </div>

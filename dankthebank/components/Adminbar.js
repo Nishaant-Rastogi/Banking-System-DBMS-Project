@@ -28,7 +28,7 @@ export default function Adminbar() {
             <div className='nav-item dropdown ADMINDROPDOWN'>
               <img className="PROFILEIMAGE" src="/user.png" />
               <a className="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                User
+                Admin
               </a>
               <div className="dropdown-menu DROPDOWN" aria-labelledby="navbarDropdown">
                 <a className="dropdown-item" onClick={handler1}>Profile</a>

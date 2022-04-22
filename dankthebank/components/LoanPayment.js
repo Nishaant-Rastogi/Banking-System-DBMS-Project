@@ -35,7 +35,7 @@ function LoanPayment(props) {
                             <input type="text" className="form-control" placeholder="Enter Amount" />
                         </div>
                         <br />
-                        <button type="submit" className="btn btn-primary">Pay</button>
+                        <button type="submit" className="btn btn-primary GRADIENT">Pay</button>
                     </form>
                 </div>
                 <img className="CLOSEIMAGE" onClick={handler} src="/close.png" />

@@ -1,0 +1,83 @@
+.CUSTOMCARDT{
+    text-decoration: none;
+    box-shadow: 1px 2px 4px #000000;
+}
+.CUSTOMCARDT:hover{
+    box-shadow:  0 0 0 0;
+}
+.CUSTOMCARDT .COL{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    cursor: pointer;
+}
+
+.CUSTOMCARDT .COL .BUTTON{
+    text-decoration: none;
+    color: black;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+#PROCESSED{
+    color: green
+}
+
+#FAILURE{
+    color: red;
+}
+
+.CUSTOMCARDT .DATA{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.CUSTOMCARDT .ACCOUNT{
+    flex: 4;
+    width: 1vh;
+    justify-content: flex-start;
+}
+
+.CUSTOMCARDT .BALANCE{
+    flex: 5;
+    justify-content: center;
+}
+
+.CUSTOMCARDT .STATUS{
+    flex: 3;
+    justify-content: flex-end;
+}
+
+
+.CUSTOMCARDT .FROM{
+    justify-content: flex-start;
+    position: relative;
+    left: 2vw;
+}
+
+
+.CUSTOMCARDT .TO{
+    justify-content: center;
+}
+
+.CUSTOMCARDT .DATE{
+    justify-content: flex-end;
+}
+
+.CUSTOMCARDT .CBODY{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.CUSTOMCARDT .DATA .HEAD1{
+    width: 15vw;
+}
+
+.CUSTOMCARDT .DATA .VALUE{
+    font-size: larger;
+    font-weight: bold;
+    margin-left: 10px;
+}

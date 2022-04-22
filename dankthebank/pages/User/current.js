@@ -12,6 +12,9 @@ function current() {
       setUser(foundUser);
       console.log(foundUser);
     }
+    else{
+      setUser(null);
+    }
   }, []);
   useEffect(() => {
     axios.post('http://localhost:5000/userCurrent', User)
@@ -26,10 +29,13 @@ function current() {
     console.log("GENERATE");
   }, [User]);
   return (
+    <>
+    {User == null ? null :
     <div>
       <Userbar userData={userData} />
       <SAccountsT />
-    </div>
+    </div> }
+    </>
   )
 }
 

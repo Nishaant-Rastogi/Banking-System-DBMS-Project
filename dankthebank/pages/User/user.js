@@ -13,6 +13,9 @@ const User = () => {
       setUser(foundUser);
       console.log(foundUser);
     }
+    else{
+      setUser(null);
+    }
   }, []);
   useEffect(() => {
     axios.post('http://localhost:5000/userProfile', User)
@@ -28,10 +31,13 @@ const User = () => {
     console.log("GENERATE");
   }, [User]);
   return (
+    <>
+    {User == null ? null :
     <div>
       <UserBar userData={userData} />
-      {User == null ? null : <UHome user={User} />}
-    </div>
+       <UHome user={User} />
+    </div>}
+    </>
   )
 }
 export default User;

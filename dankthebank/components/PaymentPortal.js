@@ -27,7 +27,7 @@ function PaymentPortal(props) {
                                 <input type="text" className="form-control" id="amount" placeholder="Enter Amount" />
                             </div>
                         </div>
-                        <button type="submit" className="btn btn-primary">Transfer Funds</button>
+                        <button type="submit" className="btn btn-primary GRADIENT">Transfer Funds</button>
                     </form>
                 </div>
                 <img className="CLOSEIMAGE" onClick={handler} src="/close.png" />

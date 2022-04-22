@@ -1,6 +1,7 @@
-import React from 'react';
+import React,{useState,useEffect} from 'react';
 import Userbar from '../../components/Userbar';
 import SAccountsT from '../../components/SAccountsT';
+import axios from 'axios';
 function accounts() {
     const [User, setUser] = useState(null);
     const [userData, setUserData] = useState(null);
@@ -10,6 +11,9 @@ function accounts() {
             const foundUser = JSON.parse(loggedInUser);
             setUser(foundUser);
             console.log(foundUser);
+        }
+        else{
+            setUser(null);
         }
     }, []);
     useEffect(() => {
@@ -26,10 +30,13 @@ function accounts() {
         console.log("GENERATE");
     }, [User]);
     return (
+        <>
+        {User == null ? null :
         <div>
             <Userbar userData={userData} />
             <SAccountsT />
-        </div>
+        </div> }
+        </>
     )
 }
 

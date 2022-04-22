@@ -1,17 +1,25 @@
-import React from "react";
+import React,{useState} from "react";
 
-function CardT(props) {
-    return (
-        <div className="CUSTOMCARD" id="accordion">
-            <div className="card CARD">
-                <div className="card-header COL" id="headingOne">
-                    <button className="btn btn-link BUTTON" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+function customcard({data}){
+    const handler = (i) => { console.log(i);}
+    const hashtag = "#H";
+    const heading = "H";
+    let id = 0;
+    return(
+        <div className="CUSTOMCARDT" id="accordion">
+            {data[0] ==null ? null : data[0].map((accoundata) => (
+                <div className="card CARD">
+                    {handler(id)}
+                    {handler(hashtag)}
+                    {handler(hashtag.concat(id))}
+                <div className="card-header COL" id="HeadingTwO">
+                    <button className="btn btn-link BUTTON" data-toggle="collapse" data-target={hashtag.concat(id).toString()} aria-expanded="true" aria-controls="collapseOne">
                         <div className="DATA ACCOUNT">
-                            <div className="HEAD">
-                                Transaction Id :
+                            <div className="HEAD HEAD1">
+                                Payment ID:
                             </div>
                             <div className="VALUE">
-                                123456789
+                                {accoundata.Payment_ID}
                             </div>
                         </div>
                         <div className="DATA BALANCE">
@@ -19,26 +27,21 @@ function CardT(props) {
                                 Amount:
                             </div>
                             <div className="VALUE">
-                                12000<image src="/greenup.png" className="VALUEIMG" />
-                                {/*<image src="/reddown.png" className="VALUEIMG"/>*/}
+                                {accoundata.Amount}
                             </div>
                         </div>
                         <div className="DATA STATUS">
                             <div className="HEAD">
                                 Status:
                             </div>
-                            <div id="SUCCESS" className="VALUE">
-                                Successful
+                            <div id={accoundata.Status} className="VALUE">
+                                {accoundata.Status}
                             </div>
-                            {/*
-                        <div id="FAILURE" className="VALUE">
-                            FAILED
-                        </div>
-                        */}
+
                         </div>
                     </button>
                 </div>
-                <div id="collapseOne" className="collapse" aria-labelledby="headingOne" data-parent="#accordion">
+                <div id={heading.concat(id++).toString()} className="collapse" aria-labelledby="headingTwo" data-parent="#accordion">
                     <div className="card-body CBODY">
                         <div className="DATA FROM">
                             <div className="HEAD">
@@ -61,76 +64,31 @@ function CardT(props) {
                                 Date :
                             </div>
                             <div className="VALUE">
-                                1 April 2022
+                                {accoundata.Date}
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-            <div className="card">
-                <div className="card-header COL" id="headingTwo">
-                    <button className="btn btn-link BUTTON" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseOne">
-                        <div className="DATA ACCOUNT">
-                            <div className="HEAD">
-                                Transaction Id :
-                            </div>
-                            <div className="VALUE">
-                                123456789
-                            </div>
-                        </div>
-                        <div className="DATA BALANCE">
-                            <div className="HEAD">
-                                Amount:
-                            </div>
-                            <div className="VALUE">
-                                12000<image src="/greenup.png" className="VALUEIMG" />
-                                {/*<image src="/reddown.png" className="VALUEIMG"/>*/}
-                            </div>
-                        </div>
-                        <div className="DATA STATUS">
-                            <div className="HEAD">
-                                Status:
-                            </div>
-                            {/* <div id="SUCCESS" className="VALUE">
-                            Successful
-                        </div> */}
-                            <div id="FAILURE" className="VALUE">
-                                FAILED
-                            </div>
+            ))}
+        </div>
+    )
+}
 
-                        </div>
-                    </button>
-                </div>
-                <div id="collapseTwo" className="collapse" aria-labelledby="headingTwo" data-parent="#accordion">
-                    <div className="card-body CBODY">
-                        <div className="DATA FROM">
-                            <div className="HEAD">
-                                FROM:
-                            </div>
-                            <div className="VALUE">
-                                123456789
-                            </div>
-                        </div>
-                        <div className="DATA TO">
-                            <div className="HEAD">
-                                TO:
-                            </div>
-                            <div className="VALUE">
-                                XDXDXDXDXXDXD
-                            </div>
-                        </div>
-                        <div className="DATA DATE">
-                            <div className="HEAD">
-                                Date :
-                            </div>
-                            <div className="VALUE">
-                                1 April 2022
-                            </div>
-                        </div>
-                    </div>
-                </div>
+function CardT({ data }) {
+    const handler = () => {
+        console.log(data[0]);
+    }
+    return (
+        <>
+        {data==null? 
+        <div className="CUSTOMCARD" id="accordion">
+        <div className="card CARD">
+            <div className="card-header COL" id="headingOne"> No Transactions 
             </div>
         </div>
+        </div> : customcard({ data })}
+        </>
     );
 }
 

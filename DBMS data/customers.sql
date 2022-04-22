@@ -18,6 +18,12 @@ for each row
 set
 New.Age = New.Age + (DATEDIFF(CURDATE(), STR_TO_DATE("2022-01-01", "%Y-%m-%d"))/365);
 
+-- create trigger young before insert on Customers
+-- for each row  
+-- set
+-- New.Age = New.Age + (DATEDIFF(CURDATE(), STR_TO_DATE("2022-01-01", "%Y-%m-%d"))/365);
+
+
 INSERT INTO Customers(Customer_ID, Name, Age, HouseNo, Locality, City, ContactNo, PAN, Password)
 VALUES
 ('1001040001', 'Vasant Kumar', 27, '54', 'Defense Colony', 'Delhi', '9999900001', 'A501C0101', 'aabbcc'),
@@ -71,9 +77,6 @@ VALUES
 ('1005E40024', 'Vishnu Kumar', 36, '655', 'Kirti Nagar', 'Delhi', '3434500503', 'R019E0503', 'llkkcc'),
 ('1005E40025', 'Irfan Pathan', 43, '471', 'Chanakyapuri', 'Delhi', '3434500504', 'Q505E0504', 'lljddk');
 
-create trigger young before insert on Customers
-for each row  
-set
-New.Age = New.Age + (DATEDIFF(CURDATE(), STR_TO_DATE("2022-01-01", "%Y-%m-%d"))/365);
+
 
 

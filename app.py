@@ -1,3 +1,4 @@
+from re import M
 from sre_constants import SUCCESS
 import mysql.connector
 from flask import Flask, request, json, send_from_directory
@@ -9,7 +10,7 @@ app = Flask(__name__)
 db = mysql.connector.connect(
     host="localhost",
     user="root",
-    passwd="NISHAant@1234",
+    passwd="mysql",
     database="DANKTHEBANK"
 )
 myCursor = db.cursor()
@@ -90,6 +91,7 @@ def userSavings():
             if(l == []):
                 return "No Savings Account"
             else:
+                # take tuple[0] to get the list and then map it to the savings account
                 return tuple(l,)
         else:
             return "Failure"
@@ -117,9 +119,22 @@ def userCurrent():
 def userTransactions():
     if request.method == 'POST':
         columns = ["Payment_ID", "Amount", "Date", "Status"]
-        
-        if(myCursor.rowcount > 1):
-            return "Success"
+        myCursor.execute("SELECT * FROM customer_account_transaction WHERE Customer_ID = %s", (request.get_json()['id'],))
+        transactionID = []
+        for x in myCursor.fetchall():
+            transactionID.append(x[1])
+        transactions = []
+        for p in transactionID:
+            myCursor.execute("SELECT * FROM transactions WHERE Payment_ID = %s", (p,))
+            transactions.append(dict(zip(columns, myCursor.fetchall()[0])))
+        print(transactions)
+        print(myCursor.rowcount)
+        if(myCursor.rowcount >= 1):
+            if(transactions == []):
+                return "No Transactions"
+            else:
+                print(transactions)
+                return {0:transactions}
         else:
             return "Failure"
 

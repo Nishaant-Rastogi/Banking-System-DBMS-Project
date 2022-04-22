@@ -31,7 +31,7 @@ const Login = () => {
         console.log(error);
         //Perform action based on error
       });
-    console.log("GENERATE");
+    console.log("Log in");
   }
   const handleLoginAdmin = (e) => {
     e.preventDefault();
@@ -60,7 +60,6 @@ const Login = () => {
           <div className='USER'>
             <button onClick={handler1} type="button" className="btn COLOR" active="true" >USER</button>
           </div>
-
           <div className='ADMIN'>
             <button onClick={handler2} type="button" className="btn COLOR" >ADMIN</button>
           </div>

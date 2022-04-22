@@ -56,7 +56,7 @@ function NewLoan(props) {
                             <label htmlFor="term">Term</label>
                             <input type="text" id="term" className="form-control" placeholder="Term" />
                         </div>
-                        <button type="submit" className="btn btn-primary">Approve New Loan</button>
+                        <button type="submit" className="btn btn-primary GRADIENT">Approve New Loan</button>
                     </form>
                 </div>
                 <img className="CLOSEIMAGE" onClick={handler} src="/close.png" />

@@ -68,7 +68,7 @@ function UNew(props) {
                             <label htmlFor="Phone">Phone No</label>
                             <input type="text" className="form-control" id="Phone" placeholder="Enter Phone No" />
                         </div>
-                        <button type="submit" className="btn btn-primary">Create Account</button>
+                        <button type="submit" className="btn btn-primary GRADIENT">Create Account</button>
                     </form>
                 </div>
                 <img className="CLOSEIMAGE" onClick={handler} src="/close.png" />

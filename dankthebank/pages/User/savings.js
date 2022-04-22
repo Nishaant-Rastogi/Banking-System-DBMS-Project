@@ -13,6 +13,9 @@ function savings() {
       setUser(foundUser);
       console.log(foundUser);
     }
+    else{
+      setUser(null);
+    }
   }, []);
   useEffect(() => {
     axios.post('http://localhost:5000/userSavings', User)
@@ -27,10 +30,13 @@ function savings() {
     console.log("GENERATE");
   }, [User]);
   return (
+    <>
+    {User == null ? null :
     <div>
       <Userbar userData={userData} />
       <SAccountsT />
-    </div>
+    </div> }
+    </>
   )
 }
 
