@@ -37,7 +37,12 @@ function UserLoan() {
       axios.post('http://localhost:5000/userLoans', User)
         .then(function (response) {
           console.log(response.data);
-          setLoans(response.data);
+          if(response.data == 'Failure'){
+            setLoans(null);
+          }
+          else{
+            setLoans(response.data);
+          }
           //Perform action based on response
         })
         .catch(function (error) {
@@ -52,7 +57,7 @@ function UserLoan() {
       {User == null ? null :
         <div>
           <Userbar userData={userData} />
-          <LoansT />
+          <LoansT Loans={loans}/>
         </div>}
     </>
   )

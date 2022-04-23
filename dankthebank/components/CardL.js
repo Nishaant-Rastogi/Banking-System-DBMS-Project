@@ -1,82 +1,23 @@
 import React, { useState } from "react";
 
-function CardL(props) {
 
-    return (
-        <div className="CUSTOMCARD" id="accordion">
-            <div className="card CARD">
-                <div className="card-header COL" id="headingOne">
-                    <button className="btn btn-link BUTTON" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+function customcard({Loans}){
+    const handler = (i) => { console.log(i);}
+    const hashtag = "#H";
+    const heading = "H";
+    let id = 0;
+    return(
+        <div className="CUSTOMCARDT" id="accordion">
+            {Loans[0] == null ? null : Loans[0].map((accoundata) => (
+                <div key={id} className="card CARD">
+                <div className="card-header COL" id="HeadingTwO">
+                    <button className="btn btn-link BUTTON" data-toggle="collapse" data-target={hashtag.concat(id).toString()} aria-expanded="true" aria-controls="collapseOne">
                         <div className="DATA ACCOUNT">
-                            <div className="HEAD">
-                                Loan Id:
-                            </div>
-                            <div className="VALUE">
-                                123456789
-                            </div>
-                        </div>
-                        <div className="DATA BALANCE">
-                            <div className="HEAD">
-                                Amount:
-                            </div>
-                            <div className="VALUE">
-                                12000
-                                {/*<image src="/reddown.png" className="VALUEIMG"/>*/}
-                            </div>
-                        </div>
-                        <div className="DATA STATUS">
-                            <div className="HEAD">
-                                Status:
-                            </div>
-                            <div id="FAILURE" className="VALUE">
-                                PENDING
-                            </div>
-                            {/*
-                        <div id="FAILURE" className="VALUE">
-                            FAILED
-                        </div>
-                        */}
-                        </div>
-                    </button>
-                </div>
-                <div id="collapseOne" className="collapse" aria-labelledby="headingOne" data-parent="#accordion">
-                    <div className="card-body CBODY">
-                        <div className="DATA FROM">
-                            <div className="HEAD">
-                                Rate of Interest:
-                            </div>
-                            <div className="VALUE">
-                                6%
-                            </div>
-                        </div>
-                        <div className="DATA TO">
-                            <div className="HEAD">
-                                Term:
-                            </div>
-                            <div className="VALUE">
-                                3 years
-                            </div>
-                        </div>
-                        <div className="DATA DATE">
-                            <div className="HEAD">
-                                Start Date:
-                            </div>
-                            <div className="VALUE">
-                                1 April 2020
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div className="card">
-                <div className="card-header COL" id="headingTwo">
-                    <button className="btn btn-link BUTTON" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseOne">
-                        <div className="DATA ACCOUNT">
-                            <div className="HEAD">
+                            <div className="HEAD HEAD1">
                                 Loan ID:
                             </div>
                             <div className="VALUE">
-                                123456789
+                                {accoundata.Loan_ID}
                             </div>
                         </div>
                         <div className="DATA BALANCE">
@@ -84,54 +25,66 @@ function CardL(props) {
                                 Amount:
                             </div>
                             <div className="VALUE">
-                                150000
-                                {/*<image src="/reddown.png" className="VALUEIMG"/>*/}
+                                {accoundata.Amount}
                             </div>
                         </div>
                         <div className="DATA STATUS">
                             <div className="HEAD">
                                 Status:
                             </div>
-                            {/* <div id="SUCCESS" className="VALUE">
-                            Successful
-                        </div> */}
-                            <div id="SUCCESS" className="VALUE">
-                                PAID
+                            <div id="NULL" className="VALUE">
+                                NULL
                             </div>
 
                         </div>
                     </button>
                 </div>
-                <div id="collapseTwo" className="collapse" aria-labelledby="headingTwo" data-parent="#accordion">
+                <div id={heading.concat(id++).toString()} className="collapse" aria-labelledby="headingTwo" data-parent="#accordion">
                     <div className="card-body CBODY">
                         <div className="DATA FROM">
                             <div className="HEAD">
-                                Rate of Interest:
+                                Rate of Interest :
                             </div>
                             <div className="VALUE">
-                                3%
+                                {accoundata.InterestRate}
                             </div>
                         </div>
                         <div className="DATA TO">
                             <div className="HEAD">
-                                Term:
+                                Term :
                             </div>
                             <div className="VALUE">
-                                2 years
+                            {accoundata.Term}
                             </div>
                         </div>
                         <div className="DATA DATE">
                             <div className="HEAD">
-                                Start Date:
+                                Start Date :
                             </div>
                             <div className="VALUE">
-                                1 February 2018
+                                {accoundata.StartDate}
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
+            ))}
         </div>
+    )
+}
+
+function CardL({Loans}) {
+
+    return (
+        <>
+        {Loans == null ? 
+        <div className="CUSTOMCARD" id="accordion">
+        <div className="card CARD">
+            <div className="card-header COL" id="headingOne"> No Loans 
+            </div>
+        </div>
+        </div> : customcard( { Loans })}
+        </>
     );
 }
 

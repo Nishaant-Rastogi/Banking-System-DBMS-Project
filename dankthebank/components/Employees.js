@@ -2,13 +2,13 @@ import React from 'react'
 import CardE from './CardE';
 import ENew from './ENew';
 
-const Employees = () => {
+const Employees = ({EmpData}) => {
     const [employee, setEmployee] = React.useState(false);
     const handleNewEmployee = () => {
         setEmployee(true);
     };
     return (
-        <div className="SAVINGACCOUNT">
+        <div className="TRANSACTIONS">
             {employee ? <ENew setEmployee={setEmployee} /> : null}
             <div className="COL COL1">
                 <div className="ROW ROW2">
@@ -24,7 +24,7 @@ const Employees = () => {
             </div>
             <div className="COL COL2">
                 <div className='ROW ROW1'>
-                    <CardE />
+                    <CardE EmpData={EmpData}/>
                 </div>
             </div>
         </div>

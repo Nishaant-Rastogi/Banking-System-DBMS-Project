@@ -2,7 +2,7 @@ import * as React from 'react';
 import CardL from './CardL';
 import NewLoan from './NewLoan';
 
-export default function LoansT() {
+export default function LoansT({Loans}) {
     const [loan, setLoan] = React.useState(false);
     const handleNewLoan = () => {
         setLoan(true);
@@ -24,10 +24,9 @@ export default function LoansT() {
             </div>
             <div className="COL COL2">
                 <div className='ROW ROW1'>
-                    <CardL />
+                    <CardL Loans={Loans}/>
                 </div>
             </div>
         </div>
-
     );
 }

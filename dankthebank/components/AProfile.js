@@ -21,7 +21,7 @@ function AProfile({ userData, setProfile }) {
               <p>{userData.Name}</p>
             </div>
             <div className="USER_DETAILS_PHONE">
-              <p>PAN : {userData.PAN}</p>
+              <p>ID : {userData.Employee_ID}</p>
             </div>
           </div>
           

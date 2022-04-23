@@ -26,8 +26,8 @@ function customcard({data}){
                             <div className="HEAD">
                                 Amount:
                             </div>
-                            <div className="VALUE">
-                                {accoundata.Amount}
+                            <div id={accoundata.Amount>0 ? "PROCESSED" : "FAILED" }className="VALUE">
+                                {accoundata.Amount >0  ? accoundata.Amount : accoundata.Amount * -1}
                             </div>
                         </div>
                         <div className="DATA STATUS">

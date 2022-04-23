@@ -13,7 +13,7 @@ app = Flask(__name__)
 db = mysql.connector.connect(
     host="localhost",
     user="root",
-    passwd="NISHAant@1234",
+    passwd="mysql",
     database="DANKTHEBANK",
 )
 myCursor = db.cursor(buffered=True)
@@ -347,7 +347,7 @@ def adminEmployees():
             finalReturn.append(dict(zip(columns,i)))
         print(finalReturn)
         if(myCursor.rowcount >= 1):
-            return {0:finalReturn}
+            return {"emp": finalReturn}
         else:
             return "Failure"
 

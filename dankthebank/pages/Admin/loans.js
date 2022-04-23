@@ -6,6 +6,7 @@ import axios from 'axios'
 const loans = () => {
     const [Admin, setAdmin] = useState(null);
     const [adminData, setAdminData] = useState(null);
+    const [LoanData, setLoanData] = useState(null);
     useEffect(() => {
         const loggedInUser = localStorage.getItem("admin");
         if (loggedInUser) {
@@ -17,26 +18,27 @@ const loans = () => {
             setAdmin(null);
         }
     }, [""]);
-    useEffect(() => {
-        if (Admin != null) {
-            axios.post('http://localhost:5000/adminProfile', Admin)
-                .then(function (response) {
-                    console.log(response.data);
-                    setAdminData(response.data);
-                    //Perform action based on response
-                })
-                .catch(function (error) {
-                    console.log(error);
-                    //Perform action based on error
-                });
-            console.log("GENERATE");
-        }
-    }, [Admin]);
+    // useEffect(() => {
+    //     if (Admin != null) {
+    //         axios.post('http://localhost:5000/adminProfile', Admin)
+    //             .then(function (response) {
+    //                 console.log(response.data);
+    //                 setAdminData(response.data);
+    //                 //Perform action based on response
+    //             })
+    //             .catch(function (error) {
+    //                 console.log(error);
+    //                 //Perform action based on error
+    //             });
+    //         console.log("GENERATE");
+    //     }
+    // }, [Admin]);
     useEffect(() => {
         if (Admin != null) {
             axios.post('http://localhost:5000/adminLoans', Admin)
                 .then(function (response) {
                     console.log(response.data);
+                    setLoanData(response.data);
                     //Perform action based on response
                 })
                 .catch(function (error) {
@@ -51,7 +53,7 @@ const loans = () => {
             {Admin == null ? null :
                 <div>
                     <Adminbar adminData={adminData} />
-                    <LoansT />
+                    <LoansT Loans={LoanData}/>
                 </div>
             }
         </div>

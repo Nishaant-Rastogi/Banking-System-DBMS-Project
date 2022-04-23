@@ -1,18 +1,18 @@
-.CUSTOMCARDT{
+.CUSTOMCARDL{
     text-decoration: none;
     box-shadow: 1px 2px 4px #000000;
 }
-.CUSTOMCARDT:hover{
+.CUSTOMCARDL:hover{
     box-shadow:  0 0 0 0;
 }
-.CUSTOMCARDT .COL{
+.CUSTOMCARDL .COL{
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     cursor: pointer;
 }
 
-.CUSTOMCARDT .COL .BUTTON{
+.CUSTOMCARDL .COL .BUTTON{
     text-decoration: none;
     color: black;
     display: flex;
@@ -20,67 +20,67 @@
     justify-content: space-between;
 }
 
-#PROCESSED{
+#OKAY{
     color: green
 }
 
-#FAILURE{
+#NULL{
+    color: blue
+}
+
+#DEFAULTER{
     color: red;
 }
 
-#FAILED{
-    color: red;
-}
-
-.CUSTOMCARDT .DATA{
+.CUSTOMCARDL .DATA{
     display: flex;
     flex-direction: row;
     align-items: center;
 }
 
-.CUSTOMCARDT .ACCOUNT{
+.CUSTOMCARDL .ACCOUNT{
     flex: 4;
     width: 1vh;
     justify-content: flex-start;
 }
 
-.CUSTOMCARDT .BALANCE{
+.CUSTOMCARDL .BALANCE{
     flex: 5;
     justify-content: center;
 }
 
-.CUSTOMCARDT .STATUS{
+.CUSTOMCARDL .STATUS{
     flex: 3;
     justify-content: flex-end;
 }
 
 
-.CUSTOMCARDT .FROM{
+.CUSTOMCARDL .FROM{
     justify-content: flex-start;
     position: relative;
     left: 2vw;
 }
 
 
-.CUSTOMCARDT .TO{
+.CUSTOMCARDL .TO{
     justify-content: center;
 }
 
-.CUSTOMCARDT .DATE{
+.CUSTOMCARDA .DATE{
     justify-content: flex-end;
 }
 
-.CUSTOMCARDT .CBODY{
+.CUSTOMCARDL .CBODY{
     display: flex;
     flex-direction: row;
     justify-content: space-between;
 }
 
-.CUSTOMCARDT .DATA .HEAD1{
+.CUSTOMCARDL .DATA .HEAD1{
     width: 15vw;
 }
 
-.CUSTOMCARDT .DATA .VALUE{
+.CUSTOMCARDL .DATA .VALUE{
     font-size: larger;
     font-weight: bold;
     margin-left: 10px;
