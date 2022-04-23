@@ -11,7 +11,7 @@ app = Flask(__name__)
 db = mysql.connector.connect(
     host="localhost",
     user="root",
-    passwd="mysql",
+    passwd="NISHAant@1234",
     database="DANKTHEBANK",
 )
 myCursor = db.cursor(buffered=True)
@@ -167,7 +167,7 @@ def userCurrent():
             myCursor.execute("SELECT * FROM transactions WHERE Payment_ID = %s", (p,))
             transactions.append(dict(zip(columns, myCursor.fetchall()[0])))
         listOfListsOfDicts = [l, transactions]
-        if(myCursor.rowcount >= 1):
+        if(listOfListsOfDicts[0] != []):
             if(l == []):
                 return "No Current Account"
             else:
