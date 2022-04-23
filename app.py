@@ -1,6 +1,7 @@
 from http.client import BadStatusLine
 from re import M
 from sre_constants import SUCCESS
+from typing import final
 import mysql.connector
 from flask import Flask, request, json, send_from_directory
 from flask_restful import Api, Resource, reqparse
@@ -11,7 +12,7 @@ app = Flask(__name__)
 db = mysql.connector.connect(
     host="localhost",
     user="root",
-    passwd="mysql",
+    passwd="NISHAant@1234",
     database="DANKTHEBANK",
 )
 myCursor = db.cursor(buffered=True)
@@ -134,14 +135,18 @@ def userSavings():
         transactionID = []
         for x in l:
             myCursor.execute("SELECT * FROM customer_account_transaction WHERE AccountNo = %s", (x['AccountNo'],))
-            for x in myCursor.fetchall():
-                transactionID.append(x[1])
+            transactionID.append({x['AccountNo']:[j[1] for j in myCursor.fetchall()]})
         transactions = []
+        finalReturn = []
         for p in transactionID:
-            myCursor.execute("SELECT * FROM transactions WHERE Payment_ID = %s", (p,))
-            transactions.append(dict(zip(columns, myCursor.fetchall()[0])))
-        listOfListsOfDicts = [l, transactions]
-        if(myCursor.rowcount >= 1):
+            for q in p:
+                for x in p[q]:
+                    myCursor.execute("SELECT * FROM transactions WHERE Payment_ID = %s", (x,))
+                    transactions.append(dict(zip(columns, myCursor.fetchall()[0])))
+                finalReturn.append({q:transactions})
+                transactions = []
+        listOfListsOfDicts = [l, finalReturn]
+        if(listOfListsOfDicts[0] != []):
             if(l == []):
                 return "No Savings Account"
             else:
@@ -164,13 +169,17 @@ def userCurrent():
         transactionID = []
         for x in l:
             myCursor.execute("SELECT * FROM customer_account_transaction WHERE AccountNo = %s", (x['AccountNo'],))
-            for x in myCursor.fetchall():
-                transactionID.append(x[1])
+            transactionID.append({x['AccountNo']:[j[1] for j in myCursor.fetchall()]})
         transactions = []
+        finalReturn = []
         for p in transactionID:
-            myCursor.execute("SELECT * FROM transactions WHERE Payment_ID = %s", (p,))
-            transactions.append(dict(zip(columns, myCursor.fetchall()[0])))
-        listOfListsOfDicts = [l, transactions]
+            for q in p:
+                for x in p[q]:
+                    myCursor.execute("SELECT * FROM transactions WHERE Payment_ID = %s", (x,))
+                    transactions.append(dict(zip(columns, myCursor.fetchall()[0])))
+                finalReturn.append({q:transactions})
+                transactions = []
+        listOfListsOfDicts = [l, finalReturn]
         if(listOfListsOfDicts[0] != []):
             if(l == []):
                 return "No Current Account"
