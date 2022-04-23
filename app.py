@@ -7,7 +7,7 @@ from flask import Flask, request, json, send_from_directory
 from flask_restful import Api, Resource, reqparse
 from werkzeug.utils import secure_filename
 from flask_cors import CORS  # comment this on deployment
-
+from datetime import date, timedelta, datetime
 app = Flask(__name__)
 db = mysql.connector.connect(
     host="localhost",
@@ -219,16 +219,17 @@ def userLoans():
         myCursor.execute("SELECT * FROM Accounts WHERE Customer_ID = %s", (request.get_json()['id'],))
         for x in myCursor.fetchall():
             accounts.append(x[0])
+        print(accounts)
         for x in accounts:
             myCursor.execute("SELECT * FROM branch_loan_account WHERE AccountNo = %s", (x,))
         loanID = []
-        print(myCursor.fetchall())
         for x in myCursor.fetchall():
+            print(x)
             loanID.append(x[1])
         print(loanID)
         loans = []
         for l in loanID:
-            myCursor.execute("SELECT * FROM loans WHERE LoanID = %s", (l,))
+            myCursor.execute("SELECT * FROM loans WHERE Loan_ID = %s", (l,))
             loans.append(dict(zip(columns, myCursor.fetchall()[0])))
         
         print(myCursor.rowcount)
@@ -247,9 +248,14 @@ def newLoan():
         myCursor.execute("SELECT LoanStatus FROM accounts WHERE AccountNo = %s", (account,))
         loanStatus = myCursor.fetchall()[0][0]
         print(loanStatus)
+        if loanStatus == "NULL" or loanStatus == "PAID":
+            loanStatus = "OKAY"
+        else:
+            return "Loan Cannot be Created"
+        myCursor.execute("UPDATE accounts SET LoanStatus = %s WHERE AccountNo = %s", (loanStatus, account))
         myCursor.execute("SELECT * FROM branch_loan_account WHERE AccountNo = %s", (account,))
         loanNo = 1
-        if myCursor.rowcount >= 1 and loanStatus == "PAID":
+        if myCursor.rowcount >= 1:
             loanNo += myCursor.rowcount
         loanID = account[:5]+"03"+account[7:9]+account[-2:]+"00"+str(loanNo)
         slab = (int(request.get_json()['amount'])/int(request.get_json()['term']))*(1+(int(request.get_json()['roi'])/100))
@@ -267,13 +273,35 @@ def loanPayments():
         branch = account[:5]
         loanPaymentID = branch+"0202"+account[-2:]+branch[-2:]+account[-2:]+str(maxTransactions)+account[6:8]+"CX"
         amount = request.get_json()['Amount']
-        myCursor.execute("SELECT Balance FROM accounts WHERE AccountNo = %s", (account,))
+        myCursor.execute("SELECT * FROM loans WHERE Loan_ID = %s", (request.get_json()['LoanID'],))
+        term = myCursor.fetchall()[0][4]
+        startDate = myCursor.fetchall()[0][0]
+        loanAmount = myCursor.fetchall()[0][2]
+        slab = myCursor.fetchall()[0][6]
+        myCursor.execute("SELECT Balance,LoanStatus FROM accounts WHERE AccountNo = %s", (account,))
         loanPaymentStatus = "PROCESSED"
+        loanStatus = myCursor.fetchall()[0][1]
+        if loanStatus == "PAID" or loanStatus == "DEFAULTER":
+            return "Loan Payment Not Allowed"
+        if date.today() > datetime.strptime(startDate) + timedelta(year=term):
+            if loanStatus == "PENDING":
+                loanStatus = "DEFAULTER"
+                return "Loan Term Expired"
+        else:
+            if amount > loanAmount:
+                return "Payment is Greater than Yearly Slab"
+            else:
+                loanAmount -= amount
+                check = (date.today() - (datetime.strptime(startDate) + timedelta(year=term)))/365
+                if check <= 0 and check >= -1 and loanAmount > 0:
+                    loanStatus = "PAID"
+                elif loanAmount == 0:
+                    loanAmount = slab
         if(myCursor.fetchall()[0][0] < 0):
             loanPaymentStatus = "FAILED"
-        else:
+        elif loanPaymentStatus != "FAILED":
             myCursor.execute("UPDATE accounts SET Balance = Balance - %s WHERE AccountNo = %s", (amount, account))
-        # loan Status
+        # loan Status and update
         myCursor.execute("INSERT INTO transactions (Payment_ID, Amount, Date, Status) VALUES (%s, %s, CURDATE(), %s)", (loanPaymentID, amount, loanPaymentStatus))
         if(myCursor.rowcount >= 1):
             return "Success"
@@ -289,12 +317,17 @@ def newTransaction():
         branch = receiverAccount[:5]
         paymentID = branch+"0201"+senderAccount[-2:]+branch[-2:]+receiverAccount[-2:]+str(maxTransactions)+senderAccount[7]+receiverAccount[7]+"CC"
         amount = request.get_json()['Amount']
-        # loan status
+        # loan 
+        myCursor.execute("SELECT LoanStatus FROM accounts where AccountNo = %s", (senderAccount,))
+        loanStatus = myCursor.fetchall()[0][0]
         paymentStatus = "PROCESSED"
+        if loanStatus == "DEFAULTER":
+            paymentStatus = "FAILED"
+
         myCursor.execute("SELECT Balance FROM accounts WHERE AccountNo = %s", (senderAccount,))
         if(myCursor.fetchall()[0][0] < 0):
             paymentStatus = "FAILED"
-        else:
+        elif paymentStatus != "FAILED":
             myCursor.execute("UPDATE accounts SET Balance = Balance - %s WHERE AccountNo = %s", (amount, senderAccount))
             myCursor.execute("UPDATE accounts SET Balance = Balance + %s WHERE AccountNo = %s", (amount, receiverAccount))
         myCursor.execute("INSERT INTO transactions (Payment_ID, Amount, Date, Status) VALUES (%s, %s, CURDATE(), %s)", (paymentID, amount, paymentStatus))
@@ -302,6 +335,8 @@ def newTransaction():
             return "Success"
         else:
             return "Failure"
+
+
 if __name__ == "__main__":
     app.run(debug=True)
 
