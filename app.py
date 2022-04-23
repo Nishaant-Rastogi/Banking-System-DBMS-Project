@@ -354,6 +354,41 @@ def adminEmployees():
         else:
             return "Failure"
 
+@app.route("/adminTransactions", methods=['POST'])
+def adminTransactions():
+    if request.method == 'POST':
+        columns = ["Payment_ID", "Amount", "Date", "Status"]
+        adminID = request.get_json()['id']
+        branch = adminID[:4]
+        print(branch)
+        myCursor.execute("SELECT * FROM transactions WHERE Payment_ID LIKE %s", (branch+"%",))
+        # print(myCursor.fetchall())
+        finalReturn = []
+        for i in myCursor.fetchall():
+            finalReturn.append(dict(zip(columns,i)))
+        print(finalReturn)
+        if(myCursor.rowcount >= 1):
+            return {0:finalReturn}
+        else:
+            return "Failure"
+
+@app.route("/adminLoans", methods=['POST'])
+def adminLoans():
+    if request.method == 'POST':
+        columns = ["StartDate", "Loan_ID", "Amount", "InterestRate", "Term"]
+        adminID = request.get_json()['id']
+        branch = adminID[:4]
+        print(branch)
+        myCursor.execute("SELECT * FROM loans WHERE Loan_ID LIKE %s", (branch+"%",))
+        # print(myCursor.fetchall())
+        finalReturn = []
+        for i in myCursor.fetchall():
+            finalReturn.append(dict(zip(columns,i)))
+        print(finalReturn)
+        if(myCursor.rowcount >= 1):
+            return {0:finalReturn}
+        else:
+            return "Failure"
 if __name__ == "__main__":
     app.run(debug=True)
 
