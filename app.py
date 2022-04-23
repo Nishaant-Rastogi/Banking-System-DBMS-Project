@@ -33,8 +33,12 @@ def userLogOut():
 @app.route("/adminLogOut", methods=["POST"])
 def adminLogOut():
     if request.method == "POST":
-        print("IN")
-        myCursor.execute("REVOKE ROLE %s FROM USER admin@localhost", (request.get_json()["Designation"].replaceAll(' ', '_'),))
+        print(request.get_json()["Designation"])
+        myCursor.execute("REVOKE %s FROM admin@localhost", (request.get_json()["Designation"].replace(' ', '_'),))
+        if myCursor.rowcount >= 0:
+            return "Success"
+        else:
+            return "Failure"
 @app.route("/authUser", methods=["POST"])
 def authUser():
     global User
