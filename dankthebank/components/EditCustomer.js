@@ -1,18 +1,47 @@
-import React from 'react';
-
+import React, { useEffect } from 'react';
+import axios from 'axios';
 
 function EditCustomer(props) {
     const handler = () => { props.setEdit(false) };
 
-    React.useEffect(() => {
+    useEffect(() => {
         handler;
     }, []);
+    const handleEditCustomer = (e) => {
+        e.preventDefault();
+        const data = {
+            Name: e.target.Name.value,
+            Age: e.target.Age.value,
+            Salary: e.target.Salary.value,
+            PAN: e.target.PAN.value,
+            Joining_Date: e.target.Joining_Date.value,
+            Password: e.target.Password.value,
+            Designation: e.target.Designation.value,
+            Branch_ID: e.target.Branch_ID.value
+        }
+        axios.post('http://localhost:5000/editCustomer', data)
+            .then(function (response) {
+                console.log(response);
+                if (response.data === "Success") {
+                    alert("Customer Updated");
+                    props.setEdit(false)
+                } else {
+                    alert("Wrong ID or Password");
+                }
+                //Perform action based on response
+            })
+            .catch(function (error) {
+                console.log(error);
+                //Perform action based on error
+            });
+        console.log("GENERATE");
+    }
     return (
         <div className='UNEW'>
             <div className='BLUR' onClick={handler} ></div>
             <div className='ACCONTAINER'>
                 <div className='FORM'>
-                    <form>
+                    <form onSubmit={handleEditCustomer}>
                         <div className="form-group">
                             <label html="Customer_ID">Customer ID</label>
                             <input type="text" className="form-control" id="Customer_ID" placeholder="Enter Customer ID" />

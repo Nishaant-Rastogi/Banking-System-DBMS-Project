@@ -26,7 +26,8 @@ global maxTransactions
 maxTransactions = 4
 global maxLoans
 maxLoans = 2
-global User
+global maxEmployees
+maxEmployees = 10
 
 @app.route("/userLogOut", methods=["POST"])
 def userLogOut():
@@ -43,7 +44,6 @@ def adminLogOut():
             return "Failure"
 @app.route("/authUser", methods=["POST"])
 def authUser():
-    global User
     if request.method == 'POST':
         myCursor.execute("SELECT * FROM customers WHERE Customer_ID = %s AND Password = %s", (request.get_json()['id'], request.get_json()['password']))
         print(myCursor.fetchall())
@@ -52,14 +52,12 @@ def authUser():
             myCursor.execute("FLUSH PRIVILEGES")
             myCursor.execute("CREATE USER customer@localhost IDENTIFIED BY %s", (request.json["password"],))
             myCursor.execute("GRANT User TO customer@localhost")
-            User = "customer"
             return "Success"
         else:
             return "Failure"
 
 @app.route("/authAdmin", methods=['POST'])
 def authAdmin():
-    global User
     if request.method == 'POST':
         myCursor.execute("SELECT * FROM employees WHERE Employee_ID = %s AND Password = %s", (request.get_json()['id'], request.get_json()['password']))
         print(myCursor.fetchall())
@@ -68,7 +66,6 @@ def authAdmin():
             myCursor.execute("FLUSH PRIVILEGES")
             myCursor.execute("CREATE USER admin@localhost IDENTIFIED BY %s", (request.json["password"],))
             myCursor.execute("GRANT Branch_Manager TO admin@localhost")
-            User = "admin"
             return "Success"
         else:
             return "Failure"
@@ -389,6 +386,31 @@ def adminLoans():
             return {0:finalReturn}
         else:
             return "Failure"
+@app.route("/newEmployee", methods=['POST'])
+def newEmployee():
+    global maxEmployees
+    if request.method == 'POST':
+        name = request.get_json()['Name']
+        age = request.get_json()['Age']
+        salary = request.get_json()['Salary']
+        designation = request.get_json()['Designation']
+        pan = request.get_json()['PAN']
+        password = request.get_json()['Password']
+        branch = request.get_json()['Branch_ID']
+        joiningDate = request.get_json()['Joining_Date']
+        employeeID = branch+"0000"+str(maxEmployees)
+        maxEmployees+=1
+        myCursor.execute("INSERT INTO employees (Employee_ID, Name, Salary, Designation, Joining_Date, PAN, Password) VALUES (%s, %s, %s, %s, %s, %s, %s)", (employeeID, name, salary, designation, joiningDate, pan, password))
+        if(myCursor.rowcount == 1):
+            return "Success"
+        else:
+            return "Failure"
+
+@app.route("/editCustomer", methods=['POST'])
+def editCustomer():
+    if request.method == 'POST':
+        return "Success"
+
 if __name__ == "__main__":
     app.run(debug=True)
 
