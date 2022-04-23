@@ -39,7 +39,7 @@ const Login = () => {
     axios.post('http://localhost:5000/authAdmin', { id, password })
       .then(function (response) {
         console.log(response);
-        if (response === "Success") {
+        if (response.data === "Success") {
           localStorage.setItem('admin', JSON.stringify(user));
           router.push('/Admin/admin');
         } else {

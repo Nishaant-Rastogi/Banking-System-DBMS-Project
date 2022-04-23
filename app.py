@@ -11,10 +11,11 @@ app = Flask(__name__)
 db = mysql.connector.connect(
     host="localhost",
     user="root",
-    passwd="mysql",
-    database="DANKTHEBANK"
+    passwd="NISHAant@1234",
+    database="DANKTHEBANK",
 )
-myCursor = db.cursor()
+myCursor = db.cursor(buffered=True)
+myCursor.execute("set GLOBAL max_allowed_packet=67108864")
 CORS(app)  # comment this on deployment
 api = Api(app)
 global maxAccounts
@@ -23,23 +24,45 @@ global maxTransactions
 maxTransactions = 4
 global maxLoans
 maxLoans = 2
+global User
 
+@app.route("/userLogOut", methods=["POST"])
+def userLogOut():
+    if request.method == "POST":
+        myCursor.execute("REVOKE ROLE User FROM USER customer@localhost")
+@app.route("/adminLogOut", methods=["POST"])
+def adminLogOut():
+    if request.method == "POST":
+        print("IN")
+        myCursor.execute("REVOKE ROLE %s FROM USER admin@localhost", (request.get_json()["Designation"].replaceAll(' ', '_'),))
 @app.route("/authUser", methods=["POST"])
 def authUser():
+    global User
     if request.method == 'POST':
         myCursor.execute("SELECT * FROM customers WHERE Customer_ID = %s AND Password = %s", (request.get_json()['id'], request.get_json()['password']))
         print(myCursor.fetchall())
         if(myCursor.rowcount == 1):
+            myCursor.execute("DROP USER IF EXISTS customer@localhost")
+            myCursor.execute("FLUSH PRIVILEGES")
+            myCursor.execute("CREATE USER customer@localhost IDENTIFIED BY %s", (request.json["password"],))
+            myCursor.execute("GRANT User TO customer@localhost")
+            User = "customer"
             return "Success"
         else:
             return "Failure"
 
 @app.route("/authAdmin", methods=['POST'])
 def authAdmin():
+    global User
     if request.method == 'POST':
-        myCursor.execute("SELECT * FROM employees WHERE Customer_ID = %s AND Password = %s", (request.get_json()['id'], request.get_json()['password']))
+        myCursor.execute("SELECT * FROM employees WHERE Employee_ID = %s AND Password = %s", (request.get_json()['id'], request.get_json()['password']))
         print(myCursor.fetchall())
         if(myCursor.rowcount == 1):
+            myCursor.execute("DROP USER IF EXISTS admin@localhost")
+            myCursor.execute("FLUSH PRIVILEGES")
+            myCursor.execute("CREATE USER admin@localhost IDENTIFIED BY %s", (request.json["password"],))
+            myCursor.execute("GRANT Manager TO admin@localhost")
+            User = "admin"
             return "Success"
         else:
             return "Failure"
@@ -51,6 +74,21 @@ def userProfile():
         columns = myCursor.fetchall()
         print(columns)
         myCursor.execute("SELECT * FROM customers WHERE Customer_ID = %s AND Password = %s", (request.get_json()['id'], request.get_json()['password']))
+        columns = [x[0] for x in columns]
+        l = dict(zip(columns, myCursor.fetchall()[0]))
+        print(l)
+        if(myCursor.rowcount == 1):
+            return l
+        else:
+            return "Failure"
+
+@app.route("/adminProfile", methods=['GET', 'POST'])
+def adminProfile():
+    if request.method == 'POST':
+        myCursor.execute("SELECT COLUMN_NAME FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_NAME = 'employees' ORDER BY ORDINAL_POSITION")
+        columns = myCursor.fetchall()
+        print(columns)
+        myCursor.execute("SELECT * FROM employees WHERE Employee_ID = %s AND Password = %s", (request.get_json()['id'], request.get_json()['password']))
         columns = [x[0] for x in columns]
         l = dict(zip(columns, myCursor.fetchall()[0]))
         print(l)
@@ -98,12 +136,13 @@ def userSavings():
         for p in transactionID:
             myCursor.execute("SELECT * FROM transactions WHERE Payment_ID = %s", (p,))
             transactions.append(dict(zip(columns, myCursor.fetchall()[0])))
-        if(myCursor.rowcount > 1):
+        listOfListsOfDicts = [l, transactions]
+        if(myCursor.rowcount >= 1):
             if(l == []):
                 return "No Savings Account"
             else:
                 # take tuple[0] to get the list and then map it to the savings account
-                return tuple(l,transactions)
+                return {0:listOfListsOfDicts}
         else:
             return "Failure"
 
@@ -127,12 +166,13 @@ def userCurrent():
         for p in transactionID:
             myCursor.execute("SELECT * FROM transactions WHERE Payment_ID = %s", (p,))
             transactions.append(dict(zip(columns, myCursor.fetchall()[0])))
-        if(myCursor.rowcount > 1):
+        listOfListsOfDicts = [l, transactions]
+        if(myCursor.rowcount >= 1):
             if(l == []):
                 return "No Current Account"
             else:
                 # take tuple[0] to get the list and then map it to the savings account
-                return tuple(l,transactions)
+                return {0:listOfListsOfDicts}
         else:
             return "Failure"
 
@@ -169,13 +209,15 @@ def userLoans():
         for x in accounts:
             myCursor.execute("SELECT * FROM branch_loan_account WHERE AccountNo = %s", (x,))
         loanID = []
+        print(myCursor.fetchall())
         for x in myCursor.fetchall():
             loanID.append(x[1])
+        print(loanID)
         loans = []
         for l in loanID:
             myCursor.execute("SELECT * FROM loans WHERE LoanID = %s", (l,))
             loans.append(dict(zip(columns, myCursor.fetchall()[0])))
-        print(loans)
+        
         print(myCursor.rowcount)
         if(myCursor.rowcount >= 1):
             if(loans == []):
@@ -190,17 +232,16 @@ def newLoan():
     if request.method == 'POST':
         account = request.get_json()['account']
         myCursor.execute("SELECT LoanStatus FROM accounts WHERE AccountNo = %s", (account,))
-        loanStatus = myCursor.fetchAll()[0]
+        loanStatus = myCursor.fetchall()[0][0]
+        print(loanStatus)
         myCursor.execute("SELECT * FROM branch_loan_account WHERE AccountNo = %s", (account,))
-        loanNo = 0
-        if myCursor.rowCount >= 1 and loanStatus == "PAID":
-            loanNo = myCursor.rowCount
-        else:
-            return "Failure"
+        loanNo = 1
+        if myCursor.rowcount >= 1 and loanStatus == "PAID":
+            loanNo += myCursor.rowcount
         loanID = account[:5]+"03"+account[7:9]+account[-2:]+"00"+str(loanNo)
-        slab = (request.get_json()['amount']/request.get_json()['term'])*(1+(request.get_json()['roi']/100))
-        myCursor.execute("INSERT INTO Accounts (LoanID, StartDate, Amount, InterestRate, Term, EndDate, Slab) VALUES (%s, CURDATE(), %s, %s, %s, DATE_ADD(CURDATE(), INTERVAL %s YEAR), %s)", (loanID,  request.get_json()['amount'], request.get_json()['roi'], request.get_json()['term'], request.get_json()['term'], slab))
-        if(myCursor.rowcount > 1):
+        slab = (int(request.get_json()['amount'])/int(request.get_json()['term']))*(1+(int(request.get_json()['roi'])/100))
+        myCursor.execute("INSERT INTO loans (Loan_ID, StartDate, Amount, InterestRate, Term, EndDate, Slab) VALUES (%s, CURDATE(), %s, %s, %s, DATE_ADD(CURDATE(), INTERVAL %s YEAR), %s)", (loanID,  request.get_json()['amount'], request.get_json()['roi'], request.get_json()['term'], request.get_json()['term'], slab))
+        if(myCursor.rowcount >= 1):
             return "Success"
         else:
             return "Failure"
@@ -211,11 +252,39 @@ def loanPayments():
     if request.method == 'POST':
         account = request.get_json()['account']
         branch = account[:5]
-        loanPaymentID = branch+"0202"+account[-2:]+branch[-2:]+account[-2:]+maxTransactions+account[6:8]+"CX"
+        loanPaymentID = branch+"0202"+account[-2:]+branch[-2:]+account[-2:]+str(maxTransactions)+account[6:8]+"CX"
         amount = request.get_json()['Amount']
-        # DG batayega hum
+        myCursor.execute("SELECT Balance FROM accounts WHERE AccountNo = %s", (account,))
         loanPaymentStatus = "PROCESSED"
-        myCursor.execute("INSERT INTO transactions (PaymentID, Amount, Date, Status) VALUES (%s, %s, CURDATE(), %s)", (loanPaymentID, amount, loanPaymentStatus))
+        if(myCursor.fetchall()[0][0] < 0):
+            loanPaymentStatus = "FAILED"
+        else:
+            myCursor.execute("UPDATE accounts SET Balance = Balance - %s WHERE AccountNo = %s", (amount, account))
+        # loan Status
+        myCursor.execute("INSERT INTO transactions (Payment_ID, Amount, Date, Status) VALUES (%s, %s, CURDATE(), %s)", (loanPaymentID, amount, loanPaymentStatus))
+        if(myCursor.rowcount >= 1):
+            return "Success"
+        else:
+            return "Failure"
+
+@app.route("/newTransaction", methods=['POST'])
+def newTransaction():
+    global maxTransactions
+    if request.method == 'POST':
+        senderAccount = request.get_json()['SAccountNo']
+        receiverAccount = request.get_json()['RAccountNo']
+        branch = receiverAccount[:5]
+        paymentID = branch+"0201"+senderAccount[-2:]+branch[-2:]+receiverAccount[-2:]+str(maxTransactions)+senderAccount[7]+receiverAccount[7]+"CC"
+        amount = request.get_json()['Amount']
+        # loan status
+        paymentStatus = "PROCESSED"
+        myCursor.execute("SELECT Balance FROM accounts WHERE AccountNo = %s", (senderAccount,))
+        if(myCursor.fetchall()[0][0] < 0):
+            paymentStatus = "FAILED"
+        else:
+            myCursor.execute("UPDATE accounts SET Balance = Balance - %s WHERE AccountNo = %s", (amount, senderAccount))
+            myCursor.execute("UPDATE accounts SET Balance = Balance + %s WHERE AccountNo = %s", (amount, receiverAccount))
+        myCursor.execute("INSERT INTO transactions (Payment_ID, Amount, Date, Status) VALUES (%s, %s, CURDATE(), %s)", (paymentID, amount, paymentStatus))
         if(myCursor.rowcount >= 1):
             return "Success"
         else:

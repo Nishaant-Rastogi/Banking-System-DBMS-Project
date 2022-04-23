@@ -30,7 +30,6 @@ function AHome() {
       {loan ? <NewLoan setLoan={setLoan} /> : null}
       {employee ? <ENew setEmployee={setEmployee} /> : null}
       {edit ? <EditCustomer setEdit={setEdit} /> : null}
-      <Adminbar />
       <AdCarousel />
       <div className="UHCONTAINER1">
         {/*...............................................................................................................*/}

@@ -8,9 +8,9 @@ Amount DOUBLE NOT NULL,
 InterestRate DOUBLE,
 Term int NOT NULL,
 EndDate DATE,
-Slab DOUBLE NOT NULL
+Slab DOUBLE NOT NULL DEFAULT 0
 );
-
+SET SQL_SAFE_UPDATES = 0;
 
 
 INSERT INTO Loans(StartDate, Loan_ID, Amount, InterestRate, Term)
@@ -42,9 +42,9 @@ DELIMITER $$
 
 CREATE TRIGGER young9 BEFORE INSERT ON Loans
     FOR EACH ROW BEGIN
-      IF ((select A.LoanStatus from Accounts A, Loans L where (substring(L.Loan_ID,1,4) = substring(A.Account_No,1,4) AND substring(T.Transaction_ID,7,8) = substring(A.Account_No,7,8) AND substring(L.Loan_ID,9,10) = substring(A.AccountNo, 11, 12))) = 'DEFAULTER' OR (select A.LoanStatus from Accounts A, Loans L where (substring(L.Loan_ID,1,4) = substring(A.Account_No,1,4) AND substring(T.Transaction_ID,7,8) = substring(A.Account_No,7,8) AND substring(L.Loan_ID,9,10) = substring(A.AccountNo, 11, 12))) = 'PENDING') 
+      IF ((select A.LoanStatus from Accounts A, Loans L, Transactions T where (substring(L.Loan_ID,1,4) = substring(A.AccountNo,1,4) AND substring(T.Payment_ID,7,8) = substring(A.AccountNo,7,8) AND substring(L.Loan_ID,9,10) = substring(A.AccountNo, 11, 12))) = 'DEFAULTER' OR (select A.LoanStatus from Accounts A, Loans L, Transactions T where (substring(L.Loan_ID,1,4) = substring(A.AccountNo,1,4) AND substring(T.Payment_ID,7,8) = substring(A.AccountNo,7,8) AND substring(L.Loan_ID,9,10) = substring(A.AccountNo, 11, 12))) = 'PENDING') 
       THEN
-            rollback;
+            SIGNAL sqlstate '45001' set message_text = "No way ! You cannot do this !"; 
       END IF;
     END$$
 

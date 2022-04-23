@@ -10,27 +10,37 @@ function Userbar({ userData }) {
   const handler1 = (e) => {
     setProfile(true)
   };
-  const Logouthandler = (e) => {
+  const LogOutHandler = (e) => {
     localStorage.clear();
     router.push('/');
+    axios.post('http://localhost:5000/userLogOut')
+      .then(function (response) {
+        console.log(response.data);
+        //Perform action based on response
+      })
+      .catch(function (error) {
+        console.log(error);
+        //Perform action based on error
+      });
+    console.log("GENERATE");
   }
   return (
     <div>
       <nav className="navbar navbar-expand-lg navbar-dark USERBAR COLOR1">
         <Link href="/User/user"><a className="navbar-brand HEADING"><b>DANK THE BANK</b></a></Link>
-          <div>
-            <div className='nav-item dropdown USERDROPDOWN'>
-              <img className="PROFILEIMAGE" src="/user.png" />
-              { userData== null ? null : <p className="USERNAME">{userData.Name}</p> }
-              <a className="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              </a>
-              <div className="dropdown-menu DROPDOWN COLOR2" aria-labelledby="navbarDropdown">
-                <a className="dropdown-item" onClick={handler1}>Profile</a>
-                <div className="dropdown-divider"></div>
-                  <a className="dropdown-item" onClick={Logouthandler}>Logout</a>
-              </div>
+        <div>
+          <div className='nav-item dropdown USERDROPDOWN'>
+            <img className="PROFILEIMAGE" src="/user.png" />
+            {userData == null ? null : <p className="USERNAME">{userData.Name}</p>}
+            <a className="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            </a>
+            <div className="dropdown-menu DROPDOWN COLOR2" aria-labelledby="navbarDropdown">
+              <a className="dropdown-item" onClick={handler1}>Profile</a>
+              <div className="dropdown-divider"></div>
+              <a className="dropdown-item" onClick={LogOutHandler}>Logout</a>
             </div>
           </div>
+        </div>
         <div>
 
         </div>

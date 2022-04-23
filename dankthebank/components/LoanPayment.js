@@ -38,14 +38,14 @@ function LoanPayment(props) {
                 <div className='FORM'>
                     <form onSubmit={handleLoanPayment}>
                         <div className="form-row">
-                            <div className="form-group col-md-6">
+                            <div className="form-group col-md 6">
+                                <label htmlFor="account">Account No</label>
+                                <input type="text" id="account" className="form-control" placeholder="Enter Account No" />
+                            </div>
+                            <div className="form-group col-md 6">
                                 <label htmlFor="LoanID">Loan ID</label>
                                 <input type="text" id="LoanID" className="form-control" placeholder="Enter LoanID" />
                             </div>
-                        </div>
-                        <div className="form-row">
-                            <label htmlFor="account">Account No</label>
-                            <input type="text" id="account" className="form-control" placeholder="Enter Account No" />
                         </div>
                         <div className="form-row">
                             <label htmlFor="amount">Amount</label>

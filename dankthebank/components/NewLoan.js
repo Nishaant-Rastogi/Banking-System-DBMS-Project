@@ -1,10 +1,10 @@
-import React from 'react';
-
+import React, { useEffect } from 'react';
+import axios from 'axios';
 
 function NewLoan(props) {
     const handler = () => { props.setLoan(false) };
 
-    React.useEffect(() => {
+    useEffect(() => {
         handler;
     }, []);
     const handleNewLoan = (e) => {
@@ -22,7 +22,7 @@ function NewLoan(props) {
                     alert("Loan Created");
                     props.setLoan(false);
                 } else {
-                    alert("Wrong ID or Password");
+                    alert("Failed to Create Loan");
                 }
                 //Perform action based on response
             })

@@ -89,110 +89,110 @@ create View Customer_Branch_1004 as
 create View Customer_Branch_1005 as 
 (select * from Customers C where(substring(C.Customer_ID,1,4) = '1005'));
 
-create Role Manager;
-grant select, create, update on DANKTHEBANK.Loan_Branch_1001 TO 'Manager';
-grant select, create, update on DANKTHEBANK.Loan_Branch_1002 TO 'Manager';
-grant select, create, update on DANKTHEBANK.Loan_Branch_1003 TO 'Manager';
-grant select, create, update on DANKTHEBANK.Loan_Branch_1004 TO 'Manager';
-grant select, create, update on DANKTHEBANK.Loan_Branch_1005 TO 'Manager';
+create Role if not exists Branch_Manager;
+grant select, create, update on DANKTHEBANK.Loan_Branch_1001 TO Branch_Manager;
+grant select, create, update on DANKTHEBANK.Loan_Branch_1002 TO Branch_Manager;
+grant select, create, update on DANKTHEBANK.Loan_Branch_1003 TO Branch_Manager;
+grant select, create, update on DANKTHEBANK.Loan_Branch_1004 TO Branch_Manager;
+grant select, create, update on DANKTHEBANK.Loan_Branch_1005 TO Branch_Manager;
 
-grant select, create, update on DANKTHEBANK.Branch_Transaction_1001 TO 'Manager';
-grant select, create, update on DANKTHEBANK.Branch_Transaction_1002 TO 'Manager';
-grant select, create, update on DANKTHEBANK.Branch_Transaction_1003 TO 'Manager';
-grant select, create, update on DANKTHEBANK.Branch_Transaction_1004 TO 'Manager';
-grant select, create, update on DANKTHEBANK.Branch_Transaction_1005 TO 'Manager';
+grant select, create, update on DANKTHEBANK.Branch_Transaction_1001 TO Branch_Manager;
+grant select, create, update on DANKTHEBANK.Branch_Transaction_1002 TO Branch_Manager;
+grant select, create, update on DANKTHEBANK.Branch_Transaction_1003 TO Branch_Manager;
+grant select, create, update on DANKTHEBANK.Branch_Transaction_1004 TO Branch_Manager;
+grant select, create, update on DANKTHEBANK.Branch_Transaction_1005 TO Branch_Manager;
 
-grant select, create, update on DANKTHEBANK.Manager_Account_View_1001 TO 'Manager';
-grant select, create, update on DANKTHEBANK.Manager_Account_View_1002 TO 'Manager';
-grant select, create, update on DANKTHEBANK.Manager_Account_View_1003 TO 'Manager';
-grant select, create, update on DANKTHEBANK.Manager_Account_View_1004 TO 'Manager';
-grant select, create, update on DANKTHEBANK.Manager_Account_View_1005 TO 'Manager';
+grant select, create, update on DANKTHEBANK.Manager_Account_View_1001 TO Branch_Manager;
+grant select, create, update on DANKTHEBANK.Manager_Account_View_1002 TO Branch_Manager;
+grant select, create, update on DANKTHEBANK.Manager_Account_View_1003 TO Branch_Manager;
+grant select, create, update on DANKTHEBANK.Manager_Account_View_1004 TO Branch_Manager;
+grant select, create, update on DANKTHEBANK.Manager_Account_View_1005 TO Branch_Manager;
 
-grant select, create, update on DANKTHEBANK.Branch_Manager_View_1001 TO 'Manager';
-grant select, create, update on DANKTHEBANK.Branch_Manager_View_1002 TO 'Manager';
-grant select, create, update on DANKTHEBANK.Branch_Manager_View_1003 TO 'Manager';
-grant select, create, update on DANKTHEBANK.Branch_Manager_View_1004 TO 'Manager';
-grant select, create, update on DANKTHEBANK.Branch_Manager_View_1005 TO 'Manager';
+grant select, create, update on DANKTHEBANK.Branch_Manager_View_1001 TO Branch_Manager;
+grant select, create, update on DANKTHEBANK.Branch_Manager_View_1002 TO Branch_Manager;
+grant select, create, update on DANKTHEBANK.Branch_Manager_View_1003 TO Branch_Manager;
+grant select, create, update on DANKTHEBANK.Branch_Manager_View_1004 TO Branch_Manager;
+grant select, create, update on DANKTHEBANK.Branch_Manager_View_1005 TO Branch_Manager;
 
-grant select, create, update on DANKTHEBANK.Customer_Branch_1001 TO 'Manager';
-grant select, create, update on DANKTHEBANK.Customer_Branch_1002 TO 'Manager';
-grant select, create, update on DANKTHEBANK.Customer_Branch_1003 TO 'Manager';
-grant select, create, update on DANKTHEBANK.Customer_Branch_1004 TO 'Manager';
-grant select, create, update on DANKTHEBANK.Customer_Branch_1005 TO 'Manager';
+grant select, create, update on DANKTHEBANK.Customer_Branch_1001 TO Branch_Manager;
+grant select, create, update on DANKTHEBANK.Customer_Branch_1002 TO Branch_Manager;
+grant select, create, update on DANKTHEBANK.Customer_Branch_1003 TO Branch_Manager;
+grant select, create, update on DANKTHEBANK.Customer_Branch_1004 TO Branch_Manager;
+grant select, create, update on DANKTHEBANK.Customer_Branch_1005 TO Branch_Manager;
 
-create Role Service_Manager;
-grant select, update on DANKTHEBANK.Customer_Branch_1001 TO 'Service_Manager';
-grant select, update on DANKTHEBANK.Customer_Branch_1002 TO 'Service_Manager';
-grant select, update on DANKTHEBANK.Customer_Branch_1003 TO 'Service_Manager';
-grant select, update on DANKTHEBANK.Customer_Branch_1004 TO 'Service_Manager';
-grant select, update on DANKTHEBANK.Customer_Branch_1005 TO 'Service_Manager';
+create Role if not exists Service_Manager;
+grant select, update on DANKTHEBANK.Customer_Branch_1001 TO Service_Manager;
+grant select, update on DANKTHEBANK.Customer_Branch_1002 TO Service_Manager;
+grant select, update on DANKTHEBANK.Customer_Branch_1003 TO Service_Manager;
+grant select, update on DANKTHEBANK.Customer_Branch_1004 TO Service_Manager;
+grant select, update on DANKTHEBANK.Customer_Branch_1005 TO Service_Manager;
 
-grant select, create, update on DANKTHEBANK.Loan_Branch_1001 TO 'Service_Manager'; -- trigger 
-grant select, create, update on DANKTHEBANK.Loan_Branch_1002 TO 'Service_Manager';
-grant select, create, update on DANKTHEBANK.Loan_Branch_1003 TO 'Service_Manager';
-grant select, create, update on DANKTHEBANK.Loan_Branch_1004 TO 'Service_Manager';
-grant select, create, update on DANKTHEBANK.Loan_Branch_1005 TO 'Service_Manager';
+grant select, create, update on DANKTHEBANK.Loan_Branch_1001 TO Service_Manager; -- trigger 
+grant select, create, update on DANKTHEBANK.Loan_Branch_1002 TO Service_Manager;
+grant select, create, update on DANKTHEBANK.Loan_Branch_1003 TO Service_Manager;
+grant select, create, update on DANKTHEBANK.Loan_Branch_1004 TO Service_Manager;
+grant select, create, update on DANKTHEBANK.Loan_Branch_1005 TO Service_Manager;
 
-grant select on DANKTHEBANK.Branch_Transaction_1001 TO 'Service_Manager';
-grant select on DANKTHEBANK.Branch_Transaction_1002 TO 'Service_Manager';
-grant select on DANKTHEBANK.Branch_Transaction_1003 TO 'Service_Manager';
-grant select on DANKTHEBANK.Branch_Transaction_1004 TO 'Service_Manager';
-grant select on DANKTHEBANK.Branch_Transaction_1005 TO 'Service_Manager';
+grant select on DANKTHEBANK.Branch_Transaction_1001 TO Service_Manager;
+grant select on DANKTHEBANK.Branch_Transaction_1002 TO Service_Manager;
+grant select on DANKTHEBANK.Branch_Transaction_1003 TO Service_Manager;
+grant select on DANKTHEBANK.Branch_Transaction_1004 TO Service_Manager;
+grant select on DANKTHEBANK.Branch_Transaction_1005 TO Service_Manager;
 
-create Role Account_Manager;
-grant select on DANKTHEBANK.Loan_Branch_1001 TO 'Account_Manager'; -- trigger 
-grant select on DANKTHEBANK.Loan_Branch_1002 TO 'Account_Manager';
-grant select on DANKTHEBANK.Loan_Branch_1003 TO 'Account_Manager';
-grant select on DANKTHEBANK.Loan_Branch_1004 TO 'Account_Manager';
-grant select on DANKTHEBANK.Loan_Branch_1005 TO 'Account_Manager';
+create Role if not exists Account_Manager;
+grant select on DANKTHEBANK.Loan_Branch_1001 TO Account_Manager; -- trigger 
+grant select on DANKTHEBANK.Loan_Branch_1002 TO Account_Manager;
+grant select on DANKTHEBANK.Loan_Branch_1003 TO Account_Manager;
+grant select on DANKTHEBANK.Loan_Branch_1004 TO Account_Manager;
+grant select on DANKTHEBANK.Loan_Branch_1005 TO Account_Manager;
 
-grant select on DANKTHEBANK.Branch_Transaction_1001 TO 'Account_Manager';
-grant select on DANKTHEBANK.Branch_Transaction_1002 TO 'Account_Manager';
-grant select on DANKTHEBANK.Branch_Transaction_1003 TO 'Account_Manager';
-grant select on DANKTHEBANK.Branch_Transaction_1004 TO 'Account_Manager';
-grant select on DANKTHEBANK.Branch_Transaction_1005 TO 'Account_Manager';
+grant select on DANKTHEBANK.Branch_Transaction_1001 TO Account_Manager;
+grant select on DANKTHEBANK.Branch_Transaction_1002 TO Account_Manager;
+grant select on DANKTHEBANK.Branch_Transaction_1003 TO Account_Manager;
+grant select on DANKTHEBANK.Branch_Transaction_1004 TO Account_Manager;
+grant select on DANKTHEBANK.Branch_Transaction_1005 TO Account_Manager;
 
-grant select, create, update on DANKTHEBANK.Manager_Account_View_1001 TO 'Account_Manager';
-grant select, create, update on DANKTHEBANK.Manager_Account_View_1002 TO 'Account_Manager';
-grant select, create, update on DANKTHEBANK.Manager_Account_View_1003 TO 'Account_Manager';
-grant select, create, update on DANKTHEBANK.Manager_Account_View_1004 TO 'Account_Manager';
-grant select, create, update on DANKTHEBANK.Manager_Account_View_1005 TO 'Account_Manager';
+grant select, create, update on DANKTHEBANK.Manager_Account_View_1001 TO Account_Manager;
+grant select, create, update on DANKTHEBANK.Manager_Account_View_1002 TO Account_Manager;
+grant select, create, update on DANKTHEBANK.Manager_Account_View_1003 TO Account_Manager;
+grant select, create, update on DANKTHEBANK.Manager_Account_View_1004 TO Account_Manager;
+grant select, create, update on DANKTHEBANK.Manager_Account_View_1005 TO Account_Manager;
 
-create Role User;
-grant select on DANKTHEBANK.Customer_Branch_1001 TO 'User';
-grant select on DANKTHEBANK.Customer_Branch_1002 TO 'User';
-grant select on DANKTHEBANK.Customer_Branch_1003 TO 'User';
-grant select on DANKTHEBANK.Customer_Branch_1004 TO 'User';
-grant select on DANKTHEBANK.Customer_Branch_1005 TO 'User';
+create Role if not exists User;
+grant select on DANKTHEBANK.Customer_Branch_1001 TO User;
+grant select on DANKTHEBANK.Customer_Branch_1002 TO User;
+grant select on DANKTHEBANK.Customer_Branch_1003 TO User;
+grant select on DANKTHEBANK.Customer_Branch_1004 TO User;
+grant select on DANKTHEBANK.Customer_Branch_1005 TO User;
 
-grant select, create on DANKTHEBANK.Branch_Transaction_1001 TO 'User';
-grant select, create on DANKTHEBANK.Branch_Transaction_1002 TO 'User';
-grant select, create on DANKTHEBANK.Branch_Transaction_1003 TO 'User';
-grant select, create on DANKTHEBANK.Branch_Transaction_1004 TO 'User';
-grant select, create on DANKTHEBANK.Branch_Transaction_1005 TO 'User';
+grant select, create on DANKTHEBANK.Branch_Transaction_1001 TO User;
+grant select, create on DANKTHEBANK.Branch_Transaction_1002 TO User;
+grant select, create on DANKTHEBANK.Branch_Transaction_1003 TO User;
+grant select, create on DANKTHEBANK.Branch_Transaction_1004 TO User;
+grant select, create on DANKTHEBANK.Branch_Transaction_1005 TO User;
 
-grant select, create on DANKTHEBANK.Loan_Branch_1001 TO 'User';
-grant select, create on DANKTHEBANK.Loan_Branch_1002 TO 'User';
-grant select, create on DANKTHEBANK.Loan_Branch_1003 TO 'User';
-grant select, create on DANKTHEBANK.Loan_Branch_1004 TO 'User';
-grant select, create on DANKTHEBANK.Loan_Branch_1005 TO 'User';
+grant select, create on DANKTHEBANK.Loan_Branch_1001 TO User;
+grant select, create on DANKTHEBANK.Loan_Branch_1002 TO User;
+grant select, create on DANKTHEBANK.Loan_Branch_1003 TO User;
+grant select, create on DANKTHEBANK.Loan_Branch_1004 TO User;
+grant select, create on DANKTHEBANK.Loan_Branch_1005 TO User;
 
-grant select, create on DANKTHEBANK.Manager_Account_View_1001 TO 'User';
-grant select, create on DANKTHEBANK.Manager_Account_View_1002 TO 'User';
-grant select, create on DANKTHEBANK.Manager_Account_View_1003 TO 'User';
-grant select, create on DANKTHEBANK.Manager_Account_View_1004 TO 'User';
-grant select, create on DANKTHEBANK.Manager_Account_View_1005 TO 'User';
+grant select, create on DANKTHEBANK.Manager_Account_View_1001 TO User;
+grant select, create on DANKTHEBANK.Manager_Account_View_1002 TO User;
+grant select, create on DANKTHEBANK.Manager_Account_View_1003 TO User;
+grant select, create on DANKTHEBANK.Manager_Account_View_1004 TO User;
+grant select, create on DANKTHEBANK.Manager_Account_View_1005 TO User;
 
-create Role Customer_Service;
+create Role if not exists Customer_Service;
 
-grant select on DANKTHEBANK.Branch_Transaction_1001 TO 'Customer_Service';
-grant select on DANKTHEBANK.Branch_Transaction_1002 TO 'Customer_Service';
-grant select on DANKTHEBANK.Branch_Transaction_1003 TO 'Customer_Service';
-grant select on DANKTHEBANK.Branch_Transaction_1004 TO 'Customer_Service';
-grant select on DANKTHEBANK.Branch_Transaction_1005 TO 'Customer_Service';
+grant select on DANKTHEBANK.Branch_Transaction_1001 TO Customer_Service;
+grant select on DANKTHEBANK.Branch_Transaction_1002 TO Customer_Service;
+grant select on DANKTHEBANK.Branch_Transaction_1003 TO Customer_Service;
+grant select on DANKTHEBANK.Branch_Transaction_1004 TO Customer_Service;
+grant select on DANKTHEBANK.Branch_Transaction_1005 TO Customer_Service;
 
-grant select, update on DANKTHEBANK.Customer_Branch_1001 TO 'Customer_Service';
-grant select, update on DANKTHEBANK.Customer_Branch_1002 TO 'Customer_Service';
-grant select, update on DANKTHEBANK.Customer_Branch_1003 TO 'Customer_Service';
-grant select, update on DANKTHEBANK.Customer_Branch_1004 TO 'Customer_Service';
-grant select, update on DANKTHEBANK.Customer_Branch_1005 TO 'Customer_Service';
+grant select, update on DANKTHEBANK.Customer_Branch_1001 TO Customer_Service;
+grant select, update on DANKTHEBANK.Customer_Branch_1002 TO Customer_Service;
+grant select, update on DANKTHEBANK.Customer_Branch_1003 TO Customer_Service;
+grant select, update on DANKTHEBANK.Customer_Branch_1004 TO Customer_Service;
+grant select, update on DANKTHEBANK.Customer_Branch_1005 TO Customer_Service;

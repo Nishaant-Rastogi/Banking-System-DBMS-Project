@@ -18,6 +18,19 @@ function savings() {
     }
   }, [""]);
   useEffect(() => {
+    axios.post('http://localhost:5000/userProfile', User)
+      .then(function (response) {
+        console.log(response.data);
+        setUserData(response.data);
+        //Perform action based on response
+      })
+      .catch(function (error) {
+        console.log(error);
+        //Perform action based on error
+      });
+    console.log("GENERATE");
+  }, [User]);
+  useEffect(() => {
     axios.post('http://localhost:5000/userSavings', User)
       .then(function (response) {
         console.log(response);

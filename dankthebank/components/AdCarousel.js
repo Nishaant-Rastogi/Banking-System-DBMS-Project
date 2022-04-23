@@ -1,5 +1,5 @@
 import React from 'react';
-import {Carousel} from 'react-bootstrap';
+import { Carousel } from 'react-bootstrap';
 
 function AdCarousel() {
   const [index, setIndex] = React.useState(0);
@@ -10,28 +10,28 @@ function AdCarousel() {
   return (
     <div>
       <Carousel className="CAROUSEL" variant="dark" indicators={false}>
-  <Carousel.Item>
-    <img
-      className="d-block w-100 CAROUSELIMG"
-      src="/ad1.png"
-      alt="First slide"
-    />
-  </Carousel.Item>
-  <Carousel.Item>
-    <img
-      className="d-block w-100 CAROUSELIMG"
-      src="/ad2.png"
-      alt="Second slide"
-    />
-  </Carousel.Item>
-  <Carousel.Item>
-    <img
-      className="d-block w-100 CAROUSELIMG" 
-      src="/ad3.png"
-      alt="Third slide"
-    />
-    </Carousel.Item>
-    </Carousel>
+        <Carousel.Item>
+          <img
+            className="d-block w-100 CAROUSELIMG"
+            src="/ad1.png"
+            alt="First slide"
+          />
+        </Carousel.Item>
+        <Carousel.Item>
+          <img
+            className="d-block w-100 CAROUSELIMG"
+            src="/ad2.png"
+            alt="Second slide"
+          />
+        </Carousel.Item>
+        <Carousel.Item>
+          <img
+            className="d-block w-100 CAROUSELIMG"
+            src="/ad3.png"
+            alt="Third slide"
+          />
+        </Carousel.Item>
+      </Carousel>
     </div>
   )
 }
