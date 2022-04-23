@@ -18,33 +18,33 @@ function UserLoan() {
     }
   }, [""]);
   useEffect(() => {
-    if(User!=null){
-    axios.post('http://localhost:5000/userProfile', User)
-      .then(function (response) {
-        console.log(response.data);
-        setUserData(response.data);
-        //Perform action based on response
-      })
-      .catch(function (error) {
-        console.log(error);
-        //Perform action based on error
-      });
-    console.log("GENERATE");
+    if (User != null) {
+      axios.post('http://localhost:5000/userProfile', User)
+        .then(function (response) {
+          console.log(response.data);
+          setUserData(response.data);
+          //Perform action based on response
+        })
+        .catch(function (error) {
+          console.log(error);
+          //Perform action based on error
+        });
+      console.log("GENERATE");
     }
   }, [User]);
   useEffect(() => {
-    if(User!=null){
-    axios.post('http://localhost:5000/userLoans', User)
-      .then(function (response) {
-        console.log(response.data);
-        setLoans(response.data);
-        //Perform action based on response
-      })
-      .catch(function (error) {
-        console.log(error);
-        //Perform action based on error
-      });
-    console.log("GENERATE");
+    if (User != null) {
+      axios.post('http://localhost:5000/userLoans', User)
+        .then(function (response) {
+          console.log(response.data);
+          setLoans(response.data);
+          //Perform action based on response
+        })
+        .catch(function (error) {
+          console.log(error);
+          //Perform action based on error
+        });
+      console.log("GENERATE");
     }
   }, [User]);
   return (

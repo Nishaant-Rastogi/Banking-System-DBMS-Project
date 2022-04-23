@@ -19,33 +19,33 @@ function savings() {
     }
   }, [""]);
   useEffect(() => {
-    if(User!=null){
-    axios.post('http://localhost:5000/userProfile', User)
-      .then(function (response) {
-        console.log(response.data);
-        setUserData(response.data);
-        //Perform action based on response
-      })
-      .catch(function (error) {
-        console.log(error);
-        //Perform action based on error
-      });
-    console.log("GENERATE");
+    if (User != null) {
+      axios.post('http://localhost:5000/userProfile', User)
+        .then(function (response) {
+          console.log(response.data);
+          setUserData(response.data);
+          //Perform action based on response
+        })
+        .catch(function (error) {
+          console.log(error);
+          //Perform action based on error
+        });
+      console.log("GENERATE");
     }
   }, [User]);
   useEffect(() => {
-    if(User!=null){
-    axios.post('http://localhost:5000/userSavings', User)
-      .then(function (response) {
-        console.log(response);
-        setAccountData(response.data);
-        //Perform action based on response
-      })
-      .catch(function (error) {
-        console.log(error);
-        //Perform action based on error
-      });
-    console.log("GENERATE");
+    if (User != null) {
+      axios.post('http://localhost:5000/userSavings', User)
+        .then(function (response) {
+          console.log(response);
+          setAccountData(response.data);
+          //Perform action based on response
+        })
+        .catch(function (error) {
+          console.log(error);
+          //Perform action based on error
+        });
+      console.log("GENERATE");
     }
   }, [User]);
   return (
@@ -53,7 +53,7 @@ function savings() {
       {User == null ? null :
         <div>
           <Userbar userData={userData} />
-          <SAccountsT AccountData={AccountData}/>
+          <SAccountsT AccountData={AccountData} />
           {console.log(AccountData)}
         </div>}
     </>

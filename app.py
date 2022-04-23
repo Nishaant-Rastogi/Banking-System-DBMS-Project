@@ -1,5 +1,6 @@
 from http.client import BadStatusLine
 from re import M
+import re
 from sre_constants import SUCCESS
 from typing import final
 import mysql.connector
@@ -12,7 +13,7 @@ app = Flask(__name__)
 db = mysql.connector.connect(
     host="localhost",
     user="root",
-    passwd="mysql",
+    passwd="NISHAant@1234",
     database="DANKTHEBANK",
 )
 myCursor = db.cursor(buffered=True)
@@ -107,7 +108,7 @@ def newAccounts():
     global maxAccounts
     if request.method == 'POST':
         customer_id = request.get_json()['Customer_ID']
-        accountNo = customer_id[:5] + "01"
+        accountNo = customer_id[:4] + "01"
         if(request.get_json()['AccountType'] == "Savings"):
             accountNo += "00"
         else:
@@ -257,7 +258,7 @@ def newLoan():
         loanNo = 1
         if myCursor.rowcount >= 1:
             loanNo += myCursor.rowcount
-        loanID = account[:5]+"03"+account[7:9]+account[-2:]+"00"+str(loanNo)
+        loanID = account[:4]+"03"+account[7:9]+account[-2:]+"00"+str(loanNo)
         slab = (int(request.get_json()['amount'])/int(request.get_json()['term']))*(1+(int(request.get_json()['roi'])/100))
         myCursor.execute("INSERT INTO loans (Loan_ID, StartDate, Amount, InterestRate, Term, EndDate, Slab) VALUES (%s, CURDATE(), %s, %s, %s, DATE_ADD(CURDATE(), INTERVAL %s YEAR), %s)", (loanID,  request.get_json()['amount'], request.get_json()['roi'], request.get_json()['term'], request.get_json()['term'], slab))
         if(myCursor.rowcount >= 1):
@@ -270,7 +271,7 @@ def loanPayments():
     global maxTransactions
     if request.method == 'POST':
         account = request.get_json()['account']
-        branch = account[:5]
+        branch = account[:4]
         loanPaymentID = branch+"0202"+account[-2:]+branch[-2:]+account[-2:]+str(maxTransactions)+account[6:8]+"CX"
         amount = request.get_json()['Amount']
         myCursor.execute("SELECT * FROM loans WHERE Loan_ID = %s", (request.get_json()['LoanID'],))
@@ -335,6 +336,23 @@ def newTransaction():
         else:
             return "Failure"
 
+@app.route("/adminEmployees", methods=['POST'])
+def adminEmployees():
+    if request.method == 'POST':
+        columns = ["Employee_ID", "Name", "Salary", "Designation", "Joining_Date", "PAN", "Password"]
+        adminID = request.get_json()['id']
+        branch = adminID[:4]
+        print(branch)
+        myCursor.execute("SELECT * FROM employees WHERE Employee_ID LIKE %s", (branch+"%",))
+        # print(myCursor.fetchall())
+        finalReturn = []
+        for i in myCursor.fetchall():
+            finalReturn.append(dict(zip(columns,i)))
+        print(finalReturn)
+        if(myCursor.rowcount >= 1):
+            return {0:finalReturn}
+        else:
+            return "Failure"
 
 if __name__ == "__main__":
     app.run(debug=True)
