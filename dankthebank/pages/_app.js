@@ -9,6 +9,7 @@ import '../styles/card.css';
 import '../styles/savings.css';
 import '../styles/loans.css';
 import '../styles/cardT.css';
+import '../styles/cardA.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 function MyApp({ Component, pageProps }) {

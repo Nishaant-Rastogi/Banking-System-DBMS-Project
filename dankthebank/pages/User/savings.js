@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from 'react';
-import Userbar from '../../components/Userbar';
+import Userbar from '../../components/UserBar';
 import SAccountsT from '../../components/SAccountsT';
 import axios from 'axios';
 
 function savings() {
   const [User, setUser] = useState(null);
   const [userData, setUserData] = useState(null);
+  const [AccountData, setAccountData] = useState(null);
   useEffect(() => {
     const loggedInUser = localStorage.getItem("user");
     if (loggedInUser) {
@@ -33,9 +34,11 @@ function savings() {
     }
   }, [User]);
   useEffect(() => {
+    if(User!=null){
     axios.post('http://localhost:5000/userSavings', User)
       .then(function (response) {
         console.log(response);
+        setAccountData(response.data);
         //Perform action based on response
       })
       .catch(function (error) {
@@ -43,13 +46,15 @@ function savings() {
         //Perform action based on error
       });
     console.log("GENERATE");
+    }
   }, [User]);
   return (
     <>
       {User == null ? null :
         <div>
           <Userbar userData={userData} />
-          <SAccountsT />
+          <SAccountsT AccountData={AccountData}/>
+          {console.log(AccountData)}
         </div>}
     </>
   )

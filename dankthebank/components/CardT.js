@@ -76,9 +76,6 @@ function customcard({data}){
 }
 
 function CardT({ data }) {
-    const handler = () => {
-        console.log(data[0]);
-    }
     return (
         <>
         {data==null? 

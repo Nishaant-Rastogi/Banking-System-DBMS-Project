@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from 'react';
-import Userbar from '../../components/Userbar';
+import Userbar from '../../components/UserBar';
 import SAccountsT from '../../components/SAccountsT';
 import axios from 'axios';
 function current() {
   const [User, setUser] = useState(null);
   const [userData, setUserData] = useState(null);
+  const [AccountData, setAccountData] = useState(null);
   useEffect(() => {
     const loggedInUser = localStorage.getItem("user");
     if (loggedInUser) {
@@ -35,6 +36,7 @@ function current() {
     axios.post('http://localhost:5000/userCurrent', User)
       .then(function (response) {
         console.log(response);
+        setAccountData(response.data);
         //Perform action based on response
       })
       .catch(function (error) {
@@ -48,7 +50,7 @@ function current() {
       {User == null ? null :
         <div>
           <Userbar userData={userData} />
-          <SAccountsT />
+          <SAccountsT AccountData={AccountData}/>
         </div>}
     </>
   )

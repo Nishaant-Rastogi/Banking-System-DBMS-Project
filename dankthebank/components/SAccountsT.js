@@ -3,7 +3,7 @@ import CardA from './CardA';
 import UNew from './UNew';
 import { useState, useEffect } from 'react';
 
-export default function SAccountsT() {
+export default function SAccountsT({ AccountData } ) {
     const [account, setAccount] = React.useState(false);
     const handleNewAccount = () => {
         setAccount(true);
@@ -25,7 +25,7 @@ export default function SAccountsT() {
             </div>
             <div className="COL COL2">
                 <div className='ROW ROW1'>
-                    <CardA />
+                    <CardA AccountData={AccountData}/>
                 </div>
             </div>
         </div>

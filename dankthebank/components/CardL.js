@@ -20,7 +20,7 @@ function CardL(props) {
                                 Amount:
                             </div>
                             <div className="VALUE">
-                                120000<image src="/greenup.png" className="VALUEIMG" />
+                                12000
                                 {/*<image src="/reddown.png" className="VALUEIMG"/>*/}
                             </div>
                         </div>
@@ -84,7 +84,7 @@ function CardL(props) {
                                 Amount:
                             </div>
                             <div className="VALUE">
-                                150000<image src="/greenup.png" className="VALUEIMG" />
+                                150000
                                 {/*<image src="/reddown.png" className="VALUEIMG"/>*/}
                             </div>
                         </div>

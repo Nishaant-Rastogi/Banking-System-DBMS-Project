@@ -1,18 +1,27 @@
 import React, { useState } from "react";
 import Table from "./Table";
-function CardA(props) {
 
-    return (
-        <div className="CUSTOMCARD" id="accordion">
-            <div className="card CARD">
-                <div className="card-header COL" id="headingOne">
-                    <button className="btn btn-link BUTTON" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+
+function customcard({AccountData}){
+    const handler = (i) => { console.log(i);}
+    const hashtag = "#H";
+    const heading = "H"; 
+    let id = 0;
+    return(
+        <div className="CUSTOMCARDA" id="accordion">
+            {AccountData[0][0] == null ? null : AccountData[0][0].map((accoundata) => (
+                <div className="card CARD">
+                    {handler(id)}
+                    {handler(hashtag)}
+                    {handler(hashtag.concat(id))}
+                <div className="card-header COL" id="HeadingTwO">
+                    <button className="btn btn-link BUTTON" data-toggle="collapse" data-target={hashtag.concat(id).toString()} aria-expanded="true" aria-controls="collapseOne">
                         <div className="DATA ACCOUNT">
-                            <div className="HEAD">
-                                Account No:
+                            <div className="HEAD HEAD1">
+                                Account No. : 
                             </div>
                             <div className="VALUE">
-                                123456789
+                                {accoundata.AccountNo}
                             </div>
                         </div>
                         <div className="DATA BALANCE">
@@ -20,72 +29,51 @@ function CardA(props) {
                                 Balance:
                             </div>
                             <div className="VALUE">
-                                120000
-                                {/*<image src="/reddown.png" className="VALUEIMG"/>*/}
+                                {accoundata.Balance}
                             </div>
                         </div>
                         <div className="DATA STATUS">
                             <div className="HEAD">
-                                Status:
+                                Loan Status:
                             </div>
-                            <div id="SUCCESS" className="VALUE">
-                                Active
+                            <div id={accoundata.LoanStatus} className="VALUE">
+                                {accoundata.LoanStatus}
                             </div>
-                            {/*
-                        <div id="FAILURE" className="VALUE">
-                            FAILED
-                        </div>
-                        */}
+
                         </div>
                     </button>
                 </div>
-                <div id="collapseOne" className="collapse" aria-labelledby="headingOne" data-parent="#accordion">
+                <div id={heading.concat(id).toString()} className="collapse" aria-labelledby="headingTwo" data-parent="#accordion">
                     <div className="card-body CBODY">
-                        <Table />
+                        <Table AcData={AccountData[0][1][id]} AccountNum={AccountData[0][0][id++].AccountNo}/>
                     </div>
                 </div>
             </div>
-            <div className="card">
-                <div className="card-header COL" id="headingTwo">
-                    <button className="btn btn-link BUTTON" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseOne">
-                        <div className="DATA ACCOUNT">
-                            <div className="HEAD">
-                                Account No:
-                            </div>
-                            <div className="VALUE">
-                                123456789
-                            </div>
-                        </div>
-                        <div className="DATA BALANCE">
-                            <div className="HEAD">
-                                Balance:
-                            </div>
-                            <div className="VALUE">
-                                150000
-                                {/*<image src="/reddown.png" className="VALUEIMG"/>*/}
-                            </div>
-                        </div>
-                        <div className="DATA STATUS">
-                            <div className="HEAD">
-                                Status:
-                            </div>
-                            {/* <div id="SUCCESS" className="VALUE">
-                            Successful
-                        </div> */}
-                            <div id="FAILURE" className="VALUE">
-                                Deactivated
-                            </div>
+            ))}
+        </div>
+    )
+}
 
-                        </div>
-                    </button>
-                </div>
-                <div id="collapseTwo" className="collapse" aria-labelledby="headingTwo" data-parent="#accordion">
-                    <div className="card-body CBODY">
-                        <Table />
-                    </div>
-                </div>
+
+
+
+
+
+function CardA({ AccountData }) {
+    const handler = (i) => { console.log(i);}
+    const hashtag = "#H";
+    const heading = "H";
+    let id = 0;
+    return (
+        <>
+        { AccountData == null ? 
+        <div className="CUSTOMCARD" id="accordion">
+        <div className="card CARD">
+            <div className="card-header COL" id="headingOne"> No Savings Account {console.log(AccountData)}
             </div>
         </div>
+        </div> : customcard({ AccountData})}
+        </>
     );
 }
 

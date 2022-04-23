@@ -1,0 +1,87 @@
+.CUSTOMCARDA{
+    text-decoration: none;
+    box-shadow: 1px 2px 4px #000000;
+}
+.CUSTOMCARDA:hover{
+    box-shadow:  0 0 0 0;
+}
+.CUSTOMCARDA .COL{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    cursor: pointer;
+}
+
+.CUSTOMCARDA .COL .BUTTON{
+    text-decoration: none;
+    color: black;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+#OKAY{
+    color: green
+}
+
+#NULL{
+    color: blue
+}
+
+#DEFAULTER{
+    color: red;
+}
+
+.CUSTOMCARDA .DATA{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.CUSTOMCARDA .ACCOUNT{
+    flex: 4;
+    width: 1vh;
+    justify-content: flex-start;
+}
+
+.CUSTOMCARDA .BALANCE{
+    flex: 5;
+    justify-content: center;
+}
+
+.CUSTOMCARDA .STATUS{
+    flex: 3;
+    justify-content: flex-end;
+}
+
+
+.CUSTOMCARDA .FROM{
+    justify-content: flex-start;
+    position: relative;
+    left: 2vw;
+}
+
+
+.CUSTOMCARDA .TO{
+    justify-content: center;
+}
+
+.CUSTOMCARDA .DATE{
+    justify-content: flex-end;
+}
+
+.CUSTOMCARDA .CBODY{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.CUSTOMCARDA .DATA .HEAD1{
+    width: 15vw;
+}
+
+.CUSTOMCARDA .DATA .VALUE{
+    font-size: larger;
+    font-weight: bold;
+    margin-left: 10px;
+}

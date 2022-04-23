@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import Userbar from '../../components/Userbar';
+import Userbar from '../../components/UserBar';
 import TransactionsT from '../../components/TransactionsT';
 import axios from 'axios';
 

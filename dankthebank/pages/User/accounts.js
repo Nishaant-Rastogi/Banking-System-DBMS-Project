@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import Userbar from '../../components/Userbar';
+import Userbar from '../../components/UserBar';
 import SAccountsT from '../../components/SAccountsT';
 import axios from 'axios';
 function accounts() {
