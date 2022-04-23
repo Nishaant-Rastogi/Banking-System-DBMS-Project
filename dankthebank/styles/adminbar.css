@@ -8,9 +8,11 @@
 }
 
 .ADMINBAR{
+    width: 100%;
     border-bottom: 1px solid black;
     margin-bottom: 10px;
     z-index: 10;
+    height: 10vh;
 }
 .ADMINBAR .PROFILEIMAGE {
     float: left;
@@ -20,15 +22,25 @@
     border-radius: 30px;
 }
 
+.ADMINBAR .USERNAME{
+    color: white;
+    position: relative;
+    margin-left: 10px;
+    top: 10px;
+}
+
 .ADMINBAR .ADMINDROPDOWN{
+    position: relative;
+    left: 72vw;
     display: flex;
     position: relative;
     /* justify-content: right; */
-    right: 0px;
+    flex-direction: row;
     margin-right: 10px;
 }
 
 .ADMINBAR #navbarDropdown{
+    /* justify-content: right; */
     color: white;
 }
 
@@ -38,6 +50,10 @@
 
 .ADMINBAR .DROPDOWN{
     background-color: #232f4a;
+    cursor: pointer;
+    position: absolute;
+    left: 5vw;
+    
 }
 
 .ADMINBAR  .dropdown-item:hover{
@@ -63,19 +79,103 @@
 .APROFILE .PROFILECONTAINER{
     background-color: white;
     position: absolute;
-    top:0;
-    left:25%;
+    top : 5vh;
+    left: 40%;
     display: flex;
     flex-direction: row;
     border-radius: 40px;;
 }
+
+.APROFILE .PROFILEHEADER{
+    color: #131a27;
+    font-size: 2.5vh;
+}
+
 .APROFILE .PROFILEIMAGE{
     position: relative;
     width: 5vh;
     height: 5vh;
     margin: 20px;
+    opacity: 0.75;
 }
 
-.APROFILE .DUMMYFORM{
+.APROFILE .USER_DETAILS{
+    width: 20vw;
     margin: 20px;
+    display: flex;
+    flex-direction: row;
+    align-items: baseline;
+    justify-content: space-around;
+}
+
+.APROFILE .USER_DETAILS .USER_DETAILS_PHONE{
+    color: #131a27;
+    font-size: 2vh;
+    position: relative;
+    top: -1.5vh;
+}
+
+.APROFILE .BORDER{
+    margin-left: 35px;
+    border-top: 1px solid #131a27;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.APROFILE .BORDER .ADDRESS{
+    margin-top: 10px;
+    color: #131a27;
+    font-size: 3vh;
+    padding-left: 1.5vw;
+}
+
+.APROFILE .USER_DETAILS_ADDRESS_DATA{
+    display: flex;
+    flex-direction: column;
+    margin-left: 35px;
+    font-size: 2.5vh;
+}
+
+.APROFILE .USER_DETAILS_ADDRESS_DATA .ADDRESS{
+    display: flex;
+    flex-direction: row;
+    align-items: baseline;
+    margin-left: 20px;
+    margin-right: 10px;
+}
+
+.APROFILE .USER_DETAILS_ADDRESS_DATA .USER_DETAILS_ADDRESS_DATA_1{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-top: 10;
+}
+
+.APROFILE .USER_DETAILS_ADDRESS_DATA .USER_DETAILS_ADDRESS_DATA_2{
+    position: relative;
+    top: -5vh;
+}
+
+.APROFILE .USER_DETAILS_ADDRESS_DATA .USER_DETAILS_ADDRESS_DATA_3{
+    position: relative;
+    top: -5vh;
+    left: 1vw;
+}
+
+.APROFILE .USER_DETAILS_ADDRESS_DATA .HEADERS{
+    font-size: 3vh;
+    margin-right: 10px;
+}
+
+.APROFILE .USER_DETAILS .USER_DETAILS_DATA{
+    position: relative;
+    top: -2vh;
+    color: #131a27;
+    font-size: 3vh;
+}
+
+.APROFILE .USER_DETAILS .img{ 
+    width: 20vh;
+    height: 20vh;
 }

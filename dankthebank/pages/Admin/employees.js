@@ -1,5 +1,5 @@
-import React, { useEffect } from 'react'
-import AdminBar from '../../components/AdminBar';
+import React, { useEffect,useState } from 'react'
+import AdminBar from '../../components/Adminbar';
 import Employees from '../../components/Employees';
 import axios from 'axios';
 
@@ -13,13 +13,32 @@ const employees = () => {
             setAdmin(foundUser);
             console.log(foundUser);
         }
+        else{
+            setAdmin(null)
+        }
+
     }, [""]);
+    useEffect(() => {
+        if(Admin!=null){
+        axios.post('http://localhost:5000/adminProfile', Admin)
+          .then(function (response) {
+            console.log(response.data);
+            setAdminData(response.data);
+            //Perform action based on response
+          })
+          .catch(function (error) {
+            console.log(error);
+            //Perform action based on error
+          });
+        console.log("GENERATE");
+        }
+      }, [Admin]);
     return (
         <div>
             {Admin == null ? null :
                 <div>
-                    <Adminbar adminData={adminData} />
-                    <AHome />
+                    <AdminBar adminData={adminData} />
+                    <Employees />
                 </div>
             }
         </div>

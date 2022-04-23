@@ -16,6 +16,7 @@ const Admin = () => {
     }
   }, [""]);
   useEffect(() => {
+    if(Admin!=null){
     axios.post('http://localhost:5000/adminProfile', Admin)
       .then(function (response) {
         console.log(response.data);
@@ -27,6 +28,7 @@ const Admin = () => {
         //Perform action based on error
       });
     console.log("GENERATE");
+    }
   }, [Admin]);
   return (
     <div>

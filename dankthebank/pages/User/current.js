@@ -17,6 +17,7 @@ function current() {
     }
   }, [""]);
   useEffect(() => {
+    if(User!=null){
     axios.post('http://localhost:5000/userProfile', User)
       .then(function (response) {
         console.log(response.data);
@@ -28,6 +29,7 @@ function current() {
         //Perform action based on error
       });
     console.log("GENERATE");
+    }
   }, [User]);
   useEffect(() => {
     axios.post('http://localhost:5000/userCurrent', User)

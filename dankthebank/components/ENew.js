@@ -45,7 +45,7 @@ function ENew(props) {
                                 <input type="text" className="form-control" id="City" placeholder="Enter City" />
                             </div>
                         </div>
-                        <button type="submit" className="btn btn-primary">Add New Employee</button>
+                        <button type="submit" className="btn btn-primary GRADIENT">Add New Employee</button>
                     </form>
                 </div>
                 <img className="CLOSEIMAGE" onClick={handler} src="/close.png" />

@@ -20,7 +20,7 @@ function CardA(props) {
                                 Balance:
                             </div>
                             <div className="VALUE">
-                                120000<image src="/greenup.png" className="VALUEIMG" />
+                                120000
                                 {/*<image src="/reddown.png" className="VALUEIMG"/>*/}
                             </div>
                         </div>
@@ -61,7 +61,7 @@ function CardA(props) {
                                 Balance:
                             </div>
                             <div className="VALUE">
-                                150000<image src="/greenup.png" className="VALUEIMG" />
+                                150000
                                 {/*<image src="/reddown.png" className="VALUEIMG"/>*/}
                             </div>
                         </div>

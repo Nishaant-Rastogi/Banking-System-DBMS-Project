@@ -45,7 +45,7 @@ function CNew(props) {
                                 <input type="text" className="form-control" id="City" placeholder="Enter City" />
                             </div>
                         </div>
-                        <button type="submit" className="btn btn-primary">Create Customer Account</button>
+                        <button type="submit" className="btn btn-primary GRADIENT">Create Customer Account</button>
                     </form>
                 </div>
                 <img className="CLOSEIMAGE" onClick={handler} src="/close.png" />

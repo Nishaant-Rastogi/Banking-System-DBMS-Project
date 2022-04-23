@@ -18,6 +18,7 @@ const User = () => {
     }
   }, [""]);
   useEffect(() => {
+    if (User != null) {
     axios.post('http://localhost:5000/userProfile', User)
       .then(function (response) {
         console.log(response.data);
@@ -29,6 +30,7 @@ const User = () => {
         //Perform action based on error
       });
     console.log("GENERATE");
+    }
   }, [User]);
   return (
     <>

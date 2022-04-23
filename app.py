@@ -11,7 +11,7 @@ app = Flask(__name__)
 db = mysql.connector.connect(
     host="localhost",
     user="root",
-    passwd="NISHAant@1234",
+    passwd="mysql",
     database="DANKTHEBANK",
 )
 myCursor = db.cursor(buffered=True)
@@ -61,7 +61,7 @@ def authAdmin():
             myCursor.execute("DROP USER IF EXISTS admin@localhost")
             myCursor.execute("FLUSH PRIVILEGES")
             myCursor.execute("CREATE USER admin@localhost IDENTIFIED BY %s", (request.json["password"],))
-            myCursor.execute("GRANT Manager TO admin@localhost")
+            myCursor.execute("GRANT Branch_Manager TO admin@localhost")
             User = "admin"
             return "Success"
         else:

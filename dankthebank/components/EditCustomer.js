@@ -45,7 +45,7 @@ function EditCustomer(props) {
                                 <input type="text" className="form-control" id="City" placeholder="Enter City" />
                             </div>
                         </div>
-                        <button type="submit" className="btn btn-primary">Save Customer Details</button>
+                        <button type="submit" className="btn btn-primary GRADIENT">Save Customer Details</button>
                     </form>
                 </div>
                 <img className="CLOSEIMAGE" onClick={handler} src="/close.png" />

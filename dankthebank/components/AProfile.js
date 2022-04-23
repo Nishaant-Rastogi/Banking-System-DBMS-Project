@@ -1,7 +1,8 @@
-import React from 'react'
+import React from 'react';
+import Link from 'next/link';
 
-function AProfile(props) {
-  const handler = () => { props.setProfile(false) };
+function AProfile({ userData, setProfile }) {
+  const handler = () => { setProfile(false) };
 
   React.useEffect(() => {
     handler;
@@ -10,33 +11,37 @@ function AProfile(props) {
     <div className='APROFILE'>
       <div className='BLUR' onClick={handler} ></div>
       <div className='PROFILECONTAINER'>
-        <div className="DUMMYFORM">
-          <form>
-            <div className="form-group">
-              <label htmlFor="exampleInputEmail1">Email address</label>
-              <input type="email" className="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email" />
-              <small id="emailHelp" className="form-text text-muted">We will never share your email with anyone else.</small>
+        <div className='PROFILEHEADER'>
+        <div className="USER_DETAILS">
+          <div className="USER_PROFILE_IMAGE">
+            <img  className="img" src="/user.png" />
+          </div>
+            <div className="USER_DETAILS_DATA">
+            <div className="USER_DETAILS_NAME">
+              <p>{userData.Name}</p>
             </div>
-            <div className="form-group">
-              <label htmlFor="exampleInputPassword1">Password</label>
-              <input type="password" className="form-control" id="exampleInputPassword1" placeholder="Password" />
+            <div className="USER_DETAILS_PHONE">
+              <p>PAN : {userData.PAN}</p>
             </div>
-            <button type="submit" className="btn COLOR LOGINB">Login as Admin</button>
-          </form>
-          <form>
-            <div className="form-group">
-              <label htmlFor="exampleInputEmail1">Email address</label>
-              <input type="email" className="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email" />
-              <small id="emailHelp" className="form-text text-muted">We will never share your email with anyone else.</small>
-            </div>
-            <div className="form-group">
-              <label htmlFor="exampleInputPassword1">Password</label>
-              <input type="password" className="form-control" id="exampleInputPassword1" placeholder="Password" />
-            </div>
-            <button type="submit" className="btn COLOR LOGINB">Login as User</button>
-          </form>
+          </div>
+          
         </div>
-        <img className="PROFILEIMAGE" onClick={handler} src="close.png" />
+        <div className="BORDER"><p className="ADDRESS">Professional Background</p></div>
+        <div className="USER_DETAILS_ADDRESS">
+         </div>
+          <div className="USER_DETAILS_ADDRESS_DATA">
+              <div className="USER_DETAILS_ADDRESS_DATA_1">
+              <p className="ADDRESS"><p className="HEADERS">Designation:</p>{userData.Designation}</p>
+              <p className="ADDRESS"><p className="HEADERS">Salary: </p>{userData.Salary}</p>
+              </div>
+              <div className="USER_DETAILS_ADDRESS_DATA_2"><p className="ADDRESS"><p className="HEADERS">Date of Joining : </p>{userData.Joining_Date}</p>
+              </div>
+              <div className="USER_DETAILS_ADDRESS_DATA_3">
+              </div>  
+            </div>
+              
+        </div>
+        <img className="PROFILEIMAGE" onClick={handler} src="/close.png" />
       </div>
     </div>
   )

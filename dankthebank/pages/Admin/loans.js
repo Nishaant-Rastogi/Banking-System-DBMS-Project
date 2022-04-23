@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect,useState } from 'react'
 import LoansT from '../../components/LoansT'
 import Adminbar from '../../components/Adminbar'
 import axios from 'axios'
@@ -13,13 +13,31 @@ const loans = () => {
             setAdmin(foundUser);
             console.log(foundUser);
         }
+        else{
+            setAdmin(null);
+        }
     }, [""]);
+    useEffect(() => {
+        if(Admin!=null){
+        axios.post('http://localhost:5000/adminProfile', Admin)
+          .then(function (response) {
+            console.log(response.data);
+            setAdminData(response.data);
+            //Perform action based on response
+          })
+          .catch(function (error) {
+            console.log(error);
+            //Perform action based on error
+          });
+        console.log("GENERATE");
+        }
+      }, [Admin]);
     return (
         <div>
             {Admin == null ? null :
                 <div>
                     <Adminbar adminData={adminData} />
-                    <AHome />
+                    <LoansT />
                 </div>
             }
         </div>
