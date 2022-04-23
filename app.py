@@ -30,7 +30,7 @@ global User
 @app.route("/userLogOut", methods=["POST"])
 def userLogOut():
     if request.method == "POST":
-        myCursor.execute("REVOKE ROLE User FROM USER customer@localhost")
+        myCursor.execute("REVOKE User FROM customer@localhost")
 @app.route("/adminLogOut", methods=["POST"])
 def adminLogOut():
     if request.method == "POST":
@@ -317,7 +317,6 @@ def newTransaction():
         branch = receiverAccount[:5]
         paymentID = branch+"0201"+senderAccount[-2:]+branch[-2:]+receiverAccount[-2:]+str(maxTransactions)+senderAccount[7]+receiverAccount[7]+"CC"
         amount = request.get_json()['Amount']
-        # loan 
         myCursor.execute("SELECT LoanStatus FROM accounts where AccountNo = %s", (senderAccount,))
         loanStatus = myCursor.fetchall()[0][0]
         paymentStatus = "PROCESSED"
