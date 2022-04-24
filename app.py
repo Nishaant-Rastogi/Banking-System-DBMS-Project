@@ -310,23 +310,29 @@ def loanPayments():
         if loanStatus == "PAID" or loanStatus == "DEFAULTER":
             return "Loan Payment Not Allowed"
         if date.today() > datetime.strptime(startDate) + timedelta(year=term):
-            if loanStatus == "PENDING":
+            if loanStatus != "DEFAULTER":
                 loanStatus = "DEFAULTER"
                 return "Loan Term Expired"
         else:
             if amount > loanAmount:
                 return "Payment is Greater than Yearly Slab"
-            else:
-                loanAmount -= amount
+            elif amount == loanAmount:
                 check = (date.today() - (datetime.strptime(startDate) + timedelta(year=term)))/365
                 if check <= 0 and check >= -1 and loanAmount > 0:
                     loanStatus = "PAID"
-                elif loanAmount == 0:
+                    loanAmount = 0
+                else:
                     loanAmount = slab
+                    loanStatus = "PENDING"
+            elif amount < loanAmount:
+                loanAmount -= amount
+                loanStatus = "PENDING"
         if(myCursor.fetchall()[0][0] < 0):
             loanPaymentStatus = "FAILED"
         elif loanPaymentStatus != "FAILED":
             myCursor.execute("UPDATE accounts SET Balance = Balance - %s WHERE AccountNo = %s", (amount, account))
+            myCursor.execute("UPDATE accounts SET LoanStatus = %s WHERE AccountNo = %s", (loanStatus, account))
+            myCursor.execute("UPDATE loans SET Amount = %s WHERE Loan_ID = %s", (loanAmount, request.get_json()['LoanID']))
         # loan Status and update
         myCursor.execute("INSERT INTO transactions (Payment_ID, Amount, Date, Status) VALUES (%s, %s, CURDATE(), %s)", (loanPaymentID, amount, loanPaymentStatus))
         myCursor.execute("INSERT INTO loan_transaction (Loan_ID, Payment_ID, Amount) VALUES (%s, %s, %s)", (request.get_json()['LoanID'], loanPaymentID, amount))
@@ -349,7 +355,7 @@ def newTransaction():
         myCursor.execute("SELECT LoanStatus FROM accounts where AccountNo = %s", (senderAccount,))
         loanStatus = myCursor.fetchall()[0][0]
         paymentStatus = "PROCESSED"
-        if loanStatus == "DEFAULTER":
+        if loanStatus == "DEFAULTER" or "PENDING":
             paymentStatus = "FAILED"
 
         myCursor.execute("SELECT Balance FROM accounts WHERE AccountNo = %s", (senderAccount,))
