@@ -2,7 +2,7 @@ import Link from 'next/link';
 import { useRouter } from 'next/router'
 import axios from 'axios';
 import { useEffect, useState } from 'react';
-
+import swal from 'sweetalert';
 
 const Login = () => {
   const router = useRouter()
@@ -21,17 +21,15 @@ const Login = () => {
         console.log(response);
         if (response.data === "Success") {
           localStorage.setItem('user', JSON.stringify(user));
+          swal("Welcome !", "Login Successful !", "success");
           router.push('/User/user');
         } else {
-          alert("Wrong ID or Password");
+          swal("Wrong ID or Password !", "Try Again !", "error");
         }
-        //Perform action based on response
       })
       .catch(function (error) {
         console.log(error);
-        //Perform action based on error
       });
-    console.log("Log in");
   }
   const handleLoginAdmin = (e) => {
     e.preventDefault();
@@ -41,9 +39,10 @@ const Login = () => {
         console.log(response);
         if (response.data === "Success") {
           localStorage.setItem('admin', JSON.stringify(user));
+          swal("Welcome !", "Login Successful !", "success");
           router.push('/Admin/admin');
         } else {
-          alert("Wrong ID or Password");
+          swal("Wrong ID or Password !", "Try Again !", "error");
         }
         //Perform action based on response
       })
