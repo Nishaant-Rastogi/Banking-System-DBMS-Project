@@ -36,7 +36,7 @@ const Admin = () => {
       {Admin == null ? null :
         <div>
           <Adminbar adminData={adminData} />
-          <AHome />
+          <AHome designation={adminData} />
         </div>
       }
     </div>

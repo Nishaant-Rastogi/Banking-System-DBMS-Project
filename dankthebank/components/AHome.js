@@ -7,7 +7,7 @@ import AdminNewLoan from './AdminNewLoan';
 import ENew from './ENew';
 import EditCustomer from './EditCustomer';
 
-function AHome() {
+function AHome({ Designation }) {
   const [account, setAccount] = React.useState(false);
   const [loan, setLoan] = React.useState(false);
   const [employee, setEmployee] = React.useState(false);
@@ -25,7 +25,8 @@ function AHome() {
     setEdit(true);
   }
   return (
-    <div className='UHOME'>
+    <div className='UHOME' >
+      {console.log(Designation)}
       {account ? <CNew setAccount={setAccount} /> : null}
       {loan ? <AdminNewLoan setLoan={setLoan} /> : null}
       {employee ? <ENew setEmployee={setEmployee} /> : null}
@@ -46,7 +47,7 @@ function AHome() {
                 </div>
               </div>
             </Link>
-            <div className='COL' onClick={handleNewEmployee}>
+            <div className='COL' onClick={Designation === "Branch Manager" ? handleNewEmployee : null}>
               <div className='IMGCONTAINER'>
                 <img className='IMG ACIMG' src="/time-management.png" />
               </div>
@@ -84,7 +85,7 @@ function AHome() {
         </div>
         <div className='UHFLEX2'>
           <div className='ROW'>
-            <div className='COL COL1' onClick={handleNewAccount}>
+            {Designation === "Branch Manager" || "Account Manager" ? <div className='COL COL1' onClick={handleNewAccount}>
               <div className='IMGCONTAINER'>
                 <img className='IMG ACIMG' src="/add-user.png" />
               </div>
@@ -94,30 +95,32 @@ function AHome() {
                   <div className='SUBHEADING'>Add New Customer</div>
                 </div>
               </div>
-            </div>
-            <div className='COL COL2' onClick={handleNewLoan}>
-              <div className='IMGCONTAINER'>
-                <img className='IMG ACIMG' src="/save-money.png" />
-              </div>
-              <div className='DATA'>
-                <div className='HEADING'>NEW LOAN</div>
-                <div className='SUBHEADING'>Apply For New Loan</div>
-              </div>
-            </div>
+            </div> : null}
+            {Designation === "Branch Manager" || "Service Manager" ?
+              <div className='COL COL2' onClick={handleNewLoan}>
+                <div className='IMGCONTAINER'>
+                  <img className='IMG ACIMG' src="/save-money.png" />
+                </div>
+                <div className='DATA'>
+                  <div className='HEADING'>NEW LOAN</div>
+                  <div className='SUBHEADING'>Apply For New Loan</div>
+                </div>
+              </div> : null}
           </div>
         </div>
-        <div className='UHFLEX3' onClick={handleNewEdit}>
-          <div className='ROW ROW1'>
-            EDIT CUSTOMER
-          </div>
-          <div className='ROW ROW2'>
-            <div className='COL'>
-              <div className='IMGCONTAINER'>
-                <img className='IMG ACIMG' src="/resume.png" />
+        {Designation === "Branch Manager" || "Service Manager" || "Customer Service" ?
+          <div className='UHFLEX3' onClick={handleNewEdit}>
+            <div className='ROW ROW1'>
+              EDIT CUSTOMER
+            </div>
+            <div className='ROW ROW2'>
+              <div className='COL'>
+                <div className='IMGCONTAINER'>
+                  <img className='IMG ACIMG' src="/resume.png" />
+                </div>
               </div>
             </div>
-          </div>
-        </div>
+          </div> : null}
       </div>
     </div >
   )
