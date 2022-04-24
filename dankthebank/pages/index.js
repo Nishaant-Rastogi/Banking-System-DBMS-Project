@@ -7,8 +7,8 @@ import swal from 'sweetalert';
 const Login = () => {
   const router = useRouter()
   const [loginasuser, setloginasuser] = useState(true);
-  const [id, setid] = useState('');
-  const [password, setpassword] = useState('');
+  const [id, setId] = useState('');
+  const [password, setPassword] = useState('');
   const handler1 = () => { setloginasuser(true) };
   const handler2 = () => setloginasuser(false);
 
@@ -30,6 +30,8 @@ const Login = () => {
       .catch(function (error) {
         console.log(error);
       });
+    e.target.Customer_ID.value = '';
+    e.target.Password.value = '';
   }
   const handleLoginAdmin = (e) => {
     e.preventDefault();
@@ -50,6 +52,8 @@ const Login = () => {
         console.log(error);
         //Perform action based on error
       });
+    e.target.Employee_ID.value = '';
+    e.target.Password.value = '';
   }
   return (
     <div className='LOGIN'>
@@ -65,30 +69,30 @@ const Login = () => {
         </div>
         <div className='FORMCONTAINER'>
           {loginasuser ? null :
-            <form>
+            <form onSubmit={handleLoginAdmin}>
               <div className="form-group">
                 <label html="exampleInputid1">Employee ID</label>
-                <input onChange={event => setid(event.target.value)} type="text" className="form-control" id="exampleInputid1" aria-describedby="idHelp" placeholder="Enter id" />
+                <input onChange={event => setId(event.target.value)} type="text" className="form-control" id="Employee_ID" aria-describedby="idHelp" placeholder="Enter id" />
                 <small id="idHelp" className="form-text text-muted">We will never share your id with anyone else.</small>
               </div>
               <div className="form-group">
                 <label html="exampleInputPassword1">Password</label>
-                <input onChange={event => setpassword(event.target.value)} type="password" className="form-control" id="exampleInputPassword1" placeholder="Password" />
+                <input onChange={event => setPassword(event.target.value)} type="password" className="form-control" id="Password" placeholder="Password" />
               </div>
-              <button onClick={handleLoginAdmin} type="submit" className="btn COLOR LOGINB">Login as Admin</button>
+              <button type="submit" className="btn COLOR LOGINB">Login as Admin</button>
             </form>}
           {loginasuser ?
-            <form>
+            <form onSubmit={handleLoginUser}>
               <div className="form-group">
                 <label htmlhtml="exampleInputid1">Customer ID</label>
-                <input onChange={event => setid(event.target.value)} type="id" className="form-control" id="exampleInputid1" aria-describedby="idHelp" placeholder="Enter id" />
+                <input onChange={event => setId(event.target.value)} type="id" className="form-control" id="Customer_ID" aria-describedby="idHelp" placeholder="Enter id" />
                 <small id="idHelp" className="form-text text-muted">We will never share your id with anyone else.</small>
               </div>
               <div className="form-group">
                 <label htmlhtml="exampleInputPassword1">Password</label>
-                <input onChange={event => setpassword(event.target.value)} type="password" className="form-control" id="exampleInputPassword1" placeholder="Password" />
+                <input onChange={event => setPassword(event.target.value)} type="password" className="form-control" id="Password" placeholder="Password" />
               </div>
-              <button onClick={handleLoginUser} type="submit" className="btn COLOR LOGINB">Login as User</button>
+              <button type="submit" className="btn COLOR LOGINB">Login as User</button>
             </form> : null}
         </div>
       </div>
