@@ -16,18 +16,19 @@ const Admin = () => {
     }
   }, [""]);
   useEffect(() => {
-    if(Admin!=null){
-    axios.post('http://localhost:5000/adminProfile', Admin)
-      .then(function (response) {
-        console.log(response.data);
-        setAdminData(response.data);
-        //Perform action based on response
-      })
-      .catch(function (error) {
-        console.log(error);
-        //Perform action based on error
-      });
-    console.log("GENERATE");
+    if (Admin != null) {
+      axios.post('http://localhost:5000/adminProfile', Admin)
+        .then(function (response) {
+          console.log(response.data);
+          setAdminData(response.data);
+          localStorage.setItem('adminData', JSON.stringify(adminData));
+          //Perform action based on response
+        })
+        .catch(function (error) {
+          console.log(error);
+          //Perform action based on error
+        });
+      console.log("GENERATE");
     }
   }, [Admin]);
   return (

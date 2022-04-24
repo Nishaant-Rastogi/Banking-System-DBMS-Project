@@ -7,6 +7,7 @@ function accounts() {
     const [userData, setUserData] = useState(null);
     useEffect(() => {
         const loggedInUser = localStorage.getItem("user");
+        const loggedInUserData = localStorage.getItem("userData");
         if (loggedInUser) {
             const foundUser = JSON.parse(loggedInUser);
             setUser(foundUser);
@@ -15,22 +16,14 @@ function accounts() {
         else {
             setUser(null);
         }
-    }, [""]);
-    useEffect(() => {
-        if (User != null) {
-            axios.post('http://localhost:5000/userProfile', User)
-                .then(function (response) {
-                    console.log(response.data);
-                    setUserData(response.data);
-                    //Perform action based on response
-                })
-                .catch(function (error) {
-                    console.log(error);
-                    //Perform action based on error
-                });
-            console.log("GENERATE");
+        if (loggedInUserData) {
+            const foundUserData = JSON.parse(loggedInUserData);
+            setUserData(foundUserData);
+            console.log(foundUserData);
+        } else {
+            setUserData(null);
         }
-    }, [User]);
+    }, [""]);
     useEffect(() => {
         axios.post('http://localhost:5000/userAccounts', User)
             .then(function (response) {

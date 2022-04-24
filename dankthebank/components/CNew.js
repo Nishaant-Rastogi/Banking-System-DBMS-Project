@@ -1,18 +1,54 @@
-import React from 'react';
-
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 
 function CNew(props) {
     const handler = () => { props.setAccount(false) };
-
-    React.useEffect(() => {
+    const [Admin, setAdmin] = useState(null);
+    useEffect(() => {
         handler;
-    }, []);
+        const loggedInUser = localStorage.getItem("admin");
+        if (loggedInUser) {
+            const foundUser = JSON.parse(loggedInUser);
+            setAdmin(foundUser);
+            console.log(foundUser);
+        } else {
+            setAdmin(null);
+        }
+    }, [""]);
+    const handleNewCustomer = (e) => {
+        e.preventDefault();
+        const data = {
+            Admin: Admin,
+            Name: e.target.Name.value,
+            Age: e.target.Age.value,
+            Phone: e.target.Phone.value,
+            HouseNo: e.target.HouseNo.value,
+            Locality: e.target.Locality.value,
+            City: e.target.City.value,
+        }
+        axios.post('http://localhost:5000/newCustomer', data)
+            .then(function (response) {
+                console.log(response);
+                if (response.data === "Success") {
+                    alert("Customer Added");
+                    props.setAccount(false)
+                } else {
+                    alert("Wrong ID or Password");
+                }
+                //Perform action based on response
+            })
+            .catch(function (error) {
+                console.log(error);
+                //Perform action based on error
+            });
+        console.log("GENERATE");
+    }
     return (
         <div className='UNEW'>
             <div className='BLUR' onClick={handler} ></div>
             <div className='ACCONTAINER'>
                 <div className='FORM'>
-                    <form>
+                    <form onSubmit={handleNewCustomer}>
                         <div className="form-row">
                             <div className="form-group col-md-6">
                                 <label html="Name">Name</label>
@@ -54,5 +90,4 @@ function CNew(props) {
 
     )
 }
-
-export default CNew
+export default CNew;

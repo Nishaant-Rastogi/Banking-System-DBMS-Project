@@ -3,7 +3,7 @@ import Adminbar from './Adminbar';
 import AdCarousel from './AdCarousel';
 import Link from 'next/link';
 import CNew from './CNew';
-import NewLoan from './NewLoan';
+import AdminNewLoan from './AdminNewLoan';
 import ENew from './ENew';
 import EditCustomer from './EditCustomer';
 
@@ -27,7 +27,7 @@ function AHome() {
   return (
     <div className='UHOME'>
       {account ? <CNew setAccount={setAccount} /> : null}
-      {loan ? <NewLoan setLoan={setLoan} /> : null}
+      {loan ? <AdminNewLoan setLoan={setLoan} /> : null}
       {employee ? <ENew setEmployee={setEmployee} /> : null}
       {edit ? <EditCustomer setEdit={setEdit} /> : null}
       <AdCarousel />

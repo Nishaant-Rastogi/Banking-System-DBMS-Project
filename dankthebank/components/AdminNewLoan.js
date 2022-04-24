@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import axios from 'axios';
 
-function NewLoan(props) {
+function AdminNewLoan(props) {
     const handler = () => { props.setLoan(false) };
 
     useEffect(() => {
@@ -10,12 +10,13 @@ function NewLoan(props) {
     const handleNewLoan = (e) => {
         e.preventDefault();
         const data = {
+            customer_id: e.target.Customer_ID.value,
             account: e.target.account.value,
             amount: e.target.amount.value,
             roi: e.target.roi.value,
             term: e.target.term.value,
         }
-        axios.post('http://localhost:5000/newLoan', data)
+        axios.post('http://localhost:5000/adminNewLoan', data)
             .then(function (response) {
                 console.log(response);
                 if (response.data === "Success") {
@@ -39,14 +40,18 @@ function NewLoan(props) {
                 <div className='FORM'>
                     <form onSubmit={handleNewLoan}>
                         <div className="form-row">
+                            <div className="form-group">
+                                <label htmlFor="Customer_ID">Customer ID</label>
+                                <input type="text" id="Customer_ID" className="form-control" placeholder="Enter Customer ID" />
+                            </div>
                             <div className="form-group col-md-6">
                                 <label htmlFor="account">Account No</label>
                                 <input type="text" id="account" className="form-control" placeholder="Enter Account No" />
                             </div>
-                            <div className="form-group">
-                                <label htmlFor="amount">Amount</label>
-                                <input type="text" id="amount" className="form-control" placeholder="Amount" />
-                            </div>
+                        </div>
+                        <div className="form-group">
+                            <label htmlFor="amount">Amount</label>
+                            <input type="text" id="amount" className="form-control" placeholder="Amount" />
                         </div>
                         <div className="form-group">
                             <label htmlFor="roi">Rate of Interest</label>
@@ -56,7 +61,7 @@ function NewLoan(props) {
                             <label htmlFor="term">Term</label>
                             <input type="text" id="term" className="form-control" placeholder="Term" />
                         </div>
-                        <button type="submit" className="btn btn-primary GRADIENT">Request New Loan</button>
+                        <button type="submit" className="btn btn-primary GRADIENT">Approve New Loan</button>
                     </form>
                 </div>
                 <img className="CLOSEIMAGE" onClick={handler} src="/close.png" />
@@ -66,4 +71,4 @@ function NewLoan(props) {
     )
 }
 
-export default NewLoan;
+export default AdminNewLoan;

@@ -21,8 +21,9 @@ const User = () => {
     if (User != null) {
       axios.post('http://localhost:5000/userProfile', User)
         .then(function (response) {
-          console.log(response.data);
           setUserData(response.data);
+          localStorage.setItem('userData', JSON.stringify(userData));
+          console.log(response.data);
           //Perform action based on response
         })
         .catch(function (error) {

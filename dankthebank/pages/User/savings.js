@@ -9,6 +9,7 @@ function savings() {
   const [AccountData, setAccountData] = useState(null);
   useEffect(() => {
     const loggedInUser = localStorage.getItem("user");
+    const loggedInUserData = localStorage.getItem("userData");
     if (loggedInUser) {
       const foundUser = JSON.parse(loggedInUser);
       setUser(foundUser);
@@ -17,22 +18,14 @@ function savings() {
     else {
       setUser(null);
     }
-  }, [""]);
-  useEffect(() => {
-    if (User != null) {
-      axios.post('http://localhost:5000/userProfile', User)
-        .then(function (response) {
-          console.log(response.data);
-          setUserData(response.data);
-          //Perform action based on response
-        })
-        .catch(function (error) {
-          console.log(error);
-          //Perform action based on error
-        });
-      console.log("GENERATE");
+    if (loggedInUserData) {
+      const foundUserData = JSON.parse(loggedInUserData);
+      setUserData(foundUserData);
+      console.log(foundUserData);
+    } else {
+      setUserData(null);
     }
-  }, [User]);
+  }, [""]);
   useEffect(() => {
     if (User != null) {
       axios.post('http://localhost:5000/userSavings', User)

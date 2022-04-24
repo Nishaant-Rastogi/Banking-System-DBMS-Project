@@ -9,30 +9,23 @@ const loans = () => {
     const [LoanData, setLoanData] = useState(null);
     useEffect(() => {
         const loggedInUser = localStorage.getItem("admin");
+        const loggedInUserData = localStorage.getItem("adminData");
         if (loggedInUser) {
             const foundUser = JSON.parse(loggedInUser);
             setAdmin(foundUser);
             console.log(foundUser);
         }
         else {
-            setAdmin(null);
+            setAdmin(null)
+        }
+        if (loggedInUserData) {
+            const foundUserData = JSON.parse(loggedInUserData);
+            setAdminData(foundUserData);
+            console.log(foundUserData);
+        } else {
+            setAdminData(null);
         }
     }, [""]);
-    // useEffect(() => {
-    //     if (Admin != null) {
-    //         axios.post('http://localhost:5000/adminProfile', Admin)
-    //             .then(function (response) {
-    //                 console.log(response.data);
-    //                 setAdminData(response.data);
-    //                 //Perform action based on response
-    //             })
-    //             .catch(function (error) {
-    //                 console.log(error);
-    //                 //Perform action based on error
-    //             });
-    //         console.log("GENERATE");
-    //     }
-    // }, [Admin]);
     useEffect(() => {
         if (Admin != null) {
             axios.post('http://localhost:5000/adminLoans', Admin)
@@ -53,7 +46,7 @@ const loans = () => {
             {Admin == null ? null :
                 <div>
                     <Adminbar adminData={adminData} />
-                    <LoansT Loans={LoanData}/>
+                    <LoansT Loans={LoanData} />
                 </div>
             }
         </div>

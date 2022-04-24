@@ -10,14 +10,13 @@ function EditCustomer(props) {
     const handleEditCustomer = (e) => {
         e.preventDefault();
         const data = {
+            Customer_ID: e.target.Customer_ID.value,
             Name: e.target.Name.value,
             Age: e.target.Age.value,
-            Salary: e.target.Salary.value,
-            PAN: e.target.PAN.value,
-            Joining_Date: e.target.Joining_Date.value,
-            Password: e.target.Password.value,
-            Designation: e.target.Designation.value,
-            Branch_ID: e.target.Branch_ID.value
+            Phone: e.target.Phone.value,
+            HouseNo: e.target.HouseNo.value,
+            Locality: e.target.Locality.value,
+            City: e.target.City.value,
         }
         axios.post('http://localhost:5000/editCustomer', data)
             .then(function (response) {
@@ -49,11 +48,11 @@ function EditCustomer(props) {
                         <div className="form-row">
                             <div className="form-group col-md-6">
                                 <label html="Name">Name</label>
-                                <input type="text" className="form-control" id="name" placeholder="Enter Name" />
+                                <input type="text" className="form-control" id="Name" placeholder="Enter Name" />
                             </div>
                             <div className="form-group col-md-6">
                                 <label html="Age">Age</label>
-                                <input type="text" className="form-control" id="age" placeholder="Enter Age" />
+                                <input type="text" className="form-control" id="Age" placeholder="Enter Age" />
                             </div>
                         </div>
                         <div className="form-group">

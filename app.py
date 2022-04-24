@@ -10,12 +10,18 @@ from werkzeug.utils import secure_filename
 from flask_cors import CORS  # comment this on deployment
 from datetime import date, timedelta, datetime
 app = Flask(__name__)
-db = mysql.connector.connect(
-    host="localhost",
-    user="root",
-    passwd="mysql",
-    database="DANKTHEBANK",
-)
+
+def dbConnect(user, password):
+    db = mysql.connector.connect(
+        host="localhost",
+        user=user,
+        passwd=password,
+        database="DANKTHEBANK",
+    )
+    return db
+
+db = dbConnect("root", "NISHAant@1234")
+
 myCursor = db.cursor(buffered=True)
 myCursor.execute("set GLOBAL max_allowed_packet=67108864")
 CORS(app)  # comment this on deployment
@@ -28,11 +34,17 @@ global maxLoans
 maxLoans = 2
 global maxEmployees
 maxEmployees = 10
+global maxCustomers
+maxCustomers = 10
 
 @app.route("/userLogOut", methods=["POST"])
 def userLogOut():
     if request.method == "POST":
         myCursor.execute("REVOKE User FROM customer@localhost")
+        if myCursor.rowcount >= 0:
+            return "Success"
+        else:
+            return "Failure"
 @app.route("/adminLogOut", methods=["POST"])
 def adminLogOut():
     if request.method == "POST":
@@ -52,6 +64,7 @@ def authUser():
             myCursor.execute("FLUSH PRIVILEGES")
             myCursor.execute("CREATE USER customer@localhost IDENTIFIED BY %s", (request.json["password"],))
             myCursor.execute("GRANT User TO customer@localhost")
+            # dbConnect("customer", request.get_json()['password'])
             return "Success"
         else:
             return "Failure"
@@ -60,12 +73,16 @@ def authUser():
 def authAdmin():
     if request.method == 'POST':
         myCursor.execute("SELECT * FROM employees WHERE Employee_ID = %s AND Password = %s", (request.get_json()['id'], request.get_json()['password']))
-        print(myCursor.fetchall())
         if(myCursor.rowcount == 1):
+            entry = myCursor.fetchall()[0]
+            branch = entry[0][:4]
+            print(branch)
+            designation = entry[3]
             myCursor.execute("DROP USER IF EXISTS admin@localhost")
             myCursor.execute("FLUSH PRIVILEGES")
             myCursor.execute("CREATE USER admin@localhost IDENTIFIED BY %s", (request.json["password"],))
-            myCursor.execute("GRANT Branch_Manager TO admin@localhost")
+            myCursor.execute("GRANT %s TO admin@localhost", (designation.replace(' ', '_'),))
+            # dbConnect("admin", request.get_json()['password'])
             return "Success"
         else:
             return "Failure"
@@ -114,6 +131,8 @@ def newAccounts():
         maxAccounts+=1
         print(accountNo)
         myCursor.execute("INSERT INTO Accounts (AccountNo, Customer_ID, Balance, OpeningDate) VALUES (%s, %s, %s, CURDATE())", (accountNo, customer_id, request.get_json()['Balance']))
+        myCursor.execute("INSERT INTO branch_accounts (AccountNo, Branch_ID) VALUES (%s, %s)", (accountNo, accountNo[:4]))
+        db.commit()
         if(myCursor.rowcount == 1):
             return "Success"
         else:
@@ -258,6 +277,8 @@ def newLoan():
         loanID = account[:4]+"03"+account[7:9]+account[-2:]+"00"+str(loanNo)
         slab = (int(request.get_json()['amount'])/int(request.get_json()['term']))*(1+(int(request.get_json()['roi'])/100))
         myCursor.execute("INSERT INTO loans (Loan_ID, StartDate, Amount, InterestRate, Term, EndDate, Slab) VALUES (%s, CURDATE(), %s, %s, %s, DATE_ADD(CURDATE(), INTERVAL %s YEAR), %s)", (loanID,  request.get_json()['amount'], request.get_json()['roi'], request.get_json()['term'], request.get_json()['term'], slab))
+        myCursor.execute("INSERT INTO branch_loan_account (Branch_ID, AccountNo, Loan_ID) VALUES (%s, %s, %s)", (account[:4], account, loanID))
+        db.commit()
         if(myCursor.rowcount >= 1):
             return "Success"
         else:
@@ -301,6 +322,8 @@ def loanPayments():
             myCursor.execute("UPDATE accounts SET Balance = Balance - %s WHERE AccountNo = %s", (amount, account))
         # loan Status and update
         myCursor.execute("INSERT INTO transactions (Payment_ID, Amount, Date, Status) VALUES (%s, %s, CURDATE(), %s)", (loanPaymentID, amount, loanPaymentStatus))
+        myCursor.execute("INSERT INTO loan_transaction (Loan_ID, Payment_ID, Amount) VALUES (%s, %s, %s)", (request.get_json()['LoanID'], loanPaymentID, amount))
+        db.commit()
         if(myCursor.rowcount >= 1):
             return "Success"
         else:
@@ -328,6 +351,7 @@ def newTransaction():
             myCursor.execute("UPDATE accounts SET Balance = Balance - %s WHERE AccountNo = %s", (amount, senderAccount))
             myCursor.execute("UPDATE accounts SET Balance = Balance + %s WHERE AccountNo = %s", (amount, receiverAccount))
         myCursor.execute("INSERT INTO transactions (Payment_ID, Amount, Date, Status) VALUES (%s, %s, CURDATE(), %s)", (paymentID, amount, paymentStatus))
+        db.commit()
         if(myCursor.rowcount >= 1):
             return "Success"
         else:
@@ -401,6 +425,7 @@ def newEmployee():
         employeeID = branch+"0000"+str(maxEmployees)
         maxEmployees+=1
         myCursor.execute("INSERT INTO employees (Employee_ID, Name, Salary, Designation, Joining_Date, PAN, Password) VALUES (%s, %s, %s, %s, %s, %s, %s)", (employeeID, name, salary, designation, joiningDate, pan, password))
+        db.commit()
         if(myCursor.rowcount == 1):
             return "Success"
         else:
@@ -409,8 +434,66 @@ def newEmployee():
 @app.route("/editCustomer", methods=['POST'])
 def editCustomer():
     if request.method == 'POST':
-        return "Success"
+        customerID = request.get_json()["Customer_ID"]
+        name = request.get_json()["Name"]
+        age = request.get_json()["Age"]
+        phone = request.get_json()["Phone"]
+        houseNo = request.get_json()["HouseNo"]
+        locality = request.get_json()["Locality"]
+        city = request.get_json()["City"]
+        myCursor.execute("UPDATE customers SET Name = %s, Age = %s, Phone = %s, HouseNo = %s, Locality = %s, City = %s WHERE Customer_ID = %s", (name, age, phone, houseNo, locality, city, customerID))
+        db.commit()
+        if myCursor.rowcount == 1:
+            return "Success"
+        else:
+            return "Failure"
 
+@app.route("/newCustomer", methods=['POST'])
+def newCustomer():
+    global maxCustomers
+    if request.method == 'POST':
+        adminId = request.get_json()['admin']['id']
+        branch = adminId[:4]
+        customerId = branch+"0400"+str(maxCustomers)
+        maxCustomers += 1
+        name = request.get_json()["Name"]
+        age = request.get_json()["Age"]
+        phone = request.get_json()["Phone"]
+        houseNo = request.get_json()["HouseNo"]
+        locality = request.get_json()["Locality"]
+        city = request.get_json()["City"]
+        myCursor.execute("INSERT INTO customers VALUES (%s, %s, %s, %s, %s, %s, %s)", (customerId, name, age, phone, houseNo, locality, city))
+        db.commit()
+        if myCursor.rowcount == 1:
+            return "Success"
+        else:
+            return "Failure"
+
+@app.route("/adminNewLoan", methods=['POST'])
+def adminNewLoan():
+    global maxLoans
+    if request.method == 'POST':
+        account = request.get_json()['account']
+        myCursor.execute("SELECT LoanStatus FROM accounts WHERE AccountNo = %s", (account,))
+        loanStatus = myCursor.fetchall()[0][0]
+        print(loanStatus)
+        if loanStatus == "NULL" or loanStatus == "PAID":
+            loanStatus = "OKAY"
+        else:
+            return "Loan Cannot be Created"
+        myCursor.execute("UPDATE accounts SET LoanStatus = %s WHERE AccountNo = %s", (loanStatus, account))
+        myCursor.execute("SELECT * FROM branch_loan_account WHERE AccountNo = %s", (account,))
+        loanNo = 1
+        if myCursor.rowcount >= 1:
+            loanNo += myCursor.rowcount
+        loanID = account[:4]+"03"+account[7:9]+account[-2:]+"00"+str(loanNo)
+        slab = (int(request.get_json()['amount'])/int(request.get_json()['term']))*(1+(int(request.get_json()['roi'])/100))
+        myCursor.execute("INSERT INTO loans (Loan_ID, StartDate, Amount, InterestRate, Term, EndDate, Slab) VALUES (%s, CURDATE(), %s, %s, %s, DATE_ADD(CURDATE(), INTERVAL %s YEAR), %s)", (loanID,  request.get_json()['amount'], request.get_json()['roi'], request.get_json()['term'], request.get_json()['term'], slab))
+        db.commit()
+        if(myCursor.rowcount >= 1):
+            return "Success"
+        else:
+            return "Failure"
 if __name__ == "__main__":
     app.run(debug=True)
 

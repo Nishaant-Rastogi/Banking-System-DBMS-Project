@@ -9,6 +9,7 @@ const employees = () => {
     const [EmpData, setEmpData] = useState(null);
     useEffect(() => {
         const loggedInUser = localStorage.getItem("admin");
+        const loggedInUserData = localStorage.getItem("adminData");
         if (loggedInUser) {
             const foundUser = JSON.parse(loggedInUser);
             setAdmin(foundUser);
@@ -17,23 +18,14 @@ const employees = () => {
         else {
             setAdmin(null)
         }
-
+        if (loggedInUserData) {
+            const foundUserData = JSON.parse(loggedInUserData);
+            setAdminData(foundUserData);
+            console.log(foundUserData);
+        } else {
+            setAdminData(null);
+        }
     }, [""]);
-    // useEffect(() => {
-    //     if (Admin != null) {
-    //         axios.post('http://localhost:5000/adminProfile', Admin)
-    //             .then(function (response) {
-    //                 console.log(response.data);
-    //                 setAdminData(response.data);
-    //                 //Perform action based on response
-    //             })
-    //             .catch(function (error) {
-    //                 console.log(error);
-    //                 //Perform action based on error
-    //             });
-    //         console.log("GENERATE");
-    //     }
-    // }, [Admin])
     useEffect(() => {
         if (Admin != null) {
             axios.post('http://localhost:5000/adminEmployees', Admin)
@@ -52,14 +44,14 @@ const employees = () => {
             console.log("GENERATE");
         }
     }, [Admin]);
-    
+
 
     return (
         <div>
             {Admin == null ? null :
                 <div>
                     <AdminBar adminData={adminData} />
-                    <Employees EmpData={EmpData==null ? null : EmpData.data}/>
+                    <Employees EmpData={EmpData == null ? null : EmpData.data} />
                 </div>
             }
         </div>
