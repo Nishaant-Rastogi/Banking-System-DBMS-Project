@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import Userbar from '../../components/UserBar';
 import TransactionsT from '../../components/TransactionsT';
 import axios from 'axios';
-
+import Error from "../../components/error";
 
 function transactions() {
   const [User, setUser] = useState(null);
@@ -25,6 +25,7 @@ function transactions() {
       console.log(foundUserData);
     } else {
       setUserData(null);
+      console.log("here");
     }
   }, [""]);
 
@@ -45,7 +46,7 @@ function transactions() {
   }, [User]);
   return (
     <>
-      {User == null ? null :
+      {User == null ? <Error/> :
         <div>
           <Userbar userData={userData} />
           <TransactionsT data={transactions} />

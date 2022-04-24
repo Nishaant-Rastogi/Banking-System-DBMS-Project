@@ -1,4 +1,4 @@
-import React from 'react';
+import React,{useEffect , useState} from 'react';
 import Adminbar from './Adminbar';
 import AdCarousel from './AdCarousel';
 import Link from 'next/link';
@@ -7,11 +7,14 @@ import AdminNewLoan from './AdminNewLoan';
 import ENew from './ENew';
 import EditCustomer from './EditCustomer';
 
-function AHome({ Designation }) {
+
+function AHome() {
   const [account, setAccount] = React.useState(false);
   const [loan, setLoan] = React.useState(false);
   const [employee, setEmployee] = React.useState(false);
   const [edit, setEdit] = React.useState(false);
+  const [Designation, setDesignation] = React.useState('');
+  const [count, setCount] = React.useState(0);
   const handleNewEmployee = () => {
     setEmployee(true);
   };
@@ -24,6 +27,18 @@ function AHome({ Designation }) {
   const handleNewEdit = () => {
     setEdit(true);
   }
+  useEffect(() => {
+    const loggedInAdminData = localStorage.getItem("adminData");
+    if(count<=25){
+      setCount(count+1);
+    }
+    if (loggedInAdminData) {
+      const foundAdminData = JSON.parse(loggedInAdminData);
+      setDesignation(foundAdminData.Designation);
+    } else {
+      setDesignation('');
+    }
+  }, [count]);
   return (
     <div className='UHOME' >
       {console.log(Designation)}
@@ -47,7 +62,7 @@ function AHome({ Designation }) {
                 </div>
               </div>
             </Link>
-            {Designation === "Branch Manager" ?
+            { (Designation === "Branch Manager") ?
               <div className='COL' onClick={handleNewEmployee}>
                 <div className='IMGCONTAINER'>
                   <img className='IMG ACIMG' src="/time-management.png" />
@@ -84,9 +99,10 @@ function AHome({ Designation }) {
           </div>
 
         </div>
-        <div className='UHFLEX2'>
+        {(Designation === "Customer Service") ? null:
+         <div className='UHFLEX2'>
           <div className='ROW'>
-            {Designation === "Branch Manager" || "Account Manager" ? <div className='COL COL1' onClick={handleNewAccount}>
+            {((Designation === "Branch Manager") ||(Designation === "Account Manager")) ? <div className='COL COL1' onClick={handleNewAccount}>
               <div className='IMGCONTAINER'>
                 <img className='IMG ACIMG' src="/add-user.png" />
               </div>
@@ -97,7 +113,7 @@ function AHome({ Designation }) {
                 </div>
               </div>
             </div> : null}
-            {Designation === "Branch Manager" || "Service Manager" ?
+            {((Designation === "Branch Manager") || (Designation === "Service Manager")) ?
               <div className='COL COL2' onClick={handleNewLoan}>
                 <div className='IMGCONTAINER'>
                   <img className='IMG ACIMG' src="/save-money.png" />
@@ -108,8 +124,8 @@ function AHome({ Designation }) {
                 </div>
               </div> : null}
           </div>
-        </div>
-        {Designation === "Branch Manager" || "Service Manager" || "Customer Service" ?
+        </div> }
+        {((Designation === "Branch Manager") || (Designation === "Service Manager") || (Designation === "Customer Service")) ?
           <div className='UHFLEX3' onClick={handleNewEdit}>
             <div className='ROW ROW1'>
               EDIT CUSTOMER

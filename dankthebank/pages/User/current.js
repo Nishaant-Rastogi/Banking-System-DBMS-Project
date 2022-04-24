@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import Userbar from '../../components/UserBar';
 import SAccountsT from '../../components/SAccountsT';
 import axios from 'axios';
+import Error from "../../components/error";
+
 function current() {
   const [User, setUser] = useState(null);
   const [userData, setUserData] = useState(null);
@@ -29,7 +31,12 @@ function current() {
     axios.post('http://localhost:5000/userCurrent', User)
       .then(function (response) {
         console.log(response);
-        setAccountData(response.data);
+        if(response.data == 'Failure'){
+          setAccountData(null);
+        }
+        else{
+          setAccountData(response.data);
+        }
         //Perform action based on response
       })
       .catch(function (error) {
@@ -40,7 +47,7 @@ function current() {
   }, [User]);
   return (
     <>
-      {User == null ? null :
+      {User == null ? <Error/> :
         <div>
           <Userbar userData={userData} />
           <SAccountsT AccountData={AccountData} />

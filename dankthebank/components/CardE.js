@@ -8,7 +8,7 @@ function customcard({EmpData}){
     return(
         <div className="CUSTOMCARDE" id="accordion">
             {EmpData.emp == null ? null : EmpData.emp.map((accoundata) => (
-                <div className="card CARD">
+                <div key = {id} className="card CARD">
                 <div className="card-header COL" id="HeadingTwO">
                     <button className="btn btn-link BUTTON" data-toggle="collapse" data-target={hashtag.concat(id).toString()} aria-expanded="true" aria-controls="collapseOne">
                         <div className="DATA ACCOUNT">

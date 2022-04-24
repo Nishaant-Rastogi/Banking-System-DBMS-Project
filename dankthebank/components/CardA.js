@@ -10,10 +10,7 @@ function customcard({AccountData}){
     return(
         <div className="CUSTOMCARDA" id="accordion">
             {AccountData[0][0] == null ? null : AccountData[0][0].map((accoundata) => (
-                <div className="card CARD">
-                    {handler(id)}
-                    {handler(hashtag)}
-                    {handler(hashtag.concat(id))}
+                <div key= {id}  className="card CARD">
                 <div className="card-header COL" id="HeadingTwO">
                     <button className="btn btn-link BUTTON" data-toggle="collapse" data-target={hashtag.concat(id).toString()} aria-expanded="true" aria-controls="collapseOne">
                         <div className="DATA ACCOUNT">

@@ -222,7 +222,7 @@ def userTransactions():
             transactionID.append(x[1])
         transactions = []
         for p in transactionID:
-            myCursor.execute("SELECT * FROM %s WHERE Payment_ID = %s", ("Branch_Transaction_"+branch, p))
+            myCursor.execute("SELECT * FROM transactions WHERE Payment_ID = %s", (p,))
             transactions.append(dict(zip(columns, myCursor.fetchall()[0])))
         print(transactions)
         print(myCursor.rowcount)

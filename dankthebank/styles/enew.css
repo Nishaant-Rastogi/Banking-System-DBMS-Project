@@ -1,0 +1,39 @@
+.ENEW{
+    position: absolute;
+    top : 0;
+    left : 0;
+    z-index: 200;
+}
+.ENEW .BLUR{
+    width: 100vw;
+    height: 100vh;
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-color: white;
+    opacity: 0.6;
+}
+
+.ENEW .ACCONTAINER{
+    position: relative;
+    top : 10vh;
+    left: 30%;
+    background-color: white;
+    display: flex;
+    flex-direction: row;
+    border-radius: 40px;
+    border: 1px solid #888888;
+    box-shadow: 2px 5px 10px #888888;
+}
+
+.ENEW .CLOSEIMAGE{
+    position: relative;
+    width: 5vh;
+    height: 5vh;
+    margin: 20px;
+    opacity: 0.75;
+}
+
+.ENEW .FORM{
+    margin: 30px;
+}

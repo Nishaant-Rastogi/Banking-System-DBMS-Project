@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import AdminBar from '../../components/Adminbar';
 import Employees from '../../components/Employees';
 import axios from 'axios';
+import Error from "../../components/error";
 
 const employees = () => {
     const [Admin, setAdmin] = useState(null);
@@ -48,7 +49,7 @@ const employees = () => {
 
     return (
         <div>
-            {Admin == null ? null :
+            {Admin == null ? <Error/> :
                 <div>
                     <AdminBar adminData={adminData} />
                     <Employees EmpData={EmpData == null ? null : EmpData.data} />

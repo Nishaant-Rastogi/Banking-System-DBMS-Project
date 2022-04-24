@@ -12,6 +12,7 @@ import '../styles/cardT.css';
 import '../styles/cardA.css';
 import '../styles/cardL.css';
 import '../styles/cardE.css';
+import '../styles/enew.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 function MyApp({ Component, pageProps }) {

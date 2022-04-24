@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import Userbar from '../../components/UserBar';
 import SAccountsT from '../../components/SAccountsT';
 import axios from 'axios';
+import Error from "../../components/error";
+
 function accounts() {
     const [User, setUser] = useState(null);
     const [userData, setUserData] = useState(null);
@@ -39,7 +41,7 @@ function accounts() {
     }, [User]);
     return (
         <>
-            {User == null ? null :
+            {User == null ? <Error/> :
                 <div>
                     <Userbar userData={userData} />
                     <SAccountsT />

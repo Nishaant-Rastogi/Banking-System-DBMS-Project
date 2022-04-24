@@ -37,7 +37,7 @@ function ENew(props) {
         console.log("GENERATE");
     }
     return (
-        <div className='UNEW'>
+        <div className='ENEW'>
             <div className='BLUR' onClick={handler} ></div>
             <div className='ACCONTAINER'>
                 <div className='FORM'>

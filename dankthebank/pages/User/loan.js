@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import Userbar from '../../components/UserBar';
 import LoansT from '../../components/LoansT';
 import axios from 'axios';
+import Error from "../../components/error";
+
 function UserLoan() {
   const [User, setUser] = useState(null);
   const [userData, setUserData] = useState(null);
@@ -47,7 +49,7 @@ function UserLoan() {
   }, [User]);
   return (
     <>
-      {User == null ? null :
+      {User == null ? <Error/> :
         <div>
           <Userbar userData={userData} />
           <LoansT Loans={loans} />

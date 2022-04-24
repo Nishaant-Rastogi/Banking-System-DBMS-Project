@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react'
 import LoansT from '../../components/LoansT'
 import Adminbar from '../../components/Adminbar'
-import axios from 'axios'
+import axios from 'axios';
+import Error from "../../components/error";
 
 const loans = () => {
     const [Admin, setAdmin] = useState(null);
@@ -43,7 +44,7 @@ const loans = () => {
     }, [Admin]);
     return (
         <div>
-            {Admin == null ? null :
+            {Admin == null ? <Error/> :
                 <div>
                     <Adminbar adminData={adminData} />
                     <LoansT Loans={LoanData} />

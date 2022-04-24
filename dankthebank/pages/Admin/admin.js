@@ -2,6 +2,8 @@ import AHome from "../../components/AHome";
 import { useState, useEffect } from "react";
 import Adminbar from "../../components/Adminbar";
 import axios from "axios";
+import Error from "../../components/error";
+
 const Admin = () => {
   const [Admin, setAdmin] = useState(null);
   const [adminData, setAdminData] = useState(null);
@@ -16,37 +18,29 @@ const Admin = () => {
     }
   }, [""]);
   useEffect(() => {
-    const loggedInUserdata = localStorage.getItem('adminData');
-    if (loggedInUserdata) {
-      const foundUserdata = JSON.parse(loggedInUserdata);
-      setAdminData(foundUserdata);
-      console.log("This is localstroage data");
-      console.log(foundUserdata);
-    } else if(!loggedInUserdata && Admin !=null) {
-      axios.post('http://localhost:5000/adminProfile', Admin)
-        .then(function (response) {
-          console.log("API request");
-          console.log(response.data);
-          setAdminData(response.data);
-          localStorage.setItem('adminData', JSON.stringify(adminData));
-          //Perform action based on response
-        })
-        .catch(function (error) {
-          console.log(error);
-          //Perform action based on error
-        });
-      console.log("GENERATE");
-    }
-    else{
-      setAdminData(null);
-    }
+      if(Admin !=null) {
+        axios.post('http://localhost:5000/adminProfile', Admin)
+          .then(function (response) {
+            console.log("API request");
+            console.log(response.data);
+            setAdminData(response.data);
+            localStorage.setItem('adminData', JSON.stringify(response.data));
+          })
+          .catch(function (error) {
+            console.log(error);
+          });
+        console.log("GENERATE");
+      }
+      else{
+        setAdminData(null);
+      }
   }, [Admin]);
   return (
     <div>
-      {Admin == null ? null :
+      {Admin == null ? <Error/> :
         <div>
           <Adminbar adminData={adminData} />
-          <AHome designation={adminData} />
+          <AHome  />
         </div>
       }
     </div>

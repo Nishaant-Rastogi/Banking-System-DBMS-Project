@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import AdminBar from '../../components/Adminbar';
 import TransactionsT from '../../components/TransactionsT';
 import axios from 'axios';
+import Error from "../../components/error";
 
 const transactions = () => {
     const [Admin, setAdmin] = useState(null);
@@ -43,7 +44,7 @@ const transactions = () => {
     }, [Admin]);
     return (
         <div>
-            {Admin == null ? null :
+            {Admin == null ? <Error/> :
                 <div>
                     <AdminBar adminData={adminData} />
                     <TransactionsT data={TransData} />
