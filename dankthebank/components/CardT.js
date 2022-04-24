@@ -8,7 +8,7 @@ function customcard({ data }) {
     return (
         <div className="CUSTOMCARDT" id="accordion">
             {data[0] == null ? null : data[0].map((accoundata) => (
-                <div key = {id} className="card CARD">
+                <div key={id} className="card CARD">
                     <div className="card-header COL" id="HeadingTwO">
                         <button className="btn btn-link BUTTON" data-toggle="collapse" data-target={hashtag.concat(id).toString()} aria-expanded="true" aria-controls="collapseOne">
                             <div className="DATA ACCOUNT">
@@ -45,7 +45,7 @@ function customcard({ data }) {
                                     FROM:
                                 </div>
                                 <div className="VALUE">
-                                    123456789
+                                    {accoundata.Payment_ID.slice(0, 4) + "010" + accoundata.Payment_ID.slice(16, 17) + "00" + accoundata.Payment_ID.slice(8, 10)}
                                 </div>
                             </div>
                             <div className="DATA TO">
@@ -53,7 +53,7 @@ function customcard({ data }) {
                                     TO:
                                 </div>
                                 <div className="VALUE">
-                                    XDXDXDXDXXDXD
+                                    {"10" + accoundata.Payment_ID.slice(10, 12) + "010" + accoundata.Payment_ID.slice(17, 18) + "00" + accoundata.Payment_ID.slice(12, 14)}
                                 </div>
                             </div>
                             <div className="DATA DATE">

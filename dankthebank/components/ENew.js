@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import axios from 'axios';
+import swal from 'sweetalert';
 
 function ENew(props) {
     const handler = () => { props.setEmployee(false) };
@@ -23,18 +24,15 @@ function ENew(props) {
             .then(function (response) {
                 console.log(response);
                 if (response.data === "Success") {
-                    alert("Account Created");
+                    swal("Welcome New Employee !", "New Employee Added !", "success");
                     props.setEmployee(false)
                 } else {
-                    alert("Wrong ID or Password");
+                    swal("Invalid Data Entry !", "Try Again !", "error");
                 }
-                //Perform action based on response
             })
             .catch(function (error) {
                 console.log(error);
-                //Perform action based on error
             });
-        console.log("GENERATE");
     }
     return (
         <div className='ENEW'>

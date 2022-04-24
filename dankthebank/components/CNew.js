@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import swal from 'sweetalert';
 
 function CNew(props) {
     const handler = () => { props.setAccount(false) };
@@ -30,10 +31,10 @@ function CNew(props) {
             .then(function (response) {
                 console.log(response);
                 if (response.data === "Success") {
-                    alert("Customer Added");
+                    swal("Welcome New Customer !", "New Customer Added !", "success");
                     props.setAccount(false)
                 } else {
-                    alert("Wrong ID or Password");
+                    swal("Invalid Data Entry !", "Try Again !", "error");
                 }
                 //Perform action based on response
             })
@@ -41,7 +42,6 @@ function CNew(props) {
                 console.log(error);
                 //Perform action based on error
             });
-        console.log("GENERATE");
     }
     return (
         <div className='UNEW'>

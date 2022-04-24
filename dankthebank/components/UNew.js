@@ -1,6 +1,6 @@
 import React from 'react';
 import axios from 'axios';
-
+import axios from 'axios';
 function UNew(props) {
     const handler = () => { props.setAccount(false) };
 
@@ -18,10 +18,10 @@ function UNew(props) {
             .then(function (response) {
                 console.log(response);
                 if (response.data === "Success") {
-                    alert("Account Created");
+                    swal("Congratulations !", "New Account Created !", "success");
                     props.setAccount(false);
                 } else {
-                    alert("Wrong ID or Password");
+                    swal("Try Again !", "Failed to Create New Account", "error");
                 }
                 //Perform action based on response
             })

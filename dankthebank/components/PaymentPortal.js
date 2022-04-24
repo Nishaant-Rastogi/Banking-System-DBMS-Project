@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-
+import swal from 'sweetalert';
 function PaymentPortal(props) {
     const handler = () => { props.setTransact(false) };
     const [User, setUser] = useState(null);
@@ -28,10 +28,10 @@ function PaymentPortal(props) {
             .then(function (response) {
                 console.log(response);
                 if (response.data === "Success") {
-                    alert("Payment Successful");
+                    swal("Woohooooo !", "Payment Successful !", "success");
                     props.setTransact(false);
                 } else {
-                    alert("Wrong ID or Password");
+                    swal("Transaction Failed !", "Try Again !", "error");
                 }
                 //Perform action based on response
             })

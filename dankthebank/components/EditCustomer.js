@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import axios from 'axios';
+import swal from 'sweetalert';
 
 function EditCustomer(props) {
     const handler = () => { props.setEdit(false) };
@@ -22,10 +23,10 @@ function EditCustomer(props) {
             .then(function (response) {
                 console.log(response);
                 if (response.data === "Success") {
-                    alert("Customer Updated");
+                    swal("Details Updated Successfully !", "Customer Details Updated !", "success");
                     props.setEdit(false)
                 } else {
-                    alert("Wrong ID or Password");
+                    swal("Invalid Data Entry !", "Try Again !", "error");
                 }
                 //Perform action based on response
             })

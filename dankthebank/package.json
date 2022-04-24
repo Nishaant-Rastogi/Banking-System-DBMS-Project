@@ -42,6 +42,7 @@
     "stream": "^0.0.2",
     "styled": "^1.0.0",
     "styled-components": "^5.3.3",
+    "sweetalert": "^2.1.2",
     "timers": "^0.1.1",
     "tls": "^0.0.1",
     "util": "^0.12.4",

@@ -1,10 +1,10 @@
 import React from 'react';
-
+import swal from 'sweetalert';
 
 function LoanPayment(props) {
     const handler = () => { props.setLoanPayment(false) };
 
-    React.useEffect(() => {
+    useEffect(() => {
         handler;
     }, []);
     const handleLoanPayment = (e) => {
@@ -18,7 +18,7 @@ function LoanPayment(props) {
             .then(function (response) {
                 console.log(response);
                 if (response.data === "Success") {
-                    alert("Loan Payment Successful");
+                    swal("Good Job !", "Loan Payment Successful !", "success");
                     props.setAccount(false);
                 } else {
                     alert("Wrong ID or Password");

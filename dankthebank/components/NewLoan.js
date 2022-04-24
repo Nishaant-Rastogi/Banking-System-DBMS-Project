@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import axios from 'axios';
-
+import swal from 'sweetalert';
 function NewLoan(props) {
     const handler = () => { props.setLoan(false) };
 
@@ -19,10 +19,10 @@ function NewLoan(props) {
             .then(function (response) {
                 console.log(response);
                 if (response.data === "Success") {
-                    alert("Loan Created");
+                    swal("Congratulations !", "Loan Created and Approved !", "success");
                     props.setLoan(false);
                 } else {
-                    alert("Failed to Create Loan");
+                    swal("Failed to Create Loan", "Try Again Later!", "error");
                 }
                 //Perform action based on response
             })

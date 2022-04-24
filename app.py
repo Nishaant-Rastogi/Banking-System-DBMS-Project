@@ -20,7 +20,7 @@ def dbConnect(user, password):
     )
     return db
 
-db = dbConnect("root", "mysql")
+db = dbConnect("root", "NISHAant@1234")
 
 myCursor = db.cursor(buffered=True)
 myCursor.execute("set GLOBAL max_allowed_packet=67108864")
@@ -134,8 +134,8 @@ def newAccounts():
         maxAccounts+=1
         print(accountNo)
         myCursor.execute("INSERT INTO accounts (AccountNo, Customer_ID, Balance, OpeningDate) VALUES (%s, %s, %s, CURDATE())", (accountNo, customer_id, request.get_json()['Balance']))
-        myCursor.execute("INSERT INTO branch_accounts (AccountNo, Branch_ID) VALUES (%s, %s)", (accountNo, accountNo[:4]))
-        db.commit()
+        myCursor.execute("INSERT INTO branch_account (AccountNo, Branch_ID) VALUES (%s, %s)", (accountNo, accountNo[:4]))
+        # db.commit()
         if(myCursor.rowcount == 1):
             return "Success"
         else:
@@ -285,7 +285,7 @@ def newLoan():
         slab = (int(request.get_json()['amount'])/int(request.get_json()['term']))*(1+(int(request.get_json()['roi'])/100))
         myCursor.execute("INSERT INTO loans (Loan_ID, StartDate, Amount, InterestRate, Term, EndDate, Slab) VALUES (%s, CURDATE(), %s, %s, %s, DATE_ADD(CURDATE(), INTERVAL %s YEAR), %s)", (loanID,  request.get_json()['amount'], request.get_json()['roi'], request.get_json()['term'], request.get_json()['term'], slab))
         myCursor.execute("INSERT INTO branch_loan_account (Branch_ID, AccountNo, Loan_ID) VALUES (%s, %s, %s)", (account[:4], account, loanID))
-        db.commit()
+        # db.commit()
         if(myCursor.rowcount >= 1):
             return "Success"
         else:
@@ -336,7 +336,7 @@ def loanPayments():
         # loan Status and update
         myCursor.execute("INSERT INTO transactions (Payment_ID, Amount, Date, Status) VALUES (%s, %s, CURDATE(), %s)", (loanPaymentID, amount, loanPaymentStatus))
         myCursor.execute("INSERT INTO loan_transaction (Loan_ID, Payment_ID, Amount) VALUES (%s, %s, %s)", (request.get_json()['LoanID'], loanPaymentID, amount))
-        db.commit()
+        # db.commit()
         if(myCursor.rowcount >= 1):
             return "Success"
         else:
@@ -349,13 +349,19 @@ def newTransaction():
         customerId = request.get_json()['user']['id']
         senderAccount = request.get_json()['SAccountNo']
         receiverAccount = request.get_json()['RAccountNo']
-        branch = receiverAccount[:5]
-        paymentID = branch+"0201"+senderAccount[-2:]+branch[-2:]+receiverAccount[-2:]+str(maxTransactions)+senderAccount[7]+receiverAccount[7]+"CC"
+        rBranch = receiverAccount[:4]
+        sBranch = senderAccount[:4]
+        paymentID = ""
+        if(maxTransactions < 10):
+            paymentID = sBranch+"0201"+senderAccount[-2:]+rBranch[-2:]+receiverAccount[-2:]+"0"+str(maxTransactions)+senderAccount[7]+receiverAccount[7]+"CC"
+        else:
+            paymentID = sBranch+"0201"+senderAccount[-2:]+rBranch[-2:]+receiverAccount[-2:]+str(maxTransactions)+senderAccount[7]+receiverAccount[7]+"CC"
         amount = request.get_json()['Amount']
+        maxTransactions+=1
         myCursor.execute("SELECT LoanStatus FROM accounts where AccountNo = %s", (senderAccount,))
         loanStatus = myCursor.fetchall()[0][0]
         paymentStatus = "PROCESSED"
-        if loanStatus == "DEFAULTER" or "PENDING":
+        if loanStatus == "DEFAULTER":
             paymentStatus = "FAILED"
 
         myCursor.execute("SELECT Balance FROM accounts WHERE AccountNo = %s", (senderAccount,))
@@ -372,8 +378,8 @@ def newTransaction():
             transactionType = "Loan Payment"
         elif paymentID[6:8] == "03":
             transactionType = "Deposit/Withdrawal"
-        myCursor.execute("INSERT INTO customer_account_transaction (Customer_ID, AccountNo, Payment_ID, Amount, TransactionType, Recipient) VALUES (%s, %s, %s, %s, %s, %s)", (customerId, senderAccount, paymentID, amount, transactionType, receiverAccount))
-        db.commit()
+        myCursor.execute("INSERT INTO customer_account_transaction (Customer_ID, AccountNo, Payment_ID, Amount, Transaction_Type, Recipient) VALUES (%s, %s, %s, %s, %s, %s)", (customerId, senderAccount, paymentID, amount, transactionType, receiverAccount))
+        # db.commit()
         if(myCursor.rowcount >= 1):
             return "Success"
         else:
@@ -447,7 +453,7 @@ def newEmployee():
         employeeID = branch+"0000"+str(maxEmployees)
         maxEmployees+=1
         myCursor.execute("INSERT INTO employees (Employee_ID, Name, Salary, Designation, Joining_Date, PAN, Password) VALUES (%s, %s, %s, %s, %s, %s, %s)", (employeeID, name, salary, designation, joiningDate, pan, password))
-        db.commit()
+        # db.commit()
         if(myCursor.rowcount == 1):
             return "Success"
         else:
@@ -464,7 +470,7 @@ def editCustomer():
         locality = request.get_json()["Locality"]
         city = request.get_json()["City"]
         myCursor.execute("UPDATE customers SET Name = %s, Age = %s, Phone = %s, HouseNo = %s, Locality = %s, City = %s WHERE Customer_ID = %s", (name, age, phone, houseNo, locality, city, customerID))
-        db.commit()
+        # db.commit()
         if myCursor.rowcount == 1:
             return "Success"
         else:
@@ -513,7 +519,7 @@ def adminNewLoan():
         slab = (int(request.get_json()['amount'])/int(request.get_json()['term']))*(1+(int(request.get_json()['roi'])/100))
         myCursor.execute("INSERT INTO loans (Loan_ID, StartDate, Amount, InterestRate, Term, EndDate, Slab) VALUES (%s, CURDATE(), %s, %s, %s, DATE_ADD(CURDATE(), INTERVAL %s YEAR), %s)", (loanID,  request.get_json()['amount'], request.get_json()['roi'], request.get_json()['term'], request.get_json()['term'], slab))
         myCursor.execute("INSERT INTO branch_loan_account (Branch_ID, AccountNo, Loan_ID) VALUES (%s, %s, %s)", (branch, account, loanID))
-        db.commit()
+        # db.commit()
         if(myCursor.rowcount >= 1):
             return "Success"
         else:

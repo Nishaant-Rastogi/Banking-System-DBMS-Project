@@ -31,11 +31,8 @@ const employees = () => {
         if (Admin != null) {
             axios.post('http://localhost:5000/adminEmployees', Admin)
                 .then(function (response) {
-                    console.log("this data");
                     console.log(response.data);
                     setEmpData(response);
-                    console.log("heree is employee")
-                    console.log(EmpData);
                     //Perform action based on response
                 })
                 .catch(function (error) {
@@ -49,7 +46,7 @@ const employees = () => {
 
     return (
         <div>
-            {Admin == null ? <Error/> :
+            {Admin == null ? <Error /> :
                 <div>
                     <AdminBar adminData={adminData} />
                     <Employees EmpData={EmpData == null ? null : EmpData.data} />
