@@ -16,9 +16,16 @@ const Admin = () => {
     }
   }, [""]);
   useEffect(() => {
-    if (Admin != null) {
+    const loggedInUserdata = localStorage.getItem('adminData');
+    if (loggedInUserdata) {
+      const foundUserdata = JSON.parse(loggedInUserdata);
+      setAdminData(foundUserdata);
+      console.log("This is localstroage data");
+      console.log(foundUserdata);
+    } else if(!loggedInUserdata && Admin !=null) {
       axios.post('http://localhost:5000/adminProfile', Admin)
         .then(function (response) {
+          console.log("API request");
           console.log(response.data);
           setAdminData(response.data);
           localStorage.setItem('adminData', JSON.stringify(adminData));
@@ -29,6 +36,9 @@ const Admin = () => {
           //Perform action based on error
         });
       console.log("GENERATE");
+    }
+    else{
+      setAdminData(null);
     }
   }, [Admin]);
   return (
