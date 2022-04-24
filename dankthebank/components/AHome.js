@@ -47,15 +47,16 @@ function AHome({ Designation }) {
                 </div>
               </div>
             </Link>
-            <div className='COL' onClick={Designation === "Branch Manager" ? handleNewEmployee : null}>
-              <div className='IMGCONTAINER'>
-                <img className='IMG ACIMG' src="/time-management.png" />
-              </div>
-              <div className='DATA'>
-                <div className='HEADING'>NEW EMPLOYEES</div>
-                <div className='SUBHEADING'>Add New Branch Employees</div>
-              </div>
-            </div>
+            {Designation === "Branch Manager" ?
+              <div className='COL' onClick={handleNewEmployee}>
+                <div className='IMGCONTAINER'>
+                  <img className='IMG ACIMG' src="/time-management.png" />
+                </div>
+                <div className='DATA'>
+                  <div className='HEADING'>NEW EMPLOYEES</div>
+                  <div className='SUBHEADING'>Add New Branch Employees</div>
+                </div>
+              </div> : null}
           </div>
           <div className='ROW ROW3 '>
             <Link href="/Admin/transactions">

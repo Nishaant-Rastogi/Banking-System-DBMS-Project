@@ -3,13 +3,23 @@ import axios from 'axios';
 
 function PaymentPortal(props) {
     const handler = () => { props.setTransact(false) };
-
+    const [User, setUser] = useState(null);
     useEffect(() => {
         handler;
+        const loggedInUser = localStorage.getItem("user");
+        if (loggedInUser) {
+            const foundUser = JSON.parse(loggedInUser);
+            setUser(foundUser);
+            console.log(foundUser);
+        }
+        else {
+            setUser(null);
+        }
     }, []);
     const handlePayment = (e) => {
         e.preventDefault();
         const data = {
+            user: User,
             SAccountNo: e.target.SAccountNo.value,
             RAccountNo: e.target.RAccountNo.value,
             Amount: e.target.Amount.value,

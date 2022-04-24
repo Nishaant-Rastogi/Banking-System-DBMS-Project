@@ -93,7 +93,8 @@ def userProfile():
         myCursor.execute("SELECT COLUMN_NAME FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_NAME = 'customers' ORDER BY ORDINAL_POSITION")
         columns = myCursor.fetchall()
         print(columns)
-        myCursor.execute("SELECT * FROM customers WHERE Customer_ID = %s AND Password = %s", (request.get_json()['id'], request.get_json()['password']))
+        branch = request.get_json()['id'][:4]
+        myCursor.execute("SELECT * FROM customers WHERE Customer_ID = %s AND Password = %s", ( request.get_json()['id'], request.get_json()['password']))
         columns = [x[0] for x in columns]
         l = dict(zip(columns, myCursor.fetchall()[0]))
         print(l)
@@ -108,6 +109,7 @@ def adminProfile():
         myCursor.execute("SELECT COLUMN_NAME FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_NAME = 'employees' ORDER BY ORDINAL_POSITION")
         columns = myCursor.fetchall()
         print(columns)
+        branch = request.get_json()['id'][:4]
         myCursor.execute("SELECT * FROM employees WHERE Employee_ID = %s AND Password = %s", (request.get_json()['id'], request.get_json()['password']))
         columns = [x[0] for x in columns]
         l = dict(zip(columns, myCursor.fetchall()[0]))
@@ -122,7 +124,8 @@ def newAccounts():
     global maxAccounts
     if request.method == 'POST':
         customer_id = request.get_json()['Customer_ID']
-        accountNo = customer_id[:4] + "01"
+        branch = customer_id[:4]
+        accountNo = branch + "01"
         if(request.get_json()['AccountType'] == "Savings"):
             accountNo += "00"
         else:
@@ -130,7 +133,7 @@ def newAccounts():
         accountNo += "00"+str(maxAccounts)
         maxAccounts+=1
         print(accountNo)
-        myCursor.execute("INSERT INTO Accounts (AccountNo, Customer_ID, Balance, OpeningDate) VALUES (%s, %s, %s, CURDATE())", (accountNo, customer_id, request.get_json()['Balance']))
+        myCursor.execute("INSERT INTO accounts (AccountNo, Customer_ID, Balance, OpeningDate) VALUES (%s, %s, %s, CURDATE())", (accountNo, customer_id, request.get_json()['Balance']))
         myCursor.execute("INSERT INTO branch_accounts (AccountNo, Branch_ID) VALUES (%s, %s)", (accountNo, accountNo[:4]))
         db.commit()
         if(myCursor.rowcount == 1):
@@ -142,7 +145,8 @@ def newAccounts():
 def userSavings():
     if request.method == 'POST':
         columns = ["AccountNo", "Opening_Date", "LoanStatus", "Balance", "Customer_ID"]
-        myCursor.execute("SELECT * FROM Accounts WHERE Customer_ID = %s", (request.get_json()['id'],))
+        branch = request.get_json()['id'][:4]
+        myCursor.execute("SELECT * FROM accounts WHERE Customer_ID = %s", (request.get_json()['id'],))
         l = []
         # print(myCursor.fetchall())
         for x in myCursor.fetchall():
@@ -176,7 +180,8 @@ def userSavings():
 def userCurrent():
     if request.method == 'POST':
         columns = ["AccountNo", "Opening_Date", "LoanStatus", "Balance", "Customer_ID"]
-        myCursor.execute("SELECT * FROM Accounts WHERE Customer_ID = %s", (request.get_json()['id'],))
+        branch = request.get_json()['id'][:4]
+        myCursor.execute("SELECT * FROM accounts WHERE Customer_ID = %s", (request.get_json()['id'],))
         l = []
         # print(myCursor.fetchall())
         for x in myCursor.fetchall():
@@ -210,13 +215,14 @@ def userCurrent():
 def userTransactions():
     if request.method == 'POST':
         columns = ["Payment_ID", "Amount", "Date", "Status"]
+        branch = request.get_json()['id'][:4]
         myCursor.execute("SELECT * FROM customer_account_transaction WHERE Customer_ID = %s", (request.get_json()['id'],))
         transactionID = []
         for x in myCursor.fetchall():
             transactionID.append(x[1])
         transactions = []
         for p in transactionID:
-            myCursor.execute("SELECT * FROM transactions WHERE Payment_ID = %s", (p,))
+            myCursor.execute("SELECT * FROM %s WHERE Payment_ID = %s", ("Branch_Transaction_"+branch, p))
             transactions.append(dict(zip(columns, myCursor.fetchall()[0])))
         print(transactions)
         print(myCursor.rowcount)
@@ -233,7 +239,8 @@ def userLoans():
     if request.method == 'POST':
         columns = ["StartDate","Loan_ID", "Amount", "InterestRate", "Term"]
         accounts = []
-        myCursor.execute("SELECT * FROM Accounts WHERE Customer_ID = %s", (request.get_json()['id'],))
+        branch = request.get_json()['id'][:4]
+        myCursor.execute("SELECT * FROM accounts WHERE Customer_ID = %s", (request.get_json()['id'],))
         for x in myCursor.fetchall():
             accounts.append(x[0])
         print(accounts)
@@ -333,6 +340,7 @@ def loanPayments():
 def newTransaction():
     global maxTransactions
     if request.method == 'POST':
+        customerId = request.get_json()['user']['id']
         senderAccount = request.get_json()['SAccountNo']
         receiverAccount = request.get_json()['RAccountNo']
         branch = receiverAccount[:5]
@@ -351,6 +359,14 @@ def newTransaction():
             myCursor.execute("UPDATE accounts SET Balance = Balance - %s WHERE AccountNo = %s", (amount, senderAccount))
             myCursor.execute("UPDATE accounts SET Balance = Balance + %s WHERE AccountNo = %s", (amount, receiverAccount))
         myCursor.execute("INSERT INTO transactions (Payment_ID, Amount, Date, Status) VALUES (%s, %s, CURDATE(), %s)", (paymentID, amount, paymentStatus))
+        transactionType = ""
+        if paymentID[6:8] == "01":
+            transactionType = "Customer to Customer"
+        elif paymentID[6:8] == "02":
+            transactionType = "Loan Payment"
+        elif paymentID[6:8] == "03":
+            transactionType = "Deposit/Withdrawal"
+        myCursor.execute("INSERT INTO customer_account_transaction (Customer_ID, AccountNo, Payment_ID, Amount, TransactionType, Recipient) VALUES (%s, %s, %s, %s, %s, %s)", (customerId, senderAccount, paymentID, amount, transactionType, receiverAccount))
         db.commit()
         if(myCursor.rowcount >= 1):
             return "Success"
@@ -486,9 +502,11 @@ def adminNewLoan():
         loanNo = 1
         if myCursor.rowcount >= 1:
             loanNo += myCursor.rowcount
-        loanID = account[:4]+"03"+account[7:9]+account[-2:]+"00"+str(loanNo)
+        branch = account[:4]
+        loanID = branch+"03"+account[7:9]+account[-2:]+"00"+str(loanNo)
         slab = (int(request.get_json()['amount'])/int(request.get_json()['term']))*(1+(int(request.get_json()['roi'])/100))
         myCursor.execute("INSERT INTO loans (Loan_ID, StartDate, Amount, InterestRate, Term, EndDate, Slab) VALUES (%s, CURDATE(), %s, %s, %s, DATE_ADD(CURDATE(), INTERVAL %s YEAR), %s)", (loanID,  request.get_json()['amount'], request.get_json()['roi'], request.get_json()['term'], request.get_json()['term'], slab))
+        myCursor.execute("INSERT INTO branch_loan_account (Branch_ID, AccountNo, Loan_ID) VALUES (%s, %s, %s)", (branch, account, loanID))
         db.commit()
         if(myCursor.rowcount >= 1):
             return "Success"
