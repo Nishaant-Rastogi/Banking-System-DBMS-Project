@@ -1,12 +1,17 @@
-import AHome from "../../components/AHome";
-import { useState, useEffect } from "react";
+import React,{ useState, useEffect } from "react";
 import Adminbar from "../../components/Adminbar";
 import axios from "axios";
 import Error from "../../components/error";
+import AManager from "../../components/AManager";
+import CManager from "../../components/CManager";
+import SManager from "../../components/SManager";
+import BManager from "../../components/BManager";
 
 const Admin = () => {
   const [Admin, setAdmin] = useState(null);
   const [adminData, setAdminData] = useState(null);
+  const [Designation, setDesignation] = React.useState('');
+  const [count, setCount] = React.useState(0);
   useEffect(() => {
     const loggedInUser = localStorage.getItem("admin");
     if (loggedInUser) {
@@ -35,12 +40,27 @@ const Admin = () => {
         setAdminData(null);
       }
   }, [Admin]);
+  useEffect(() => {
+    const loggedInAdminData = localStorage.getItem("adminData");
+    if(count<=50){
+      setCount(count+1);
+    }
+    if (loggedInAdminData) {
+      const foundAdminData = JSON.parse(loggedInAdminData);
+      setDesignation(foundAdminData.Designation);
+    } else {
+      setDesignation('');
+    }
+  }, [count]);
   return (
     <div>
       {Admin == null ? <Error/> :
         <div>
           <Adminbar adminData={adminData} />
-          <AHome  />
+          {Designation === "Account Manager" ? <AManager /> : null}
+          {Designation === "Service Manager" ? <SManager /> : null}
+          {Designation === "Customer Service" ? <CManager /> : null}
+          {Designation === "Branch Manager" ? <BManager /> : null}
         </div>
       }
     </div>

@@ -1,0 +1,169 @@
+.CM .UHCONTAINER1{
+    display: flex;
+    flex-direction: row;
+    position: relative;
+    top:-5vh;
+    z-index: 1;
+}
+
+/*--------------------------------------*/
+
+.CM .UHCONTAINER1 .UHFLEX1{
+    flex: 5;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    margin: 10px;
+    margin-left: 10vw;
+    border-radius: 10px;
+    background-color: rgb(0, 28, 80);
+    color: white;
+    
+}
+
+.CM .UHCONTAINER1 .UHFLEX1 .ROW{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    margin-left: 1vw;
+    padding-top: 2vh;
+    padding-bottom: 2vh;
+}
+
+.CM .UHCONTAINER1 .UHFLEX1 .ROW1{
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    padding-left: 1vw;
+    padding-bottom: 1vh;
+}
+
+.CM .UHCONTAINER1 .UHFLEX1 .ROW .COL{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    flex: 1;
+    cursor: pointer;
+}
+
+.CM .UHCONTAINER1 .UHFLEX1 .COL:hover{
+    opacity:0.8; 
+}
+
+.CM .UHCONTAINER1 .UHFLEX1 .ROW .IMG{
+    border-radius: 15vh;
+    border: 1px solid white;
+    height: 9vh;
+    width: 9vh;
+    margin: 1vh;
+}
+.CM .UHCONTAINER1 .UHFLEX1 .ROW .DATA{
+    position: relative;
+    top: 2vh;
+    flex: 6;
+}
+
+
+/*--------------------------------*/
+
+.CM .UHCONTAINER1 .UHFLEX2{
+    flex: 2;
+    align-items: center;
+    margin: 10px;
+    border-radius: 10px;
+    background-color: rgb(0, 28, 80);
+    color: white;
+    display: flex;
+    flex-direction: row;
+}
+
+.CM .UHCONTAINER1 .UHFLEX2 .ROW{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    margin-left: 1vw;
+}
+
+.CM .UHCONTAINER1 .UHFLEX2 .ROW .COL{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.CM .UHCONTAINER1 .UHFLEX2 .ROW .COL1{
+    margin-bottom: 2vh;
+}
+
+.CM .UHCONTAINER1 .UHFLEX2 .COL:hover{
+    cursor: pointer;
+    opacity:0.8; 
+}
+
+.CM .UHCONTAINER1 .UHFLEX2 .ROW .IMG{
+    border-radius: 15vh;
+    border: 1px solid white;
+    height: 9vh;
+    width: 9vh;
+    margin: 1vh;
+}
+.CM .UHCONTAINER1 .UHFLEX2 .ROW .DATA{
+    position: relative;
+    top: 2vh;
+}
+/*--------------------------------*/
+.CM .UHCONTAINER1 .ROW .SUBHEADING{
+    display: inline;
+    margin-top: 0.4vh;
+    margin-bottom: 0.8vh;
+    font-size: small;
+    color: grey;
+    opacity: 0.9;
+}
+
+/*--------------------------------*/
+
+
+.CM .CM .UHCONTAINER1 .UHFLEX3{
+    flex: 2;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    margin: 10px;
+    margin-right: 10vw;
+    border-radius: 10px;
+    background-color: rgb(0, 28, 80);
+    color: white;
+}
+
+.CM .UHCONTAINER1 .UHFLEX3 .ROW1{
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    padding-left: 1vw;
+    font-size: large;
+    align-items: center;
+}
+
+.CM .UHCONTAINER1 .UHFLEX3 .ROW{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.CM .UHCONTAINER1 .UHFLEX3 .ROW .COL{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+.CM .UHCONTAINER1 .UHFLEX3 .COL:hover{
+    cursor: pointer;
+    opacity:0.8; 
+}
+
+.CM .UHCONTAINER1 .UHFLEX3 .ROW .IMG{
+    border-radius: 15vh;
+    height: 10vh;
+    width: 10vh;
+    margin: 1vh;
+}

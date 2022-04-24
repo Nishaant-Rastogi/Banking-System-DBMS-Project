@@ -20,7 +20,7 @@ def dbConnect(user, password):
     )
     return db
 
-db = dbConnect("root", "NISHAant@1234")
+db = dbConnect("root", "mysql")
 
 myCursor = db.cursor(buffered=True)
 myCursor.execute("set GLOBAL max_allowed_packet=67108864")

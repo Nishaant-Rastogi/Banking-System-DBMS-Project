@@ -13,6 +13,10 @@ import '../styles/cardA.css';
 import '../styles/cardL.css';
 import '../styles/cardE.css';
 import '../styles/enew.css';
+import '../styles/AManager.css';
+import '../styles/BManager.css';
+import '../styles/SManager.css';
+import '../styles/CManager.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 function MyApp({ Component, pageProps }) {
