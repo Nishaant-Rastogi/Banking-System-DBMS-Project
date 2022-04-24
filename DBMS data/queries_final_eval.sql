@@ -3,6 +3,8 @@
 -- For every customer check total transaction and grant him gold, silver, platinum accounts
 create database IF NOT EXISTS DANKTHEBANK;
 use DANKTHEBANK;
+
+SET SQL_SAFE_UPDATES=0;
 drop table if exists Customer_Privelege;
 CREATE TABLE Customer_Privelege(
 Customer_ID VARCHAR(100) NOT NULL PRIMARY KEY,
@@ -50,3 +52,34 @@ where A.Customer_ID = C.Customer_ID AND substring(T.Payment_ID,1,4) = substring(
 AND substring(A.AccountNo, 11, 2) = substring(T.Payment_ID, 9, 2) AND substring(A.AccountNo, 5, 1) = substring(T.Payment_ID, 5, 1) AND T.Status != 'FAILED'
 GROUP BY C.Customer_ID;
 
+-- Save the current DB state, and then delete all the customers not having PAN as per the RBI rules
+START transaction;
+Select * from customers;
+Savepoint beforePANdeletion;
+DELETE FROM customers
+WHERE PAN is null;
+
+-- Accidentally, customers less than 18 years old were also deleted which should not have happened. 
+-- Revert to the previous state and make the correction. Save the final changes.
+Rollback to beforePANdeletion;
+DELETE FROM customers
+WHERE Age>18 AND PAN is null;
+commit;
+
+-- calculating the credit score of a customer                              
+SELECT A.Customer_ID, 
+CASE
+	WHEN A.LoanStatus='DEFAULTER' THEN 0
+	WHEN A.LoanStatus='NULL' THEN null
+    WHEN A.LoanStatus='PAID' THEN 900
+    WHEN A.LoanStatus='PENDING' THEN ((SELECT sum(L.Amount) 
+										FROM loans L,branch_loan_account b
+                                        WHERE A.AccountNo=b.AccountNo AND b.Loan_ID=l.Loan_ID
+                                        group by A.Customer_ID
+                                        )/SUM(A.Balance))*1000
+	ELSE null
+END AS CreditScore
+FROM Customers C, accounts A
+group by A.Customer_ID;
+
+SET SQL_SAFE_UPDATES=1;
