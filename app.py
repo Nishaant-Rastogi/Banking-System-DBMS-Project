@@ -491,7 +491,7 @@ def newCustomer():
         locality = request.get_json()["Locality"]
         city = request.get_json()["City"]
         myCursor.execute("INSERT INTO customers VALUES (%s, %s, %s, %s, %s, %s, %s)", (customerId, name, age, phone, houseNo, locality, city))
-        db.commit()
+        # db.commit()
         if myCursor.rowcount == 1:
             return "Success"
         else:
