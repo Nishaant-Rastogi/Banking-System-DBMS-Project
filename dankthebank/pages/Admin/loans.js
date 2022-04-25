@@ -45,7 +45,7 @@ const loans = () => {
     return (
         <div>
             {Admin == null ? <Error/> :
-                <div>
+                <div className="HOME">
                     <Adminbar adminData={adminData} />
                     <LoansT Loans={LoanData} />
                 </div>

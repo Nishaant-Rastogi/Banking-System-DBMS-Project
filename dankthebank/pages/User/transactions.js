@@ -47,7 +47,7 @@ function transactions() {
   return (
     <>
       {User == null ? <Error/> :
-        <div>
+        <div className="HOME">
           <Userbar userData={userData} />
           <TransactionsT data={transactions} />
         </div>}

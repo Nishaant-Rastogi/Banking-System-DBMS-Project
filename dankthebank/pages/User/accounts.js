@@ -42,7 +42,7 @@ function accounts() {
     return (
         <>
             {User == null ? <Error/> :
-                <div>
+                <div className="HOME">
                     <Userbar userData={userData} />
                     <SAccountsT />
                 </div>}

@@ -26,6 +26,8 @@
 }
 
 .SAVINGACCOUNT .ROW2{
+    background-color: rgb(0, 28, 80);
+    color: white;
     border-radius: 10px;
     border: 1px solid black;
     box-shadow: 1px 2px 4px #000000;
@@ -44,6 +46,6 @@
 }
 
 .SAVINGACCOUNT .FLEXIMG{
-    height: 30vh;
+    height: 15vh;
     width: auto;
 }

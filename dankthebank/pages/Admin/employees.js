@@ -47,7 +47,7 @@ const employees = () => {
     return (
         <div>
             {Admin == null ? <Error /> :
-                <div>
+                <div className="HOME">
                     <AdminBar adminData={adminData} />
                     <Employees EmpData={EmpData == null ? null : EmpData.data} />
                 </div>

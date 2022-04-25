@@ -18,7 +18,6 @@
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    align-items: baseline;
 }
 
 #OKAY{
@@ -36,24 +35,22 @@
 .CUSTOMCARDE .DATA{
     display: flex;
     flex-direction: row;
-    align-items: baseline;
+    align-items: flex-start;
 }
 
 .CUSTOMCARDE .ACCOUNT{
-    flex:4;
-    width: 10vw;
+    flex: 4;
+    width: 1vh;
     justify-content: flex-start;
-    position: relative;
-    left: -5vw;
 }
 
 .CUSTOMCARDE .BALANCE{
-    flex:3;
+    flex: 4;
     justify-content: center;
 }
 
 .CUSTOMCARDE .STATUS{
-    flex:4;
+    flex: 4;
     justify-content: flex-end;
 }
 
@@ -79,20 +76,8 @@
     justify-content: space-between;
 }
 
-.CUSTOMCARDE .DATA .HEAD1{
-    flex: 2;
-    width: 15vw;
-    margin: 10px;
-}
-
 .CUSTOMCARDE .DATA .VALUE{
     font-size: larger;
     font-weight: bold;
-    margin-left: 10px;
-}
-
-.CUSTOMCARDE .DATA .NAME{
-    position: relative;
-    left: -6vw;
-    justify-content: flex-start;
+    margin-left: 20px;
 }

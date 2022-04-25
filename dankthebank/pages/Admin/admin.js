@@ -42,7 +42,7 @@ const Admin = () => {
   }, [Admin]);
   useEffect(() => {
     const loggedInAdminData = localStorage.getItem("adminData");
-    if (count <= 1000) {
+    if (count <= 100) {
       setCount(count + 1);
     }
     if (loggedInAdminData) {
