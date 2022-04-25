@@ -20,7 +20,7 @@ def dbConnect(user, password):
     )
     return db
 
-db = dbConnect("root", "mysql")
+db = dbConnect("root", "NISHAant@1234")
 
 myCursor = db.cursor(buffered=True)
 myCursor.execute("set GLOBAL max_allowed_packet=67108864")
@@ -141,22 +141,26 @@ def userSavings():
         branch = request.get_json()['id'][:4]
         myCursor.execute("SELECT * FROM accounts WHERE Customer_ID = %s", (request.get_json()['id'],))
         l = []
-        # print(myCursor.fetchall())
         for x in myCursor.fetchall():
             if(x[0][6:8] == "00"):
                 l.append(dict(zip(columns, x)))
+        print(l)
         columns = ["Payment_ID", "Amount", "Date", "Status"]
         transactionID = []
         for x in l:
             myCursor.execute("SELECT * FROM customer_account_transaction WHERE AccountNo = %s", (x['AccountNo'],))
             transactionID.append({x['AccountNo']:[j[1] for j in myCursor.fetchall()]})
+        print(transactionID)
         transactions = []
         finalReturn = []
+
         for p in transactionID:
             for q in p:
                 for x in p[q]:
                     myCursor.execute("SELECT * FROM transactions WHERE Payment_ID = %s", (x,))
-                    transactions.append(dict(zip(columns, myCursor.fetchall()[0])))
+                    i = myCursor.fetchall()
+                    print(i)
+                    transactions.append(dict(zip(columns, i[0])))
                 finalReturn.append({q:transactions})
                 transactions = []
         listOfListsOfDicts = [l, finalReturn]
