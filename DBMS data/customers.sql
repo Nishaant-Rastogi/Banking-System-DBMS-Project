@@ -9,7 +9,7 @@ HouseNo VARCHAR(20) NOT NULL,
 Locality VARCHAR(100) NOT NULL,
 City VARCHAR(50) NOT NULL,
 ContactNo bigint NOT NULL,
-PAN varchar(30) NOT NULL,
+PAN varchar(30),
 Password VARCHAR(100) NOT NULL
 );
 
@@ -77,6 +77,10 @@ VALUES
 ('1005E40024', 'Vishnu Kumar', 36, '655', 'Kirti Nagar', 'Delhi', '3434500503', 'R019E0503', 'llkkcc'),
 ('1005E40025', 'Irfan Pathan', 43, '471', 'Chanakyapuri', 'Delhi', '3434500504', 'Q505E0504', 'lljddk');
 
-
-
-
+-- Adding for a query on PAN Card with null value
+INSERT INTO Customers(Customer_ID, Name, Age, HouseNo, Locality, City, ContactNo, PAN, Password)
+VALUES
+('1001040006','Ross Geller', 55,'12','Central Perk','New Delhi','4011678910',null,'Rsgllr'),
+('1002040006','Rachel Green',53,'12','Central Perk','New Delhi','4011654320',null,'RclGrn'),
+('1002040007','Emma Geller Green',15,'12','Central Perk','New Delhi','4011654320',null,'EmaGlr'),
+('1003040006','Ben Geller',17,'12','Central Perk','New Delhi','4011678910',null,'BnGllr');

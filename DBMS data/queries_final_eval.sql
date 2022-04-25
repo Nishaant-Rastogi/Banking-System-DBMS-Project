@@ -66,8 +66,9 @@ DELETE FROM customers
 WHERE Age>18 AND PAN is null;
 commit;
 
--- calculating the credit score of a customer                              
-SELECT A.Customer_ID, 
+-- calculating the credit score of a customer
+CREATE Table CreditScores                              
+SELECT DISTINCT A.Customer_ID, 
 CASE
 	WHEN A.LoanStatus='DEFAULTER' THEN 0
 	WHEN A.LoanStatus='NULL' THEN null
@@ -81,5 +82,7 @@ CASE
 END AS CreditScore
 FROM Customers C, accounts A
 group by A.Customer_ID;
+
+
 
 SET SQL_SAFE_UPDATES=1;
