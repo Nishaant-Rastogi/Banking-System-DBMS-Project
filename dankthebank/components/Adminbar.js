@@ -1,15 +1,20 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import AProfile from './AProfile';
 import axios from 'axios';
 import swal from 'sweetalert';
+import BankInfo from './BankInfo';
 
 export default function Adminbar({ adminData }) {
   const router = useRouter();
-  const [profile, setProfile] = React.useState(false);
+  const [profile, setProfile] = useState(false);
   const handler1 = () => { setProfile(true) };
+  const [info, setInfo] = useState(false);
 
+  const handleInfo = () => {
+    setInfo(true);
+  }
   const LogOutHandler = (e) => {
     router.push('/');
     axios.post('http://localhost:5000/adminLogOut', adminData)
@@ -28,8 +33,10 @@ export default function Adminbar({ adminData }) {
   }
   return (
     <div>
+      {info ? <BankInfo setInfo={setInfo} /> : null}
       <nav className="navbar navbar-expand-lg navbar-dark ADMINBAR COLOR1">
         <Link href="/Admin/admin"><a className="navbar-brand HEADING"><b>DANK THE BANK</b></a></Link>
+        {/* <div><img className="BANKINFO" onClick={handleInfo} src="/information.png" /></div> */}
         <div>
           <div className='nav-item dropdown ADMINDROPDOWN'>
             <img className="PROFILEIMAGE" src="/user.png" />

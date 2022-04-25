@@ -56,7 +56,8 @@ function UNew(props) {
                         </div>
                         <div className="form-group">
                             <label htmlFor="AccountType">Account Type</label>
-                            <select className="dropdown" id="AccountType" name="AccountType">
+                            <br></br>
+                            <select type="text" className="dropdown" id="AccountType" name="AccountType">
                                 <option value="defualt">Choose Account Type</option>
                                 <option value="Savings">Savings</option>
                                 <option value="Current">Current</option>

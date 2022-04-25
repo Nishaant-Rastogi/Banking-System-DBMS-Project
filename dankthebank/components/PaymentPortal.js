@@ -27,7 +27,7 @@ function PaymentPortal(props) {
         axios.post('http://localhost:5000/newTransaction', data)
             .then(function (response) {
                 console.log(response);
-                if (response.data === "Success") {
+                if (response.data === "PROCESSED") {
                     swal("Woohooooo !", "Payment Successful !", "success");
                     props.setTransact(false);
                 } else {

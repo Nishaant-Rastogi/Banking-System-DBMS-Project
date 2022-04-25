@@ -55,7 +55,12 @@ function AdminNewLoan(props) {
                         </div>
                         <div className="form-group">
                             <label htmlFor="roi">Rate of Interest</label>
-                            <input type="text" id="roi" className="form-control" placeholder="Rate of Interest" />
+                            <br></br>
+                            <select type="text" id="roi" className="form-control" >
+                                <option value="default">Choose a Rate of Interest</option>
+                                <option value="0">0%</option>
+                                <option value="6">6%</option>
+                            </select>
                         </div>
                         <div className="form-group">
                             <label htmlFor="term">Term</label>

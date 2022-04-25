@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import swal from 'sweetalert';
-
+import axios from 'axios';
 function LoanPayment(props) {
     const handler = () => { props.setLoanPayment(false) };
 
@@ -14,14 +14,14 @@ function LoanPayment(props) {
             Amount: e.target.amount.value,
             AccountNo: e.target.account.value,
         }
-        axios.post('http://localhost:5000/loanPayment', data)
+        axios.post('http://localhost:5000/loanPayments', data)
             .then(function (response) {
                 console.log(response);
-                if (response.data === "Success") {
+                if (response.data === "PROCESSED") {
                     swal("Good Job !", "Loan Payment Successful !", "success");
-                    props.setAccount(false);
+                    props.setLoanPayment(false);
                 } else {
-                    alert("Wrong ID or Password");
+                    swal("Invalid Payment !", "Try Again !", "error");
                 }
                 //Perform action based on response
             })

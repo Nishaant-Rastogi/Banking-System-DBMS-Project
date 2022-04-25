@@ -10,7 +10,7 @@ Transaction_Type VARCHAR(100) NOT NULL DEFAULT('Customer to Bank'),
 Recipient VARCHAR(100) NOT NULL DEFAULT('BANK'),
 PRIMARY KEY(Customer_ID, Payment_ID, AccountNo)
 );
-
+SET SQL_SAFE_UPDATES=0;
 INSERT INTO Customer_Account_Transaction(Customer_ID, Payment_ID, AccountNo, Amount) 
 SELECT C.Customer_ID, T.Payment_ID, A.AccountNo, T.Amount 
 from Customers C, Accounts A, Transactions T 
