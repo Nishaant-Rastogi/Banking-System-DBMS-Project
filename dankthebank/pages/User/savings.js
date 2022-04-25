@@ -32,7 +32,12 @@ function savings() {
       axios.post('http://localhost:5000/userSavings', User)
         .then(function (response) {
           console.log(response);
-          setAccountData(response.data);
+          if (response.data == 'Failure') {
+            setAccountData(null);
+          }
+          else {
+            setAccountData(response.data);
+          }
           //Perform action based on response
         })
         .catch(function (error) {
@@ -44,7 +49,7 @@ function savings() {
   }, [User]);
   return (
     <>
-      {User == null ? <Error/> :
+      {User == null ? <Error /> :
         <div>
           <Userbar userData={userData} />
           <SAccountsT AccountData={AccountData} />

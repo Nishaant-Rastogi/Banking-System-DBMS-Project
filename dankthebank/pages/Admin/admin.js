@@ -1,4 +1,4 @@
-import React,{ useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import Adminbar from "../../components/Adminbar";
 import axios from "axios";
 import Error from "../../components/error";
@@ -23,27 +23,27 @@ const Admin = () => {
     }
   }, [""]);
   useEffect(() => {
-      if(Admin !=null) {
-        axios.post('http://localhost:5000/adminProfile', Admin)
-          .then(function (response) {
-            console.log("API request");
-            console.log(response.data);
-            setAdminData(response.data);
-            localStorage.setItem('adminData', JSON.stringify(response.data));
-          })
-          .catch(function (error) {
-            console.log(error);
-          });
-        console.log("GENERATE");
-      }
-      else{
-        setAdminData(null);
-      }
+    if (Admin != null) {
+      axios.post('http://localhost:5000/adminProfile', Admin)
+        .then(function (response) {
+          console.log("API request");
+          console.log(response.data);
+          setAdminData(response.data);
+          localStorage.setItem('adminData', JSON.stringify(response.data));
+        })
+        .catch(function (error) {
+          console.log(error);
+        });
+      console.log("GENERATE");
+    }
+    else {
+      setAdminData(null);
+    }
   }, [Admin]);
   useEffect(() => {
     const loggedInAdminData = localStorage.getItem("adminData");
-    if(count<=50){
-      setCount(count+1);
+    if (count <= 1000) {
+      setCount(count + 1);
     }
     if (loggedInAdminData) {
       const foundAdminData = JSON.parse(loggedInAdminData);
@@ -54,7 +54,7 @@ const Admin = () => {
   }, [count]);
   return (
     <div>
-      {Admin == null ? <Error/> :
+      {Admin == null ? <Error /> :
         <div>
           <Adminbar adminData={adminData} />
           {Designation === "Account Manager" ? <AManager /> : null}
