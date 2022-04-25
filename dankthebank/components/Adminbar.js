@@ -3,21 +3,25 @@ import Link from 'next/link';
 import { useRouter } from 'next/router';
 import AProfile from './AProfile';
 import axios from 'axios';
+import swal from 'sweetalert';
+
 export default function Adminbar({ adminData }) {
   const router = useRouter();
   const [profile, setProfile] = React.useState(false);
   const handler1 = () => { setProfile(true) };
 
   const LogOutHandler = (e) => {
-    localStorage.clear();
     router.push('/');
     axios.post('http://localhost:5000/adminLogOut', adminData)
       .then(function (response) {
         console.log(response.data);
+        localStorage.clear();
+        swal("Logged Out Successfully !", "You are logged out !", "success");
         //Perform action based on response
       })
       .catch(function (error) {
         console.log(error);
+        swal("Log Out Failed !", "You are not logged out !", "error");
         //Perform action based on error
       });
     console.log("GENERATE");

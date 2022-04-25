@@ -3,6 +3,7 @@ import { useRouter } from 'next/router'
 import Link from 'next/link';
 import UProfile from './UProfile';
 import axios from 'axios';
+import swal from 'sweetalert';
 
 function Userbar({ userData }) {
   const router = useRouter()
@@ -11,15 +12,17 @@ function Userbar({ userData }) {
     setProfile(true)
   };
   const LogOutHandler = (e) => {
-    localStorage.clear();
-    router.push('/');
     axios.post('http://localhost:5000/userLogOut')
       .then(function (response) {
         console.log(response.data);
+        localStorage.clear();
+        swal("Logged Out Successfully !", "You are logged out !", "success");
+        router.push('/');
         //Perform action based on response
       })
       .catch(function (error) {
         console.log(error);
+        swal("Log Out Failed !", "You are not logged out !", "error");
         //Perform action based on error
       });
     console.log("GENERATE");
