@@ -10,17 +10,16 @@ import Paper from '@mui/material/Paper';
 export default function BasicTable({ AcData, AccountNum }) {
     return (
         <>
-            {AcData[AccountNum].length == 0 ? <h6>No transactions</h6> :
+            {AcData[AccountNum.Customer_ID] == null ? null : (AcData[AccountNum.Customer_ID].length == 0 ? <h6>No transactions</h6> :
                 <TableContainer component={Paper}>
-                    {console.log("This is AC data")}
                     {console.log(AcData[AccountNum])}
                     <Table sx={{ minWidth: 650 }} aria-label="simple table">
                         <TableHead>
                             <TableRow>
-                                <TableCell>Payment ID</TableCell>
-                                <TableCell align="right">Date</TableCell>
-                                <TableCell align="right">Amount</TableCell>
-                                <TableCell align="right">Status</TableCell>
+                                <TableCell>Account No</TableCell>
+                                <TableCell align="right">Balance</TableCell>
+                                <TableCell align="right">Opening Date</TableCell>
+                                <TableCell align="right">Loan Status</TableCell>
                             </TableRow>
                         </TableHead>
                         <TableBody>
@@ -30,16 +29,16 @@ export default function BasicTable({ AcData, AccountNum }) {
                                     sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
                                 >
                                     <TableCell component="th" scope="row">
-                                        {row.Payment_ID}
+                                        {row.AccountNo}
                                     </TableCell>
-                                    <TableCell align="right">{row.Date}</TableCell>
-                                    <TableCell align="right">{row.Amount}</TableCell>
-                                    <TableCell align="right">{row.Status}</TableCell>
+                                    <TableCell align="right">{row.Balance}</TableCell>
+                                    <TableCell align="right">{row.OpeningDate}</TableCell>
+                                    <TableCell align="right">{row.LoanStatus}</TableCell>
                                 </TableRow>
                             ))}
                         </TableBody>
                     </Table>
-                </TableContainer>}
+                </TableContainer>)}
         </>
     );
 }

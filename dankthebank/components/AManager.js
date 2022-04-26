@@ -1,8 +1,6 @@
-import React,{useEffect , useState} from 'react';
-import Adminbar from './Adminbar';
+import React, { useEffect, useState } from 'react';
 import AdCarousel from './AdCarousel';
 import Link from 'next/link';
-import CNew from './CNew';
 import AdminNewLoan from './AdminNewLoan';
 import ENew from './ENew';
 import EditCustomer from './EditCustomer';
@@ -25,10 +23,9 @@ function AManager() {
   const handleNewEdit = () => {
     setEdit(true);
   }
-  
+
   return (
     <div className='UHOME AM' >
-      {account ? <CNew setAccount={setAccount} /> : null}
       {loan ? <AdminNewLoan setLoan={setLoan} /> : null}
       {employee ? <ENew setEmployee={setEmployee} /> : null}
       {edit ? <EditCustomer setEdit={setEdit} /> : null}
@@ -73,19 +70,21 @@ function AManager() {
           </div>
 
         </div>
-         <div className='UHFLEX2'>
+        <div className='UHFLEX2'>
           <div className='ROW'>
-              <div className='COL COL1' onClick={handleNewAccount}>
-              <div className='IMGCONTAINER'>
-                <img className='IMG ACIMG' src="/add-user.png" />
-              </div>
-              <div className='DATA'>
-                <div className='LINK'>
-                  <div className='HEADING'>NEW CUSTOMER</div>
-                  <div className='SUBHEADING'>Add New Customer</div>
+            <Link href="/Admin/customers">
+              <div className='COL COL1'>
+                <div className='IMGCONTAINER'>
+                  <img className='IMG ACIMG' src="/add-user.png" />
+                </div>
+                <div className='DATA'>
+                  <div className='LINK'>
+                    <div className='HEADING'>CUSTOMERS</div>
+                    <div className='SUBHEADING'>View Branch Customers</div>
+                  </div>
                 </div>
               </div>
-            </div>
+            </Link>
           </div>
         </div>
       </div>

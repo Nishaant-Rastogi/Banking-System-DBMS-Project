@@ -539,6 +539,32 @@ def adminNewLoan():
             return "Success"
         else:
             return "Failure"
+
+@app.route("/adminCustomers", methods=['POST'])
+def adminCustomers():
+    if request.method == 'POST':
+        adminId = request.get_json()['id']
+        branch = adminId[:4]
+        myCursor.execute("SELECT * FROM customers WHERE Customer_ID LIKE %s", (branch+"%",))
+        columns = [column[0] for column in myCursor.description]
+        finalReturn = []
+        customerID = []
+        for i in myCursor.fetchall():
+            finalReturn.append(dict(zip(columns,i)))
+            customerID.append(i[0])
+        accounts = []
+        for i in customerID:
+            myCursor.execute("SELECT * FROM accounts WHERE Customer_ID = %s", (i,))
+            columns = [column[0] for column in myCursor.description]
+            for j in myCursor.fetchall():
+                accounts.append(dict(zip(columns,j)))
+        print(finalReturn)
+        print(accounts)
+        if(myCursor.rowcount >= 1):
+            return {0:finalReturn, 1:accounts}
+        else:
+            return "Failure"
+
 if __name__ == "__main__":
     app.run(debug=True)
 
