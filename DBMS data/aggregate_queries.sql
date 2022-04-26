@@ -32,7 +32,7 @@ from Branches B, Transactions T
 where substring(B.Branch_ID, 1, 4) = substring(T.Payment_ID, 1, 4)
 GROUP BY B.Branch_ID;
 
--- variance calculation of balance and laons issued by a bank branch, compared with its assets
+-- variance calculation of balance and loans issued by a bank branch, compared with its assets
 
 SELECT B.Branch_ID, sqrt(VARIANCE(A.Balance)) as Variance_Balance, sqrt(VARIANCE(L.Slab)) as Variance_Slab, SUM(A.Balance) as Assets, L.Loan_ID, SUM(L.Slab*L.Term) as Total_Loan_Issued
 from Accounts A, Loans L, Branches B
