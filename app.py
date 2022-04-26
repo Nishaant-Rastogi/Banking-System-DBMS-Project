@@ -80,12 +80,10 @@ def authAdmin():
 @app.route("/userProfile", methods=['GET', 'POST'])
 def userProfile():
     if request.method == 'POST':
-        myCursor.execute("SELECT COLUMN_NAME FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_NAME = 'customers' ORDER BY ORDINAL_POSITION")
-        columns = myCursor.fetchall()
+        columns = ["Customer_ID", "Name", "Age", "HouseNo", "Locality", "City", "ContactNo", "PAN", "Password"]
         print(columns)
         branch = request.get_json()['id'][:4]
         myCursor.execute("SELECT * FROM customers WHERE Customer_ID = %s AND Password = %s", ( request.get_json()['id'], request.get_json()['password']))
-        columns = [x[0] for x in columns]
         l = dict(zip(columns, myCursor.fetchall()[0]))
         print(l)
         if(myCursor.rowcount == 1):
@@ -96,12 +94,10 @@ def userProfile():
 @app.route("/adminProfile", methods=['GET', 'POST'])
 def adminProfile():
     if request.method == 'POST':
-        myCursor.execute("SELECT COLUMN_NAME FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_NAME = 'employees' ORDER BY ORDINAL_POSITION")
-        columns = myCursor.fetchall()
+        columns = ["Employee_ID", "Name", "Salary", "Designation", "Joining_Date", "PAN", "Password"]
         print(columns)
         branch = request.get_json()['id'][:4]
         myCursor.execute("SELECT * FROM employees WHERE Employee_ID = %s AND Password = %s", (request.get_json()['id'], request.get_json()['password']))
-        columns = [x[0] for x in columns]
         l = dict(zip(columns, myCursor.fetchall()[0]))
         print(l)
         if(myCursor.rowcount == 1):
