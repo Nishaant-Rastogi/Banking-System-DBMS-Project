@@ -1,5 +1,5 @@
 from http.client import BadStatusLine
-from re import M
+from re import L, M
 import re
 from sre_constants import SUCCESS
 from typing import final
@@ -20,7 +20,7 @@ def dbConnect(user, password):
     )
     return db
 
-db = dbConnect("root", "NISHAant@1234")
+db = dbConnect("root", "mysql")
 
 myCursor = db.cursor(buffered=True)
 myCursor.execute("set GLOBAL max_allowed_packet=67108864")
@@ -549,15 +549,18 @@ def adminCustomers():
             finalReturn.append(dict(zip(columns,i)))
             customerID.append(i[0])
         accounts = []
+        finalAccounts = []
         for i in customerID:
             myCursor.execute("SELECT * FROM accounts WHERE Customer_ID = %s", (i,))
             columns = [column[0] for column in myCursor.description]
+            listOfAccounts = [] 
             for j in myCursor.fetchall():
-                accounts.append(dict(zip(columns,j)))
-        print(finalReturn)
-        print(accounts)
+                listOfAccounts.append(dict(zip(columns,j)))
+            finalAccounts.append({i:listOfAccounts})
+        # print(finalReturn)
+        print(finalAccounts)
         if(myCursor.rowcount >= 1):
-            return {0:finalReturn, 1:accounts}
+            return {"customer":finalReturn, "accounts":finalAccounts}
         else:
             return "Failure"
 

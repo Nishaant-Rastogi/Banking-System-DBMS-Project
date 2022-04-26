@@ -7,7 +7,7 @@ function customcard({ Loans }) {
     const heading = "H";
     let id = 0;
     return (
-        <div className="CUSTOMCARDT" id="accordion">
+        <div className="CUSTOMCARDL" id="accordion">
             {Loans[0] == null ? null : Loans[0].map((accoundata) => (
                 <div key={id} className="card CARD">
                     <div className="card-header COL" id="HeadingTwO">
@@ -32,7 +32,7 @@ function customcard({ Loans }) {
                                 <div className="HEAD">
                                     Status:
                                 </div>
-                                <div id="NULL" className="VALUE">
+                                <div id={accoundata.Status} className="VALUE">
                                     {accoundata.Status}
                                 </div>
 

@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import TableAccount from "./TableAccount";
 
 
-function customcard({ AccountData }) {
+function customcardC({ AccountData }) {
     const handler = (i) => { console.log(i); }
 
     const hashtag = "#H";
@@ -10,7 +10,7 @@ function customcard({ AccountData }) {
     let id = 0;
     return (
         <div className="CUSTOMCARDA" id="accordion">
-            {AccountData[0] == null ? null : AccountData[0].map((accoundata) => (
+            {AccountData.customer == null ? null : AccountData.customer.map((accoundata) => (
                 <div key={id} className="card CARD">
                     <div className="card-header COL" id="HeadingTwO">
                         <button className="btn btn-link BUTTON" data-toggle="collapse" data-target={hashtag.concat(id).toString()} aria-expanded="true" aria-controls="collapseOne">
@@ -43,7 +43,7 @@ function customcard({ AccountData }) {
                     </div>
                     <div id={heading.concat(id).toString()} className="collapse" aria-labelledby="headingTwo" data-parent="#accordion">
                         <div className="card-body CBODY">
-                            <TableAccount AcData={AccountData[1][id]} AccountNum={AccountData[1][id++].AccountNo} />
+                            <TableAccount AcData={AccountData.accounts[id++][accoundata.Customer_ID]}/>
                         </div>
                     </div>
                 </div>
@@ -70,7 +70,9 @@ function CardC({ AccountData }) {
                         <div className="card-header COL" id="headingOne"> No Savings Account {console.log(AccountData)}
                         </div>
                     </div>
-                </div> : customcard({ AccountData })}
+                </div> :
+                    customcardC({ AccountData})
+                }
         </>
     );
 }
