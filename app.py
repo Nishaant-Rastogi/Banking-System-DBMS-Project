@@ -54,7 +54,7 @@ def authUser():
             myCursor.execute("FLUSH PRIVILEGES")
             myCursor.execute("CREATE USER customer@localhost IDENTIFIED BY %s", (request.json["password"],))
             myCursor.execute("GRANT User TO customer@localhost")
-            # dbConnect("customer", request.get_json()['password'])
+
             return "Success"
         else:
             return "Failure"
@@ -72,7 +72,7 @@ def authAdmin():
             myCursor.execute("FLUSH PRIVILEGES")
             myCursor.execute("CREATE USER admin@localhost IDENTIFIED BY %s", (request.json["password"],))
             myCursor.execute("GRANT %s TO admin@localhost", (designation.replace(' ', '_'),))
-            # dbConnect("admin", request.get_json()['password'])
+
             return "Success"
         else:
             return "Failure"
@@ -124,7 +124,7 @@ def newAccounts():
         print(accountNo)
         myCursor.execute("INSERT INTO accounts (AccountNo, Customer_ID, Balance, OpeningDate) VALUES (%s, %s, %s, CURDATE())", (accountNo, customer_id, request.get_json()['Balance']))
         myCursor.execute("INSERT INTO branch_account (AccountNo, Branch_ID) VALUES (%s, %s)", (accountNo, accountNo[:4]))
-        # db.commit()
+        db.commit()
         if(myCursor.rowcount == 1):
             return "Success"
         else:
@@ -282,7 +282,7 @@ def newLoan():
         slab = (int(request.get_json()['amount'])/int(request.get_json()['term']))*(1+(int(request.get_json()['roi'])/100))
         myCursor.execute("INSERT INTO loans (Loan_ID, StartDate, Amount, InterestRate, Term, EndDate, Slab) VALUES (%s, CURDATE(), %s, %s, %s, DATE_ADD(CURDATE(), INTERVAL %s YEAR), %s)", (loanID,  request.get_json()['amount'], request.get_json()['roi'], request.get_json()['term'], request.get_json()['term'], slab))
         myCursor.execute("INSERT INTO branch_loan_account (Branch_ID, AccountNo, Loan_ID) VALUES (%s, %s, %s)", (account[:4], account, loanID))
-        # db.commit()
+        db.commit()
         if(myCursor.rowcount >= 1):
             return "Success"
         else:
@@ -350,7 +350,7 @@ def loanPayments():
         elif loanPaymentID[6:8] == "03":
             transactionType = "Deposit/Withdrawal"
         myCursor.execute("INSERT INTO customer_account_transaction (Customer_ID, AccountNo, Payment_ID, Amount, Transaction_Type, Recipient) VALUES (%s, %s, %s, %s, %s, %s)", (customerID, account, loanPaymentID, amount, transactionType, account))
-        # db.commit()
+        db.commit()
         if(myCursor.rowcount >= 1):
             return loanPaymentStatus
         else:
@@ -392,7 +392,7 @@ def newTransaction():
         elif paymentID[6:8] == "03":
             transactionType = "Deposit/Withdrawal"
         myCursor.execute("INSERT INTO customer_account_transaction (Customer_ID, AccountNo, Payment_ID, Amount, Transaction_Type, Recipient) VALUES (%s, %s, %s, %s, %s, %s)", (customerId, senderAccount, paymentID, amount, transactionType, receiverAccount))
-        # db.commit()
+        db.commit()
         if(myCursor.rowcount >= 1):
             return paymentStatus
         else:
@@ -463,7 +463,7 @@ def newEmployee():
         myCursor.execute("SELECT * FROM employees WHERE Employee_ID LIKE %s", (branch+"%",))
         employeeID = branch+"0000"+str(myCursor.rowcount + 1)
         myCursor.execute("INSERT INTO employees (Employee_ID, Name, Salary, Designation, Joining_Date, PAN, Password) VALUES (%s, %s, %s, %s, %s, %s, %s)", (employeeID, name, salary, designation, joiningDate, pan, password))
-        # db.commit()
+        db.commit()
         if(myCursor.rowcount == 1):
             return "Success"
         else:
@@ -480,7 +480,7 @@ def editCustomer():
         locality = request.get_json()["Locality"]
         city = request.get_json()["City"]
         myCursor.execute("UPDATE customers SET Name = %s, Age = %s, ContactNo = %s, HouseNo = %s, Locality = %s, City = %s WHERE Customer_ID = %s", (name, age, phone, houseNo, locality, city, customerID))
-        # db.commit()
+        db.commit()
         if myCursor.rowcount == 1:
             return "Success"
         else:
@@ -500,7 +500,7 @@ def newCustomer():
         locality = request.get_json()["Locality"]
         city = request.get_json()["City"]
         myCursor.execute("INSERT INTO customers VALUES (%s, %s, %s, %s, %s, %s, %s)", (customerId, name, age, phone, houseNo, locality, city))
-        # db.commit()
+        db.commit()
         if myCursor.rowcount == 1:
             return "Success"
         else:
@@ -530,7 +530,7 @@ def adminNewLoan():
         slab = (int(request.get_json()['amount'])/int(request.get_json()['term']))*(1+(int(request.get_json()['roi'])/100))
         myCursor.execute("INSERT INTO loans (Loan_ID, StartDate, Amount, InterestRate, Term, EndDate, Slab) VALUES (%s, CURDATE(), %s, %s, %s, DATE_ADD(CURDATE(), INTERVAL %s YEAR), %s)", (loanID,  request.get_json()['amount'], request.get_json()['roi'], request.get_json()['term'], request.get_json()['term'], slab))
         myCursor.execute("INSERT INTO branch_loan_account (Branch_ID, AccountNo, Loan_ID) VALUES (%s, %s, %s)", (branch, account, loanID))
-        # db.commit()
+        db.commit()
         if(myCursor.rowcount >= 1):
             return "Success"
         else:

@@ -68,11 +68,12 @@ WHERE Age>18 AND PAN is null;
 commit;
 
 -- calculating the credit score of a customer
+drop table if exists CreditScores;
 CREATE Table CreditScores                              
 SELECT DISTINCT A.Customer_ID, 
 CASE
 	WHEN A.LoanStatus='DEFAULTER' THEN 0
-	WHEN A.LoanStatus='NULL' THEN null
+	WHEN A.LoanStatus='NULL' THEN (((select sum(T.Amount)/max(T.Amount) from Customer_Account_Transaction T where A.Customer_ID=T.Customer_ID)*1000))
     	WHEN A.LoanStatus='PAID' THEN 900
     	WHEN A.LoanStatus='PENDING' THEN ((SELECT sum(L.Amount) 
 					FROM Loans L,Branch_Loan_Account b
@@ -83,6 +84,7 @@ CASE
 END AS CreditScore
 FROM Customers C, Accounts A
 group by A.Customer_ID;
+select * from CreditScores;
 
 -- list the employees having bank account in same bank with the total amount in all their banks
 SELECT E.Employee_ID, E.Name, T.Acc_Bal
