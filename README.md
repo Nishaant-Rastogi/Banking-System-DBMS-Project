@@ -1,9 +1,7 @@
 # Banking-System-DBMS-Project
 
 ## Hi! Welcome to Dank The Bank!
-<div id="header" align="center">
-  <img src="https://imgur.com/a/JRh9suu" width="100"/>
-</div>
+![alt text](https://imgur.com/a/JRh9suu)
 
 ## TechStack and Languages
 1. NextJS
