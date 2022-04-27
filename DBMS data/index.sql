@@ -7,11 +7,10 @@
 -- ALTER TABLE Transactions DROP INDEX Status_idx;
 -- ALTER TABLE Employees DROP INDEX Designation_idx;
 
--- CREATE INDEX Customer_ID_idx ON Customers (Customer_ID);
--- CREATE INDEX LoanStatus_idx ON Accounts (LoanStatus);
--- CREATE UNIQUE INDEX AccountNo_idx ON Accounts (AccountNo);
--- CREATE UNIQUE INDEX Employee_ID_idx ON Employees (Employee_ID);
--- CREATE UNIQUE INDEX Payment_ID_idx ON Transactions (Payment_ID);
--- CREATE INDEX Customer_Account_idx ON Accounts (Customer_ID, AccountNo);
--- CREATE INDEX Status_idx ON Transactions (Status);
--- CREATE INDEX Designation_idx ON Employees (Designation);
+CREATE INDEX Customer_ID_idx ON Customers (Customer_ID);
+CREATE UNIQUE INDEX AccountNo_idx ON Accounts (AccountNo);
+CREATE UNIQUE INDEX Employee_ID_idx ON Employees (Employee_ID);
+CREATE UNIQUE INDEX Payment_ID_idx ON Transactions (Payment_ID);
+CREATE INDEX Customer_Account_idx ON Accounts (Customer_ID, AccountNo);
+CREATE INDEX Status_idx ON Transactions (Status);
+CREATE INDEX Designation_idx ON Employees (Designation);

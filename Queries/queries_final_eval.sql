@@ -6,6 +6,7 @@ use DANKTHEBANK;
 
 SET SQL_SAFE_UPDATES=0;
 drop table if exists Customer_Privelege;
+
 CREATE TABLE Customer_Privelege(
 Customer_ID VARCHAR(100) NOT NULL PRIMARY KEY,
 Privelege VARCHAR(30),
@@ -83,6 +84,28 @@ END AS CreditScore
 FROM Customers C, accounts A
 group by A.Customer_ID;
 
+-- list the employees having bank account in same bank with the total amount in all their banks
+SELECT E.Employee_ID, E.Name, T.Acc_Bal
+FROM employees E, customers C,
+(SELECT A.Customer_ID,SUM(A.Balance) as Acc_Bal
+FROM Accounts A
+GROUP BY A.Customer_ID) as T
+WHERE C.PAN=E.PAN AND T.Customer_ID=C.Customer_ID;
 
+-- Deduct TDS from everyone's account having annual total income greater than 50000
+SELECT DISTINCT C.Customer_ID,
+CASE
+	WHEN T.Amount>=10000 THEN 0.28*T.Amount
+    WHEN T.Amount>=5000 AND T.Amount<10000 THEN 0.18*T.Amount
+    ELSE 0
+END AS Tax
+FROM Customers C, Accounts A, 
+	(SELECT Customer_ID,SUM(Amount) as Amount
+	FROM customer_account_transaction
+	WHERE Transaction_Type = 'Customer to Customer' or
+		(Transaction_Type='Deposit/Withdrawal' AND Amount>0)
+	GROUP BY Customer_ID
+	) as T
+WHERE T.Customer_ID=C.Customer_ID;
 
 SET SQL_SAFE_UPDATES=1;
