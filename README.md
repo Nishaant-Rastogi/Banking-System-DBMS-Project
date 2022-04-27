@@ -1,7 +1,7 @@
 # Banking-System-DBMS-Project
 
 ## Hi! Welcome to Dank The Bank!
-![alt text](https://imgur.com/a/JRh9suu)
+![alt text](https://github.com/Nishaant-Rastogi/Banking-System-DBMS-Project/blob/main/images/front.png?raw=true)
 
 ## TechStack and Languages
 1. NextJS
