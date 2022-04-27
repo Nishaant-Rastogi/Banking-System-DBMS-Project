@@ -2,8 +2,15 @@
 
 ## Hi! Welcome to Dank The Bank!
 <div id="header" align="center">
-  <img src="https://drive.google.com/file/d/1JUFKxIrofBMUWLrxWlA3UkeOy7D_GQEJ/view?usp=sharing" width="100"/>
+  <img src="https://imgur.com/a/JRh9suu" width="100"/>
 </div>
+
+## TechStack and Languages
+1. NextJS
+2. CSS
+3. Flask
+4. MySQL
+5. Python
 
 ## Follow the steps below to run the front-end after downloading the repo on your system and opening a terminal in the folder.
 1. cd dankthebank
