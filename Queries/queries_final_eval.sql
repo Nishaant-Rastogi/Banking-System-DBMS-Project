@@ -73,20 +73,20 @@ SELECT DISTINCT A.Customer_ID,
 CASE
 	WHEN A.LoanStatus='DEFAULTER' THEN 0
 	WHEN A.LoanStatus='NULL' THEN null
-    WHEN A.LoanStatus='PAID' THEN 900
-    WHEN A.LoanStatus='PENDING' THEN ((SELECT sum(L.Amount) 
-										FROM loans L,branch_loan_account b
-                                        WHERE A.AccountNo=b.AccountNo AND b.Loan_ID=l.Loan_ID
+    	WHEN A.LoanStatus='PAID' THEN 900
+    	WHEN A.LoanStatus='PENDING' THEN ((SELECT sum(L.Amount) 
+					FROM Loans L,Branch_Loan_Account b
+                                        WHERE A.AccountNo=b.AccountNo AND b.Loan_ID=L.Loan_ID
                                         group by A.Customer_ID
                                         )/SUM(A.Balance))*1000
 	ELSE null
 END AS CreditScore
-FROM Customers C, accounts A
+FROM Customers C, Accounts A
 group by A.Customer_ID;
 
 -- list the employees having bank account in same bank with the total amount in all their banks
 SELECT E.Employee_ID, E.Name, T.Acc_Bal
-FROM employees E, customers C,
+FROM Employees E, Customers C,
 (SELECT A.Customer_ID,SUM(A.Balance) as Acc_Bal
 FROM Accounts A
 GROUP BY A.Customer_ID) as T
@@ -95,15 +95,14 @@ WHERE C.PAN=E.PAN AND T.Customer_ID=C.Customer_ID;
 -- Deduct TDS from everyone's account having annual total income greater than 50000
 SELECT DISTINCT C.Customer_ID,
 CASE
-	WHEN T.Amount>=10000 THEN 0.28*T.Amount
+    WHEN T.Amount>=10000 THEN 0.28*T.Amount
     WHEN T.Amount>=5000 AND T.Amount<10000 THEN 0.18*T.Amount
     ELSE 0
 END AS Tax
 FROM Customers C, Accounts A, 
-	(SELECT Customer_ID,SUM(Amount) as Amount
-	FROM customer_account_transaction
-	WHERE Transaction_Type = 'Customer to Customer' or
-		(Transaction_Type='Deposit/Withdrawal' AND Amount>0)
+	(SELECT Customer_ID, SUM(Amount) as Amount
+	FROM Customer_Account_Transaction
+	WHERE Transaction_Type = 'Customer to Customer' or (Transaction_Type='Deposit/Withdrawal' AND Amount>0)
 	GROUP BY Customer_ID
 	) as T
 WHERE T.Customer_ID=C.Customer_ID;
