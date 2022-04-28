@@ -20,7 +20,7 @@ def dbConnect(user, password):
     )
     return db
 
-db = dbConnect("root", "mysql")
+db = dbConnect("root", "NISHAant@1234")
 
 myCursor = db.cursor(buffered=True)
 myCursor.execute("set GLOBAL max_allowed_packet=67108864")
@@ -489,7 +489,7 @@ def editCustomer():
 @app.route("/newCustomer", methods=['POST'])
 def newCustomer():
     if request.method == 'POST':
-        adminId = request.get_json()['admin']['id']
+        adminId = request.get_json()['Admin']['id']
         branch = adminId[:4]
         myCursor.execute("SELECT * FROM customers WHERE Customer_ID LIKE %s", (branch+"%",))
         customerId = branch+"0400"+str(myCursor.rowcount + 1)
@@ -499,7 +499,9 @@ def newCustomer():
         houseNo = request.get_json()["HouseNo"]
         locality = request.get_json()["Locality"]
         city = request.get_json()["City"]
-        myCursor.execute("INSERT INTO customers VALUES (%s, %s, %s, %s, %s, %s, %s)", (customerId, name, age, phone, houseNo, locality, city))
+        pan = request.get_json()["PAN"]
+        password = request.get_json()["Password"]
+        myCursor.execute("INSERT INTO customers VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s)", (customerId, name, age, houseNo, locality, city, phone, pan, password,))
         db.commit()
         if myCursor.rowcount == 1:
             return "Success"
