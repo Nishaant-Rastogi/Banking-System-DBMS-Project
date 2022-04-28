@@ -7,7 +7,7 @@ use DANKTHEBANK;
 SET SQL_SAFE_UPDATES=0;
 drop table if exists Customer_Privelege;
 
-CREATE TABLE Customer_Privelege(
+CREATE Temporary TABLE Customer_Privelege(
 Customer_ID VARCHAR(100) NOT NULL PRIMARY KEY,
 Privelege VARCHAR(30),
 Customer_Name VARCHAR(50) NOT NULL,
