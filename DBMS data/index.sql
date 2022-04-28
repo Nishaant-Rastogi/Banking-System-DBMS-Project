@@ -1,3 +1,24 @@
+Use DANKTHEBANK;
+
+CREATE INDEX Customer_ID_idx ON Customers (Customer_ID);
+CREATE INDEX Branch_ID_idx ON Branches (Branch_ID);
+CREATE UNIQUE INDEX AccountNo_idx ON Accounts (AccountNo);
+CREATE UNIQUE INDEX Employee_ID_idx ON Employees (Employee_ID);
+CREATE UNIQUE INDEX Payment_ID_idx ON Transactions (Payment_ID);
+CREATE INDEX Customer_Account_idx ON Accounts (Customer_ID, AccountNo);
+CREATE INDEX Status_idx ON Transactions (Status);
+CREATE INDEX Designation_idx ON Employees (Designation);
+CREATE INDEX LoanStatus_idx ON Accounts (LoanStatus);
+CREATE INDEX Loan_ID_idx ON Loans (Loan_ID);
+CREATE INDEX Employee_PAN_idx ON Employees (PAN);
+CREATE INDEX Trans_Amount_idx ON Transactions (Amount);
+CREATE INDEX Acc_OpeningDate_idx ON Accounts (OpeningDate);
+CREATE INDEX Cust_Age_idx ON Customers (Age);
+CREATE INDEX Tra_Status_idx ON Transactions (STATUS);
+CREATE INDEX Trans_Cust_ID_idx ON Customer_Account_Transaction (Customer_ID);
+CREATE INDEX Trans_Type_idx ON Customer_Account_Transaction (Transaction_Type);
+CREATE INDEX Cust_PAN_idx ON Customers (PAN);
+
 -- ALTER TABLE Customers DROP INDEX Customer_ID_idx;
 -- ALTER TABLE Accounts DROP INDEX LoanStatus_idx;
 -- ALTER TABLE Accounts DROP INDEX AccountNo_idx;
@@ -6,11 +27,12 @@
 -- ALTER TABLE Accounts DROP INDEX Customer_Account_idx;
 -- ALTER TABLE Transactions DROP INDEX Status_idx;
 -- ALTER TABLE Employees DROP INDEX Designation_idx;
-
-CREATE INDEX Customer_ID_idx ON Customers (Customer_ID);
-CREATE UNIQUE INDEX AccountNo_idx ON Accounts (AccountNo);
-CREATE UNIQUE INDEX Employee_ID_idx ON Employees (Employee_ID);
-CREATE UNIQUE INDEX Payment_ID_idx ON Transactions (Payment_ID);
-CREATE INDEX Customer_Account_idx ON Accounts (Customer_ID, AccountNo);
-CREATE INDEX Status_idx ON Transactions (Status);
-CREATE INDEX Designation_idx ON Employees (Designation);
+-- DROP INDEX Branch_ID_idx ON Branches;
+-- DROP INDEX Loan_ID_idx ON Loans;
+-- DROP INDEX Employee_PAN_idx ON Employees;
+-- Drop INDEX Trans_Amount_idx ON Transactions;
+-- DROP INDEX Acc_OpeningDate_idx ON Accounts; 
+-- DROP INDEX Cust_PAN_idx ON Customers;
+-- ALTER TABLE Transactions DROP INDEX Trans_Type_idx;
+-- ALTER TABLE Transactions DROP INDEX Tra_Status_idx;
+-- ALTER TABLE Customer_Account_Transaction DROP INDEX Trans_Cust_ID_idx;
